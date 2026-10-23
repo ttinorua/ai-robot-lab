@@ -18,6 +18,22 @@ python evaluate.py --episodes 3 --render
 
 Use `tensorboard --logdir runs` to inspect training metrics. Longer runs may be required. GUI rendering needs a machine with graphics/display support. On Colab, train headlessly; download the saved model for local visualization.
 
+Training retains the best deterministic validation checkpoint (seeds 2000–2009)
+as `models/balance_ppo.zip` and the final policy as `models/balance_ppo.last.zip`.
+More training can reduce stability, so evaluate the selected checkpoint. For a
+bounded experiment, use `python train.py --steps 20000`; the default uses two CPU
+threads. To save per-trial results and enforce the ten-trial goal:
+
+```bash
+python evaluate.py --episodes 10 --first-seed 1000 --json evaluation.json --require-all-success
+```
+
+The [verified checkpoint experiment](experiments/balance-checkpoint-selection/README.md)
+achieved 10.00 seconds in all ten evaluation trials, compared with a measured
+3.19-second final-checkpoint baseline. Its policy, individual results, validation
+history, and best replay are included. This verifies nominal balance under the
+existing reset distribution; it does not establish disturbance recovery.
+
 ## How it works
 - MuJoCo XML describes a torso, two legs, two motors, ground, and gravity.
 - Gymnasium environment produces a 17-dimensional observation: 9 generalized positions and 8 generalized velocities.
@@ -26,11 +42,9 @@ Use `tensorboard --logdir runs` to inspect training metrics. Longer runs may be 
 - `evaluate.py` tests a trained model on 10 different random initializations.
 
 ## Important caveats
-This is a starter scaffold, **not a trained robot or a validated walking controller**. Its two fixed legs and hip-only motors are intentionally simple, and stable balancing may require redesigning feet, actuators, observations, reward, and reset distribution. The project has not yet been dependency-installed or run against MuJoCo in this environment. The XML and Python files need runtime validation before claiming training success. A full browser-connected dashboard is a later milestone.
+This is a minimal balance experiment, **not a validated walking controller**. Its two fixed legs and hip-only motors are intentionally simple. The checked-in policy has been trained and evaluated headlessly with MuJoCo, but harder reset distributions, disturbances, and walking remain unvalidated. A full browser-connected dashboard is a later milestone.
 
 ## Next milestones
-1. Install dependencies and run a physics smoke test.
-2. Verify action/observation shapes and contact stability.
-3. Train a baseline policy; record episode length and rewards.
-4. Tune the task to reach 10 seconds consistently.
-5. Add knees, walking reward, and disturbance testing.
+1. Measure recovery from seeded torso tilts and velocity disturbances.
+2. Compare symmetric actuators and additional observations on that harder benchmark.
+3. Add knees and a walking objective after balance robustness is established.

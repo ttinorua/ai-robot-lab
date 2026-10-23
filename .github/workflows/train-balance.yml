@@ -14,7 +14,7 @@ on:
       timesteps:
         description: PPO training timesteps
         required: true
-        default: '200000'
+        default: '20000'
         type: choice
         options:
           - '20000'
@@ -25,7 +25,7 @@ on:
 jobs:
   train:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 20
     permissions:
       contents: read
     steps:
@@ -35,22 +35,29 @@ jobs:
           python-version: '3.11'
           cache: pip
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -r requirements.txt
+      - name: Validate physics and evaluation
+        run: python -m unittest discover -s tests -v
       - name: Train PPO
-        run: python train.py --steps ${{ github.event_name == 'workflow_dispatch' && inputs.timesteps || '200000' }} --output models/balance_ppo
+        run: python train.py --steps ${{ github.event_name == 'workflow_dispatch' && inputs.timesteps || '20000' }} --output models/balance_ppo
       - name: Evaluate trained policy
-        run: python evaluate.py --model models/balance_ppo.zip --episodes 10 | tee evaluation.txt
+        run: python evaluate.py --model models/balance_ppo.zip --episodes 10 --first-seed 1000 --json evaluation.json --require-all-success
       - name: Export 3D replay
+        if: ${{ !cancelled() && hashFiles('models/balance_ppo.zip') != '' }}
         run: python export_replay.py --model models/balance_ppo.zip --output replays/trained-robot.json
       - name: Upload model and evaluation
         if: always()
         continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
-          name: balance-improved-experiment
+          name: balance-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
             models/balance_ppo.zip
-            evaluation.txt
+            models/balance_ppo.last.zip
+            models/balance_ppo.training.json
+            evaluation.json
             replays/trained-robot.json
           if-no-files-found: warn
           retention-days: 7

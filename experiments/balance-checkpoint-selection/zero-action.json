@@ -1,0 +1,89 @@
+{
+  "episodes": 10,
+  "first_seed": 1000,
+  "mean_seconds": 7.808,
+  "successes": 7,
+  "trials": [
+    {
+      "seed": 1000,
+      "seconds": 10.0,
+      "success": true,
+      "terminated": false,
+      "truncated": true,
+      "reward": 2486.846723955601
+    },
+    {
+      "seed": 1001,
+      "seconds": 2.82,
+      "success": false,
+      "terminated": true,
+      "truncated": false,
+      "reward": 770.8488919996081
+    },
+    {
+      "seed": 1002,
+      "seconds": 10.0,
+      "success": true,
+      "terminated": false,
+      "truncated": true,
+      "reward": 2428.546354988651
+    },
+    {
+      "seed": 1003,
+      "seconds": 10.0,
+      "success": true,
+      "terminated": false,
+      "truncated": true,
+      "reward": 2432.8838882479035
+    },
+    {
+      "seed": 1004,
+      "seconds": 10.0,
+      "success": true,
+      "terminated": false,
+      "truncated": true,
+      "reward": 2408.4006861414323
+    },
+    {
+      "seed": 1005,
+      "seconds": 2.4,
+      "success": false,
+      "terminated": true,
+      "truncated": false,
+      "reward": 641.9718846357911
+    },
+    {
+      "seed": 1006,
+      "seconds": 10.0,
+      "success": true,
+      "terminated": false,
+      "truncated": true,
+      "reward": 2478.715559467157
+    },
+    {
+      "seed": 1007,
+      "seconds": 2.86,
+      "success": false,
+      "terminated": true,
+      "truncated": false,
+      "reward": 777.7008208324725
+    },
+    {
+      "seed": 1008,
+      "seconds": 10.0,
+      "success": true,
+      "terminated": false,
+      "truncated": true,
+      "reward": 2482.852551784009
+    },
+    {
+      "seed": 1009,
+      "seconds": 10.0,
+      "success": true,
+      "terminated": false,
+      "truncated": true,
+      "reward": 2417.432654246445
+    }
+  ],
+  "controller": "zero"
+}

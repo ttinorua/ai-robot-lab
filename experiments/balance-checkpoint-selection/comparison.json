@@ -1,0 +1,8 @@
+{
+  "final_policy_parameters_identical": true,
+  "early_policy_parameters_identical": true,
+  "baseline_source_commit": "57a8e56bf310b3d41faa1de3e4a3a544d396d932",
+  "training_seed": 42,
+  "requested_timesteps": 20000,
+  "actual_timesteps": 20480
+}

@@ -1,0 +1,470 @@
+{
+  "requested_timesteps": 20000,
+  "actual_timesteps": 20480,
+  "training_seed": 42,
+  "selected_timesteps": 1024,
+  "selection": "highest validation successes, then mean seconds; earliest on ties",
+  "validation_first_seed": 2000,
+  "validation_episodes": 10,
+  "python": "3.11.17",
+  "packages": {
+    "mujoco": "3.17.0",
+    "gymnasium": "1.4.0",
+    "stable-baselines3": "2.9.0",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.4.6"
+  },
+  "source_sha256": {
+    "train.py": "a45a38eb75147c3c4a17a886a152273aef5735ca76f780fd836edba408fedcf4",
+    "robot_lab/env.py": "9c4dc6e97ae9793da65a80122982c507174ad05518960a4cb962719da6872f9e",
+    "robot_lab/evaluation.py": "988bc3925f68e8e0fa0df266f0c49ac0e5b4b00030724ca588b58a30c0339c2f",
+    "assets/robot.xml": "5becb4218e15a54e45b048bd9c26117fb2edd532aedad7758b0f9161994695a3"
+  },
+  "history": [
+    {
+      "episodes": 10,
+      "first_seed": 2000,
+      "mean_seconds": 10.0,
+      "successes": 10,
+      "trials": [
+        {
+          "seed": 2000,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2357.6854621476527
+        },
+        {
+          "seed": 2001,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2357.073753332011
+        },
+        {
+          "seed": 2002,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2357.5074593473723
+        },
+        {
+          "seed": 2003,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2357.4154492885773
+        },
+        {
+          "seed": 2004,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2357.4882272553155
+        },
+        {
+          "seed": 2005,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2357.335108718292
+        },
+        {
+          "seed": 2006,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2357.8127283644694
+        },
+        {
+          "seed": 2007,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2357.5618458397253
+        },
+        {
+          "seed": 2008,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2357.2929935934058
+        },
+        {
+          "seed": 2009,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2357.2105935856116
+        }
+      ],
+      "timesteps": 1024
+    },
+    {
+      "episodes": 10,
+      "first_seed": 2000,
+      "mean_seconds": 6.296,
+      "successes": 6,
+      "trials": [
+        {
+          "seed": 2000,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2312.5781086092366
+        },
+        {
+          "seed": 2001,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2309.352352783727
+        },
+        {
+          "seed": 2002,
+          "seconds": 0.7000000000000001,
+          "success": false,
+          "terminated": true,
+          "truncated": false,
+          "reward": 150.1270199469766
+        },
+        {
+          "seed": 2003,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2313.051288068715
+        },
+        {
+          "seed": 2004,
+          "seconds": 0.74,
+          "success": false,
+          "terminated": true,
+          "truncated": false,
+          "reward": 158.7191359700095
+        },
+        {
+          "seed": 2005,
+          "seconds": 0.8200000000000001,
+          "success": false,
+          "terminated": true,
+          "truncated": false,
+          "reward": 175.22160074771415
+        },
+        {
+          "seed": 2006,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2302.1512662978084
+        },
+        {
+          "seed": 2007,
+          "seconds": 0.7000000000000001,
+          "success": false,
+          "terminated": true,
+          "truncated": false,
+          "reward": 150.20406045382887
+        },
+        {
+          "seed": 2008,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2301.342539803525
+        },
+        {
+          "seed": 2009,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2312.0296528480117
+        }
+      ],
+      "timesteps": 6144
+    },
+    {
+      "episodes": 10,
+      "first_seed": 2000,
+      "mean_seconds": 9.078,
+      "successes": 9,
+      "trials": [
+        {
+          "seed": 2000,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2301.3209761729336
+        },
+        {
+          "seed": 2001,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2295.9376421353486
+        },
+        {
+          "seed": 2002,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2304.0101256079624
+        },
+        {
+          "seed": 2003,
+          "seconds": 0.78,
+          "success": false,
+          "terminated": true,
+          "truncated": false,
+          "reward": 168.8879914257349
+        },
+        {
+          "seed": 2004,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2303.7580046245066
+        },
+        {
+          "seed": 2005,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2300.919350468817
+        },
+        {
+          "seed": 2006,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2304.155323751809
+        },
+        {
+          "seed": 2007,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2300.9683570280126
+        },
+        {
+          "seed": 2008,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2301.0249556071913
+        },
+        {
+          "seed": 2009,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2292.958969600823
+        }
+      ],
+      "timesteps": 11264
+    },
+    {
+      "episodes": 10,
+      "first_seed": 2000,
+      "mean_seconds": 10.0,
+      "successes": 10,
+      "trials": [
+        {
+          "seed": 2000,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2471.9068816443937
+        },
+        {
+          "seed": 2001,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2280.711017534006
+        },
+        {
+          "seed": 2002,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2386.381704963733
+        },
+        {
+          "seed": 2003,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2365.17424498557
+        },
+        {
+          "seed": 2004,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2346.2880253865733
+        },
+        {
+          "seed": 2005,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2353.517190395765
+        },
+        {
+          "seed": 2006,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2292.486599355599
+        },
+        {
+          "seed": 2007,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2377.943065127728
+        },
+        {
+          "seed": 2008,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2289.3323456009966
+        },
+        {
+          "seed": 2009,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2304.516364971119
+        }
+      ],
+      "timesteps": 16384
+    },
+    {
+      "episodes": 10,
+      "first_seed": 2000,
+      "mean_seconds": 3.21,
+      "successes": 2,
+      "trials": [
+        {
+          "seed": 2000,
+          "seconds": 1.22,
+          "success": false,
+          "terminated": true,
+          "truncated": false,
+          "reward": 292.3624934163787
+        },
+        {
+          "seed": 2001,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2294.728918119685
+        },
+        {
+          "seed": 2002,
+          "seconds": 1.78,
+          "success": false,
+          "terminated": true,
+          "truncated": false,
+          "reward": 372.4274536949862
+        },
+        {
+          "seed": 2003,
+          "seconds": 1.1400000000000001,
+          "success": false,
+          "terminated": true,
+          "truncated": false,
+          "reward": 261.89665349729535
+        },
+        {
+          "seed": 2004,
+          "seconds": 1.42,
+          "success": false,
+          "terminated": true,
+          "truncated": false,
+          "reward": 344.6268837090317
+        },
+        {
+          "seed": 2005,
+          "seconds": 10.0,
+          "success": true,
+          "terminated": false,
+          "truncated": true,
+          "reward": 2237.7223091779124
+        },
+        {
+          "seed": 2006,
+          "seconds": 1.84,
+          "success": false,
+          "terminated": true,
+          "truncated": false,
+          "reward": 327.96109932577895
+        },
+        {
+          "seed": 2007,
+          "seconds": 1.18,
+          "success": false,
+          "terminated": true,
+          "truncated": false,
+          "reward": 230.81888414269793
+        },
+        {
+          "seed": 2008,
+          "seconds": 2.62,
+          "success": false,
+          "terminated": true,
+          "truncated": false,
+          "reward": 489.6263242746194
+        },
+        {
+          "seed": 2009,
+          "seconds": 0.9,
+          "success": false,
+          "terminated": true,
+          "truncated": false,
+          "reward": 165.155062723361
+        }
+      ],
+      "timesteps": 20480
+    }
+  ]
+}

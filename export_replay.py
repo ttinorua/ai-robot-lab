@@ -3,6 +3,7 @@
 Coordinate conversion is handled by the viewer (MuJoCo uses z-up).
 """
 import argparse
+import hashlib
 import json
 from pathlib import Path
 
@@ -40,11 +41,16 @@ def main():
 
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)
+    model_path = Path(args.model)
+    if not model_path.is_file():
+        model_path = Path(str(model_path) + '.zip')
     output.write_text(json.dumps({
         "format": "ai-robot-lab-replay-v1",
         "source": "trained PPO policy",
         "step_seconds": 0.02,
         "seed": args.seed,
+        "model_sha256": hashlib.sha256(model_path.read_bytes()).hexdigest(),
+        "success": bool(truncated and not terminated),
         "survived_seconds": round((len(frames) - 1) * 0.02, 2),
         "frames": frames,
     }, separators=(",", ":")), encoding="utf-8")
