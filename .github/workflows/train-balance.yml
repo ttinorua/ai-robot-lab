@@ -1,5 +1,14 @@
 name: Train balance AI
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'train.py'
+      - 'evaluate.py'
+      - 'export_replay.py'
+      - 'robot_lab/**'
+      - 'assets/robot.xml'
+      - 'requirements.txt'
   workflow_dispatch:
     inputs:
       timesteps:
@@ -28,7 +37,7 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
       - name: Train PPO
-        run: python train.py --steps ${{ inputs.timesteps }} --output models/balance_ppo
+        run: python train.py --steps ${{ github.event_name == 'workflow_dispatch' && inputs.timesteps || '200000' }} --output models/balance_ppo
       - name: Evaluate trained policy
         run: python evaluate.py --model models/balance_ppo.zip --episodes 10 | tee evaluation.txt
       - name: Export 3D replay
