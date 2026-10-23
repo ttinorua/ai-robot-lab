@@ -20,6 +20,7 @@ class BalanceEnv(gym.Env):
         self.action_space = spaces.Box(-1.0, 1.0, shape=(2,), dtype=np.float32)
         self.observation_space = spaces.Box(-np.inf, np.inf, shape=(17,), dtype=np.float32)
         self.steps = 0
+        self.previous_action = np.zeros(2, dtype=np.float64)
 
     def _obs(self):
         return np.concatenate([self.data.qpos, self.data.qvel]).astype(np.float32)
@@ -34,6 +35,7 @@ class BalanceEnv(gym.Env):
         self.data.qvel[:] = self.np_random.normal(0, 0.015, size=self.model.nv)
         mujoco.mj_forward(self.model, self.data)
         self.steps = 0
+        self.previous_action[:] = 0.0
         return self._obs(), {}
 
     def step(self, action):
@@ -46,7 +48,21 @@ class BalanceEnv(gym.Env):
         torso = self.data.body('torso').xmat.reshape(3, 3)
         upright = float(torso[2, 2])
         alive = height > 0.40 and upright > 0.55
-        reward = (1.0 + upright - 0.15 * float(np.sum(action**2))) if alive else -5.0
+        # Shape reward around stable, smooth balancing rather than survival alone.
+        # Keep survival as the dominant incentive and avoid rewarding early falls.
+        angular_speed = float(np.linalg.norm(self.data.qvel[3:6]))
+        height_error = abs(height - 0.72)
+        effort = float(np.sum(action ** 2))
+        action_change = float(np.sum((action - self.previous_action) ** 2))
+        reward = (
+            2.0
+            + 2.0 * upright
+            - 0.8 * height_error
+            - 0.08 * angular_speed
+            - 0.08 * effort
+            - 0.06 * action_change
+        ) if alive else -10.0
+        self.previous_action[:] = action
         terminated = not alive
         truncated = self.steps >= 500
         if self.render_mode == 'human':
