@@ -5,16 +5,17 @@ on:
       timesteps:
         description: PPO training timesteps
         required: true
-        default: '20000'
+        default: '100000'
         type: choice
         options:
           - '20000'
           - '50000'
           - '100000'
+          - '200000'
 jobs:
   train:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 45
     permissions:
       contents: read
     steps:
@@ -33,6 +34,7 @@ jobs:
         run: python export_replay.py --model models/balance_ppo.zip --output replays/trained-robot.json
       - name: Upload model and evaluation
         if: always()
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: balance-first-experiment
