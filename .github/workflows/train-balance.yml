@@ -1,0 +1,41 @@
+name: Train balance AI
+on:
+  workflow_dispatch:
+    inputs:
+      timesteps:
+        description: PPO training timesteps
+        required: true
+        default: '20000'
+        type: choice
+        options:
+          - '20000'
+          - '50000'
+          - '100000'
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Train PPO
+        run: python train.py --steps ${{ inputs.timesteps }} --output models/balance_ppo
+      - name: Evaluate trained policy
+        run: python evaluate.py --model models/balance_ppo.zip --episodes 10 | tee evaluation.txt
+      - name: Upload model and evaluation
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: balance-first-experiment
+          path: |
+            models/balance_ppo.zip
+            evaluation.txt
+          if-no-files-found: warn
+          retention-days: 7
