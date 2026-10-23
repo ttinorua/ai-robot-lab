@@ -11,7 +11,7 @@
       <body name="left_leg" pos="0 0.10 -0.22">
         <joint name="left_hip" axis="0 1 0" range="-0.8 0.8" limited="true"/>
         <geom type="capsule" fromto="0 0 0 0 0 -0.4" size="0.045" mass="0.6"/>
-        <geom name="left_foot" type="box" pos="0.06 0 -0.42" size="0.13 0.065 0.035" mass="0.2"/>
+        <geom name="left_foot" type="box" pos="0.06 0 -0.42" size="0.16 0.09 0.035" mass="0.2"/>
       </body>
       <body name="right_leg" pos="0 -0.10 -0.22">
         <joint name="right_hip" axis="0 1 0" range="-0.8 0.8" limited="true"/>
@@ -21,7 +21,7 @@
     </body>
   </worldbody>
   <actuator>
-    <motor name="left_motor" joint="left_hip" gear="35" ctrllimited="true" ctrlrange="-1 1"/>
+    <motor name="left_motor" joint="left_hip" gear="45" ctrllimited="true" ctrlrange="-1 1"/>
     <motor name="right_motor" joint="right_hip" gear="35" ctrllimited="true" ctrlrange="-1 1"/>
   </actuator>
 </mujoco>
