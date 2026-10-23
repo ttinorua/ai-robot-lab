@@ -28,7 +28,7 @@ class BalanceEnv(gym.Env):
     def reset(self, seed=None, options=None):
         super().reset(seed=seed)
         mujoco.mj_resetData(self.model, self.data)
-        self.data.qpos[2] = 0.72
+        self.data.qpos[2] = 0.675
         self.data.qpos[3] = 1.0
         self.data.qpos[4:7] = 0.0
         self.data.qpos[7:9] = self.np_random.uniform(-0.05, 0.05, size=2)
@@ -47,18 +47,18 @@ class BalanceEnv(gym.Env):
         height = float(self.data.qpos[2])
         torso = self.data.body('torso').xmat.reshape(3, 3)
         upright = float(torso[2, 2])
-        alive = height > 0.40 and upright > 0.55
+        alive = height > 0.43 and upright > 0.55
         # Shape reward around stable, smooth balancing rather than survival alone.
         # Keep survival as the dominant incentive and avoid rewarding early falls.
         angular_speed = float(np.linalg.norm(self.data.qvel[3:6]))
-        height_error = abs(height - 0.72)
+        height_error = abs(height - 0.675)
         effort = float(np.sum(action ** 2))
         action_change = float(np.sum((action - self.previous_action) ** 2))
         reward = (
             2.0
-            + 2.0 * upright
-            - 0.8 * height_error
-            - 0.08 * angular_speed
+            + 4.0 * upright
+            - 2.0 * height_error
+            - 0.25 * angular_speed
             - 0.08 * effort
             - 0.06 * action_change
         ) if alive else -10.0
