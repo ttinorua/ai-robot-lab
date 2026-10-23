@@ -13,9 +13,10 @@ button:disabled{opacity:.45}label{display:block;margin:10px 0}input[type=file]{m
 <label>Load a recorded trajectory (.json): <input id="file" type="file" accept=".json,application/json"></label>
 <div id="status" role="status">Demo mode — motion is illustrative, NOT the trained AI.</div>
 <p><small>Training produces a model, not a recording. A trajectory export is needed to replay the real AI. Demo mode works before training finishes.</small></p></section>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"}}</script>
 <script type="module">
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js';
-import {OrbitControls} from 'https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/controls/OrbitControls.js';
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 const root=document.getElementById('scene'),status=document.getElementById('status');
 const scene=new THREE.Scene();scene.background=new THREE.Color(0x101c30);
 const camera=new THREE.PerspectiveCamera(48,1,.05,100);camera.position.set(2.5,1.9,3.1);
