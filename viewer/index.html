@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Robot Lab — 3D Viewer</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,sans-serif}body{margin:0;background:#0c1424;color:#eef3ff}
+header{padding:16px 18px;background:#15223a}h1{font-size:21px;margin:0 0 5px}small{color:#b5c5dd}
+#scene{height:58vh;min-height:340px;touch-action:pan-y}section{padding:15px 18px;max-width:760px;margin:auto}
+.controls{display:flex;flex-wrap:wrap;gap:9px;align-items:center}button,input::file-selector-button{background:#4268f4;border:0;border-radius:9px;color:white;padding:11px 14px;font-weight:600;cursor:pointer}
+button:disabled{opacity:.45}label{display:block;margin:10px 0}input[type=file]{max-width:100%;font-size:13px}
+#status{color:#b5c5dd;line-height:1.5}.pill{display:inline-block;border-radius:20px;background:#30425e;padding:4px 10px;margin-left:6px}
+</style></head><body><header><h1>🤖 AI Robot Lab <span class="pill">3D viewer</span></h1><small>Touch to rotate • Pinch to zoom • Simulation replay</small></header>
+<div id="scene"></div><section><div class="controls"><button id="play">Pause demo</button><button id="reset">Restart</button><button id="speed">Speed: 1×</button></div>
+<label>Load a recorded trajectory (.json): <input id="file" type="file" accept=".json,application/json"></label>
+<div id="status" role="status">Demo mode — motion is illustrative, NOT the trained AI.</div>
+<p><small>Training produces a model, not a recording. A trajectory export is needed to replay the real AI. Demo mode works before training finishes.</small></p></section>
+<script type="module">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js';
+import {OrbitControls} from 'https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/controls/OrbitControls.js';
+const root=document.getElementById('scene'),status=document.getElementById('status');
+const scene=new THREE.Scene();scene.background=new THREE.Color(0x101c30);
+const camera=new THREE.PerspectiveCamera(48,1,.05,100);camera.position.set(2.5,1.9,3.1);
+const renderer=new THREE.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));root.appendChild(renderer.domElement);
+const controls=new OrbitControls(camera,renderer.domElement);controls.target.set(0,0,.45);controls.enableDamping=true;
+scene.add(new THREE.HemisphereLight(0xffffff,0x475569,2.3));
+const light=new THREE.DirectionalLight(0xffffff,2);light.position.set(2,4,3);scene.add(light);
+const floor=new THREE.Mesh(new THREE.PlaneGeometry(30,30),new THREE.MeshStandardMaterial({color:0x263750,roughness:.9}));floor.rotation.x=-Math.PI/2;scene.add(floor);
+const grid=new THREE.GridHelper(10,20,0x5d759c,0x344967);scene.add(grid);
+const material=(c)=>new THREE.MeshStandardMaterial({color:c,metalness:.15,roughness:.5});
+const torsoMat=material(0x66b8ff),legMat=material(0xffba68),footMat=material(0x82efc4);
+function box(parent,w,h,d,mat,x,y,z){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);m.position.set(x,y,z);parent.add(m);return m}
+const robot=new THREE.Group();scene.add(robot);box(robot,.28,.34,.2,torsoMat,0,0,0);
+const legs=[];
+for(const side of [-1,1]){const hip=new THREE.Group();hip.position.set(side*.095,-.15,0);robot.add(hip);
+box(hip,.075,.34,.09,legMat,0,-.17,0);box(hip,.115,.055,.21,footMat,0,-.355,.055);legs.push(hip)}
+const resize=()=>{const w=root.clientWidth,h=root.clientHeight;camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h)};window.addEventListener('resize',resize);resize();
+let playing=true,speed=1,time=0,frames=null,prev=performance.now();
+const play=document.getElementById('play');play.onclick=()=>{playing=!playing;play.textContent=playing?'Pause':'Play'};
+document.getElementById('reset').onclick=()=>{time=0;playing=true;play.textContent='Pause demo'};
+document.getElementById('speed').onclick=e=>{speed=speed===1?2:speed===2?.5:1;e.target.textContent='Speed: '+speed+'×'};
+document.getElementById('file').onchange=async e=>{const f=e.target.files[0];if(!f)return;
+try{const obj=JSON.parse(await f.text());if(!Array.isArray(obj.frames)||!obj.frames.length)throw Error('Expected a nonempty frames array');
+for(const a of obj.frames){if(!Array.isArray(a.position)||a.position.length!==3||!Array.isArray(a.quaternion)||a.quaternion.length!==4||!Array.isArray(a.hips)||a.hips.length!==2||![...a.position,...a.quaternion,...a.hips].every(Number.isFinite))throw Error('Each frame needs position[3], quaternion[4], hips[2]');}
+frames=obj.frames;time=0;playing=true;play.textContent='Pause';status.textContent='Loaded '+frames.length+' recorded frames from '+f.name;
+}catch(err){status.textContent='Could not load trajectory: '+err.message}};
+function animate(now){requestAnimationFrame(animate);const dt=Math.min((now-prev)/1000,.1);prev=now;if(playing)time+=dt*speed;
+if(frames){const i=Math.min(Math.floor(time/0.02),frames.length-1);const f=frames[i];robot.position.set(f.position[0],f.position[2],-f.position[1]);robot.quaternion.set(f.quaternion[1],f.quaternion[3],-f.quaternion[2],f.quaternion[0]);legs[0].rotation.x=f.hips[0];legs[1].rotation.x=f.hips[1];if(i===frames.length-1){playing=false;play.textContent='Play';}}
+else{robot.position.set(0,.59+.015*Math.sin(time*3),0);robot.rotation.set(.035*Math.sin(time*2),0,.045*Math.sin(time*1.4));legs[0].rotation.x=.17*Math.sin(time*3);legs[1].rotation.x=-.17*Math.sin(time*3)}
+controls.update();renderer.render(scene,camera)}requestAnimationFrame(animate);
+</script></body></html>
