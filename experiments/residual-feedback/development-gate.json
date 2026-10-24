@@ -1,0 +1,51 @@
+{
+  "accepted": false,
+  "candidate_sha256": "5ed3bc419f8bc03fa86896ce2decb47cd0da92881899f94cc57e34e54288f7d1",
+  "nominal_successes": 10,
+  "choices_sha256": "87ff9a9b444dde00edc2055355f5ba75eca3c8fd6f4aeb95ad9186f8aec12d2d",
+  "summaries": {
+    "candidate": {
+      "trials": 170,
+      "survivals": 169,
+      "recoveries": 169,
+      "mean_seconds": 9.948705882352941,
+      "mean_tilt_rad": 0.008205853554082846,
+      "mean_effort": 9.689270320533738e-05,
+      "mean_nonfoot_contact_fraction": 0.0,
+      "mean_saturation_fraction": 0.0
+    },
+    "base": {
+      "trials": 170,
+      "survivals": 169,
+      "recoveries": 169,
+      "mean_seconds": 9.948705882352941,
+      "mean_tilt_rad": 0.00798940420194678,
+      "mean_effort": 9.67775680727818e-05,
+      "mean_nonfoot_contact_fraction": 0.0,
+      "mean_saturation_fraction": 0.0
+    },
+    "original": {
+      "trials": 170,
+      "survivals": 168,
+      "recoveries": 0,
+      "mean_seconds": 9.897647058823528,
+      "mean_tilt_rad": 0.7535771078863517,
+      "mean_effort": 0.01712092174432151,
+      "mean_nonfoot_contact_fraction": 0.0,
+      "mean_saturation_fraction": 0.0
+    },
+    "zero": {
+      "trials": 170,
+      "survivals": 75,
+      "recoveries": 20,
+      "mean_seconds": 5.510235294117647,
+      "mean_tilt_rad": 0.5200714697586455,
+      "mean_effort": 0.0,
+      "mean_nonfoot_contact_fraction": 0.0,
+      "mean_saturation_fraction": 0.0
+    }
+  },
+  "protocol_complete": false,
+  "holdout_authorized": false,
+  "reason": "No recovery gain versus feedback; the sole training attempt also ended on reporting error after 8192 steps."
+}

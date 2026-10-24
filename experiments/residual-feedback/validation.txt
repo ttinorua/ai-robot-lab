@@ -1,0 +1,39 @@
+Initial pre-training run:
+test_physical_sign_gear_clipping_and_input_discipline (test_residual_feedback.TestResidualFeedback.test_physical_sign_gear_clipping_and_input_discipline) ... ok
+test_seed_separation_and_common_composition (test_residual_feedback.TestResidualFeedback.test_seed_separation_and_common_composition) ... ok
+test_zero_mean_serialization_and_ppo_collect_rollouts (test_residual_feedback.TestResidualFeedback.test_zero_mean_serialization_and_ppo_collect_rollouts) ... ok
+test_zero_residual_exact_full_trajectories (test_residual_feedback.TestResidualFeedback.test_zero_residual_exact_full_trajectories) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.966s
+
+OK
+
+Final pre-training run:
+test_physical_sign_gear_clipping_and_input_discipline (test_residual_feedback.TestResidualFeedback.test_physical_sign_gear_clipping_and_input_discipline) ... ok
+test_seed_separation_and_common_composition (test_residual_feedback.TestResidualFeedback.test_seed_separation_and_common_composition) ... ok
+test_selection_and_no_loss_gain_gate (test_residual_feedback.TestResidualFeedback.test_selection_and_no_loss_gain_gate) ... ok
+test_zero_mean_serialization_and_ppo_collect_rollouts (test_residual_feedback.TestResidualFeedback.test_zero_mean_serialization_and_ppo_collect_rollouts) ... ok
+test_zero_residual_exact_full_trajectories (test_residual_feedback.TestResidualFeedback.test_zero_residual_exact_full_trajectories) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.855s
+
+OK
+
+Reporting fix regression:
+test_paired_hash_metadata_is_not_a_controller_trial (test_residual_reporting.TestResidualReporting.test_paired_hash_metadata_is_not_a_controller_trial) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.699s
+
+OK
+
+Original nominal regression:
+test_empty_evaluation_is_rejected (test_evaluation.TestEvaluation.test_empty_evaluation_is_rejected) ... ok
+test_verified_policy_survives_ten_trials (test_evaluation.TestEvaluation.test_verified_policy_survives_ten_trials) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 1.116s
+
+OK

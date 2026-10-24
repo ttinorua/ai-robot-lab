@@ -1,0 +1,14 @@
+{
+  "status": "interrupted_export_error",
+  "single_attempt": true,
+  "actual_new_steps": 8192,
+  "selected_steps": 8192,
+  "candidate_sha256": "5ed3bc419f8bc03fa86896ce2decb47cd0da92881899f94cc57e34e54288f7d1",
+  "training_phase_cpu_seconds_upper_bound": 5.301260827,
+  "checkpoint_validation_episodes": 10,
+  "resumed": false,
+  "retry": false,
+  "reason": "First post-update checkpoint saved and evaluated; CSV metadata bug interrupted callback before history write. Three planned checkpoints not reached.",
+  "cpu_scope": "Timed budget region after imports; imports are covered by conservative25 CPU-second reserve, not an exact whole-process training timing.",
+  "unflushed_training_seed_and_clipping_aggregates": "unavailable after exception; not inferred"
+}

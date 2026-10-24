@@ -1,0 +1,29 @@
+{
+  "sources": {
+    "/workspace/ai-robot-lab/experiments/residual-feedback/residual.py": "e8c235594a3ec3c6371414d81e8d6496e9ddb97b59e84af33f9b519933dfefe9",
+    "/workspace/ai-robot-lab/experiments/residual-feedback/run.py": "bffcdf1c9f77a07f616511f693df2315e60b23774513d9523ba82fb20b936376",
+    "/workspace/ai-robot-lab/experiments/residual-feedback/PROTOCOL.md": "b8e7332933b351c0285890cd00e9a3f23ac9f84359c07913829dab89a986b2bc",
+    "/workspace/ai-robot-lab/experiments/residual-feedback/SOURCES.md": "a737452b2df4106a0ab79dcaf7a643870675b8f4ce9e4e79651a6627678ff3b0",
+    "tests/test_residual_feedback.py": "29d51cd2e68e29986163ce019365f62c9c9469ac735afb344e26d79b36c8a76a"
+  },
+  "protected": {
+    "/workspace/ai-robot-lab/experiments/upright-feedback/controller.py": "da1ef50938457527e12141ca64ced8383cf74b00abe11fb859256ceca7f4c6b6",
+    "/workspace/ai-robot-lab/experiments/upright-feedback/engine.py": "ae0c4b6d8bf46a9f453deec5bb33e1542266831314584a5ac7375adc2d79d11e",
+    "/workspace/ai-robot-lab/experiments/upright-feedback/selected.json": "a5ce2dadc40e2f4bba910902b45976b563cf6006661695a417eee32a3a3e5c71",
+    "/workspace/ai-robot-lab/experiments/upright-feedback/development.json.gz": "84593df160e2f3ae5dc5f0a20dc5bf4c4d73c1597212c5359c0ccbf65c80cd29",
+    "robot_lab/env.py": "9c4dc6e97ae9793da65a80122982c507174ad05518960a4cb962719da6872f9e",
+    "assets/robot.xml": "5becb4218e15a54e45b048bd9c26117fb2edd532aedad7758b0f9161994695a3",
+    "train.py": "a45a38eb75147c3c4a17a886a152273aef5735ca76f780fd836edba408fedcf4",
+    "robot_lab/robustness.py": "66c7d843b37fb63b34ca621014977535cea5286ebdb080250b653a47a0d94201",
+    "experiments/balance-checkpoint-selection/policy.zip": "d00ffe9a13cb9a71e9f596d7b4392bf10edc004b18d6f4c1565fb338021b7244"
+  },
+  "packages": {
+    "stable-baselines3": "2.9.0",
+    "torch": "2.14.1+cpu",
+    "mujoco": "3.17.0",
+    "gymnasium": "1.4.0",
+    "numpy": "2.4.6"
+  },
+  "python": "3.11.17",
+  "bound_evidence_sha256": "8979f4213e8e746b6945a4694f8a5d2862cd3c6d28321d398406d0dda8f936f7"
+}

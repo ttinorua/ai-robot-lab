@@ -1,0 +1,45 @@
+{
+  "candidate_final_band": 169,
+  "raw_mean_residual_clip_steps": 0,
+  "total_clip_steps": 0,
+  "mean_residual_effort_Nm_squared_seconds": 6.134849082250497e-06,
+  "paired_comparison": {
+    "ppo": {
+      "successes": 169,
+      "trials": 170,
+      "mean_seconds": 9.948705882352941,
+      "recoveries": 169,
+      "mean_recovery_seconds_conditional": 0.8156213017751479
+    },
+    "zero": {
+      "successes": 169,
+      "trials": 170,
+      "mean_seconds": 9.948705882352941,
+      "recoveries": 169,
+      "mean_recovery_seconds_conditional": 0.8153846153846153
+    },
+    "paired_seconds": {
+      "mean": 0.0,
+      "bootstrap_95_percent": [
+        0.0,
+        0.0
+      ]
+    },
+    "paired_success": {
+      "mean": 0.0,
+      "bootstrap_95_percent": [
+        0.0,
+        0.0
+      ]
+    },
+    "paired_recovered_without_later_fall": {
+      "mean": 0.0,
+      "bootstrap_95_percent": [
+        0.0,
+        0.0
+      ]
+    },
+    "ppo_only_successes": 0,
+    "zero_only_successes": 0
+  }
+}

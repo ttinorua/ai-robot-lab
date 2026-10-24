@@ -1,0 +1,34 @@
+{
+  "johannink": {
+    "url": "https://arxiv.org/html/1812.03201v2",
+    "version": "1812.03201v2",
+    "inspected": "Method section III, additive Eq.5 and Algorithm1; publication experiments are not Robot Lab results."
+  },
+  "allen": {
+    "repository": "k-r-allen/residual-policy-learning",
+    "commit": "ab330ee425463459f1dd7daa4b571104ae449118",
+    "inspected": [
+      "README.md",
+      "requirements.txt",
+      "rpl_environments/rpl_environments/envs/residual_fetch_push_env.py",
+      "tensorflow/experiment/models/actor_critic_copy_policy.py",
+      "tensorflow/experiment/rollout_controller.py"
+    ],
+    "root_license_found": false,
+    "code_copied": false
+  },
+  "modern": {
+    "repository": "steventango/residual-rl",
+    "commit": "747c5db350694f1e4e59758205948dae6fd403ff",
+    "license": "MIT, Copyright (c) 2023 Steven Tang",
+    "archived_for_review_only": true,
+    "installed": false,
+    "executed": false,
+    "adaptation": "Algorithmic additive composition implemented freshly as Gymnasium wrapper; not alpha blend/predict-only subclass."
+  },
+  "archived_sha256": {
+    "steventango-747c5db-residualrl.py.txt": "00a1fbdee4fd30300acde600d040ff707876817ab367650ad5f95b7d8850fd69",
+    "steventango-747c5db-LICENSE": "25e3e1fda5a85fcb279b60917149ed6ce2bd405a5523039edd36771e86e4bd7b",
+    "steventango-747c5db-pyproject.toml.txt": "b0828844877af284b9a1897e7ac60b93b82aa43b4637ed3d2e65f2de9855d576"
+  }
+}

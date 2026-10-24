@@ -1,5 +1,11 @@
 # Robot Lab status — 2026-10-24
 
+CURRENT OWNER PRIORITY: T-Duck/XGO-Duck migration, PR#2 feature/t-duck-foundation.
+PR#1 is archival/reporting only after the interrupted residual attempt. No further
+original two-motor training, holdout or improvement in this task. Earlier next-step
+recommendations below are historical and superseded. Work will launch a separate
+bounded T-Duck task after this task stops; PR#2 is not modified here.
+
 PR: https://github.com/ttinorua/ai-robot-lab/pull/1
 Branch: improve/verified-balance; prior reviewed head a247941.
 Checkpoint: experiments/balance-checkpoint-selection/policy.zip, selected at step 1024.
@@ -83,3 +89,34 @@ blind lower-exploration PPO attempt. Official MuJoCo MPC standing objectives are
 a reference; its full C++/gRPC stack/model is not drop-in. Community PD+SAC claims
 and licensing remain unverified; nothing installed/copied. Primary references and
 reuse rationale: experiments/upright-feedback/REUSE.md. No extra experiment run.
+
+
+## Residual source-reuse milestone — interrupted, feedback retained
+
+Reviewed parent20ee9e3 and successful CI40069199261 verified before starting.
+Directly inspected Johannink1812.03201v2, Silver/Allen author implementation at
+ab330ee425463459f1dd7daa4b571104ae449118 and MIT steventango747c5db. Compatibility/
+licensing and pinned review snapshots: experiments/residual-feedback/SOURCES.md.
+New shared Gymnasium action composition is full frozen base torque + bounded
+0.10 Nm residual, gear-aware45/35, zero mean and0.005 Nm exploration std.
+Zero-residual full-trajectory identity and actual PPO rollout-path tests passed
+before training; no third-party package/weights installed or blindly copied.
+
+The ONE PPO attempt stopped at8192 steps on CSV metadata-export AttributeError
+at checkpoint1. No retry/resume. Frozen source and traceback retained; reporting
+fix is separately attested/tested, reward/controller choices unchanged. Only one
+checkpoint exists; the four-checkpoint protocol was interrupted. Partial model
+SHA5ed3bc419f8bc03fa86896ce2decb47cd0da92881899f94cc57e34e54288f7d1.
+
+Development partial residual/base/original/zero survival169/169/168/75 of170,
+recoveries169/169/0/20. No recovery gain over feedback; nominal10/10. Feedback
+retained, no promotion.7000–7019 remain unused;5000/6000 ranges remain retired.
+Ledger:766 local eval/reset episodes,1016 with CI reserve;
+~101.18 process CPU s including allowance,1097.6 wall s before publication.
+Prior code/physics/benchmarks/reports/checkpoints/viewer unchanged. No merge,
+deployment, paid resources or security/network/billing change.
+
+Blocker: incomplete training/checkpoint protocol due reporting error; no measured
+partial-checkpoint gain. Next: Work technical review of correction and evidence,
+then consider a future bounded run of the same residual design. No automatic
+second attempt in this milestone; ordinary owner development authority persists.
