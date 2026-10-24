@@ -1,0 +1,44 @@
+{
+  "selected_sha256": "a5ce2dadc40e2f4bba910902b45976b563cf6006661695a417eee32a3a3e5c71",
+  "frozen_search_sha256": "1a0bef2064a49f04df2a4de789df322b75f1d3eeb4b6257562b06d7df277bf10",
+  "source_and_models": {
+    "experiments/balance-checkpoint-selection/policy.zip": "d00ffe9a13cb9a71e9f596d7b4392bf10edc004b18d6f4c1565fb338021b7244",
+    "experiments/settling-candidate/candidate.zip": "bb5cda047e39940ecb3a5e28c31f47bd4a4ac32e2047e87decad9b9b955adab1",
+    "robot_lab/env.py": "9c4dc6e97ae9793da65a80122982c507174ad05518960a4cb962719da6872f9e",
+    "assets/robot.xml": "5becb4218e15a54e45b048bd9c26117fb2edd532aedad7758b0f9161994695a3",
+    "train.py": "a45a38eb75147c3c4a17a886a152273aef5735ca76f780fd836edba408fedcf4",
+    "robot_lab/robustness.py": "66c7d843b37fb63b34ca621014977535cea5286ebdb080250b653a47a0d94201",
+    "benchmark_robustness.py": "1d6a97486150946c12411f6c14b1055ed564d22d18a46d85f75c1a05e6c82bc2"
+  },
+  "python": "3.11.17",
+  "packages": {
+    "mujoco": "3.17.0",
+    "gymnasium": "1.4.0",
+    "stable-baselines3": "2.9.0",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.4.6"
+  },
+  "holdout_seeds": [
+    6000,
+    6001,
+    6002,
+    6003,
+    6004,
+    6005,
+    6006,
+    6007,
+    6008,
+    6009,
+    6010,
+    6011,
+    6012,
+    6013,
+    6014,
+    6015,
+    6016,
+    6017,
+    6018,
+    6019
+  ],
+  "development_accepted": true
+}

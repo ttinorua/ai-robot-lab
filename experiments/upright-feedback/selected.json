@@ -1,0 +1,25 @@
+{
+  "index": 5,
+  "parameters": {
+    "name": "hip2_pitch4_d0.5",
+    "hip_k": 2.0,
+    "hip_d": 0.4898979485566356,
+    "pitch_k": 4.0,
+    "pitch_d": 0.5
+  },
+  "shortlist": [
+    5,
+    15,
+    9,
+    11
+  ],
+  "selection_seeds": [
+    4008,
+    4009
+  ],
+  "tuning_seeds": [
+    4000,
+    4003
+  ],
+  "frozen_search_sha256": "1a0bef2064a49f04df2a4de789df322b75f1d3eeb4b6257562b06d7df277bf10"
+}

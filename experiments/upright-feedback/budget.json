@@ -1,0 +1,13 @@
+{
+  "rollouts": 2246,
+  "cpu_seconds": 170.565167316,
+  "wall_start_unix": 1792820811.5318935,
+  "overhead_reserve_cpu_seconds": 20,
+  "wall_seconds": 906.3778643608093,
+  "tests_counted": 3,
+  "regression_test_reset_rollouts": 101,
+  "ci_test_rollout_upper_bound_reserved": 200,
+  "rollouts_with_ci_reserve": 2446,
+  "budget_note": "Includes 3 new-test rollouts plus 101 regression resets (including zero-step tests), all 32 tuning settings, failures, audits and final holdout. CPU includes conservative 20-second startup/test/postprocessing allowance.",
+  "execution_complete_before_publication": true
+}

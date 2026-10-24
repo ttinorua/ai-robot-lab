@@ -1,0 +1,25 @@
+test_grid_and_seed_selection_isolation (test_upright_feedback.TestUprightFeedback.test_grid_and_seed_selection_isolation) ... ok
+test_nominal_trial_matches_frozen_evaluation_and_upright_pd (test_upright_feedback.TestUprightFeedback.test_nominal_trial_matches_frozen_evaluation_and_upright_pd) ... ok
+test_sign_gearing_clipping_and_input_discipline (test_upright_feedback.TestUprightFeedback.test_sign_gearing_clipping_and_input_discipline) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.735s
+
+OK
+
+test_budget_rejects_before_episode (test_robustness.TestRobustness.test_budget_rejects_before_episode) ... ok
+test_deterministic_pairing_and_no_leakage (test_robustness.TestRobustness.test_deterministic_pairing_and_no_leakage) ... ok
+test_fall_at_horizon_is_failure (test_robustness.TestRobustness.test_fall_at_horizon_is_failure) ... ok
+test_force_cleared_on_error (test_robustness.TestRobustness.test_force_cleared_on_error) ... ok
+test_push_changes_simulated_momentum (test_robustness.TestRobustness.test_push_changes_simulated_momentum) ... ok
+test_push_substeps_timing_strength_direction_and_clearing (test_robustness.TestRobustness.test_push_substeps_timing_strength_direction_and_clearing) ... ok
+test_recovery_requires_continuous_window_after_push (test_robustness.TestRobustness.test_recovery_requires_continuous_window_after_push) ... ok
+test_reset_effect_normalization_and_pairing (test_robustness.TestRobustness.test_reset_effect_normalization_and_pairing) ... ok
+test_wrapper_nominal_trajectory_matches_original (test_robustness.TestRobustness.test_wrapper_nominal_trajectory_matches_original) ... ok
+test_empty_evaluation_is_rejected (test_evaluation.TestEvaluation.test_empty_evaluation_is_rejected) ... ok
+test_verified_policy_survives_ten_trials (test_evaluation.TestEvaluation.test_verified_policy_survives_ten_trials) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 1.195s
+
+OK

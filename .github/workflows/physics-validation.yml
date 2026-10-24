@@ -20,10 +20,11 @@ jobs:
           pip install torch --index-url https://download.pytorch.org/whl/cpu
           pip install -r requirements.txt
       - name: Compile Python sources
-        run: python -m compileall -q robot_lab train.py evaluate.py improve_settling.py tests
+        run: python -m compileall -q robot_lab train.py evaluate.py improve_settling.py tests experiments/upright-feedback
       - name: Run MuJoCo physics smoke tests
         run: |
           python -m unittest discover -s tests -p test_physics.py -v
           python -m unittest discover -s tests -p test_evaluation.py -v
           python -m unittest discover -s tests -p test_robustness.py -v
           python -m unittest discover -s tests -p test_settling.py -v
+          python -m unittest discover -s tests -p test_upright_feedback.py -v

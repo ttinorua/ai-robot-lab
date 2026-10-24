@@ -1,0 +1,399 @@
+{
+  "sources": {
+    "/workspace/ai-robot-lab/experiments/upright-feedback/controller.py": "da1ef50938457527e12141ca64ced8383cf74b00abe11fb859256ceca7f4c6b6",
+    "/workspace/ai-robot-lab/experiments/upright-feedback/engine.py": "ae0c4b6d8bf46a9f453deec5bb33e1542266831314584a5ac7375adc2d79d11e",
+    "/workspace/ai-robot-lab/experiments/upright-feedback/run.py": "fe6e8fb97dd1ce01d454e974db93f7886091922a7899ede0ca15e2bb347995dc",
+    "/workspace/ai-robot-lab/experiments/upright-feedback/PROTOCOL.md": "4d15f6f7ce958bc85c3f672ee4dd6e063e28a75c5757792c95656f33ade9f238",
+    "tests/test_upright_feedback.py": "b8a41706f4cf1703eeb84e89d5d545977540dc07375afdc9b3e8b549f1714b0d"
+  },
+  "parameters": [
+    {
+      "name": "zero"
+    },
+    {
+      "name": "hip_PD_8",
+      "hip_k": 8.0,
+      "hip_d": 1.0
+    },
+    {
+      "name": "bias_positive",
+      "bias_Nm": 0.02
+    },
+    {
+      "name": "bias_negative",
+      "bias_Nm": -0.02
+    },
+    {
+      "name": "hip2_pitch0_d0",
+      "hip_k": 2.0,
+      "hip_d": 0.4898979485566356,
+      "pitch_k": 0.0,
+      "pitch_d": 0.0
+    },
+    {
+      "name": "hip2_pitch4_d0.5",
+      "hip_k": 2.0,
+      "hip_d": 0.4898979485566356,
+      "pitch_k": 4.0,
+      "pitch_d": 0.5
+    },
+    {
+      "name": "hip2_pitch16_d1",
+      "hip_k": 2.0,
+      "hip_d": 0.4898979485566356,
+      "pitch_k": 16.0,
+      "pitch_d": 1.0
+    },
+    {
+      "name": "hip2_pitch64_d2",
+      "hip_k": 2.0,
+      "hip_d": 0.4898979485566356,
+      "pitch_k": 64.0,
+      "pitch_d": 2.0
+    },
+    {
+      "name": "hip2_pitch0_d2",
+      "hip_k": 2.0,
+      "hip_d": 0.4898979485566356,
+      "pitch_k": 0.0,
+      "pitch_d": 2.0
+    },
+    {
+      "name": "hip2_pitch16_d4",
+      "hip_k": 2.0,
+      "hip_d": 0.4898979485566356,
+      "pitch_k": 16.0,
+      "pitch_d": 4.0
+    },
+    {
+      "name": "hip2_pitch64_d8",
+      "hip_k": 2.0,
+      "hip_d": 0.4898979485566356,
+      "pitch_k": 64.0,
+      "pitch_d": 8.0
+    },
+    {
+      "name": "hip8_pitch0_d0",
+      "hip_k": 8.0,
+      "hip_d": 0.9797958971132712,
+      "pitch_k": 0.0,
+      "pitch_d": 0.0
+    },
+    {
+      "name": "hip8_pitch4_d0.5",
+      "hip_k": 8.0,
+      "hip_d": 0.9797958971132712,
+      "pitch_k": 4.0,
+      "pitch_d": 0.5
+    },
+    {
+      "name": "hip8_pitch16_d1",
+      "hip_k": 8.0,
+      "hip_d": 0.9797958971132712,
+      "pitch_k": 16.0,
+      "pitch_d": 1.0
+    },
+    {
+      "name": "hip8_pitch64_d2",
+      "hip_k": 8.0,
+      "hip_d": 0.9797958971132712,
+      "pitch_k": 64.0,
+      "pitch_d": 2.0
+    },
+    {
+      "name": "hip8_pitch0_d2",
+      "hip_k": 8.0,
+      "hip_d": 0.9797958971132712,
+      "pitch_k": 0.0,
+      "pitch_d": 2.0
+    },
+    {
+      "name": "hip8_pitch16_d4",
+      "hip_k": 8.0,
+      "hip_d": 0.9797958971132712,
+      "pitch_k": 16.0,
+      "pitch_d": 4.0
+    },
+    {
+      "name": "hip8_pitch64_d8",
+      "hip_k": 8.0,
+      "hip_d": 0.9797958971132712,
+      "pitch_k": 64.0,
+      "pitch_d": 8.0
+    },
+    {
+      "name": "hip32_pitch0_d0",
+      "hip_k": 32.0,
+      "hip_d": 1.9595917942265424,
+      "pitch_k": 0.0,
+      "pitch_d": 0.0
+    },
+    {
+      "name": "hip32_pitch4_d0.5",
+      "hip_k": 32.0,
+      "hip_d": 1.9595917942265424,
+      "pitch_k": 4.0,
+      "pitch_d": 0.5
+    },
+    {
+      "name": "hip32_pitch16_d1",
+      "hip_k": 32.0,
+      "hip_d": 1.9595917942265424,
+      "pitch_k": 16.0,
+      "pitch_d": 1.0
+    },
+    {
+      "name": "hip32_pitch64_d2",
+      "hip_k": 32.0,
+      "hip_d": 1.9595917942265424,
+      "pitch_k": 64.0,
+      "pitch_d": 2.0
+    },
+    {
+      "name": "hip32_pitch0_d2",
+      "hip_k": 32.0,
+      "hip_d": 1.9595917942265424,
+      "pitch_k": 0.0,
+      "pitch_d": 2.0
+    },
+    {
+      "name": "hip32_pitch16_d4",
+      "hip_k": 32.0,
+      "hip_d": 1.9595917942265424,
+      "pitch_k": 16.0,
+      "pitch_d": 4.0
+    },
+    {
+      "name": "hip32_pitch64_d8",
+      "hip_k": 32.0,
+      "hip_d": 1.9595917942265424,
+      "pitch_k": 64.0,
+      "pitch_d": 8.0
+    },
+    {
+      "name": "hip128_pitch0_d0",
+      "hip_k": 128.0,
+      "hip_d": 3.919183588453085,
+      "pitch_k": 0.0,
+      "pitch_d": 0.0
+    },
+    {
+      "name": "hip128_pitch4_d0.5",
+      "hip_k": 128.0,
+      "hip_d": 3.919183588453085,
+      "pitch_k": 4.0,
+      "pitch_d": 0.5
+    },
+    {
+      "name": "hip128_pitch16_d1",
+      "hip_k": 128.0,
+      "hip_d": 3.919183588453085,
+      "pitch_k": 16.0,
+      "pitch_d": 1.0
+    },
+    {
+      "name": "hip128_pitch64_d2",
+      "hip_k": 128.0,
+      "hip_d": 3.919183588453085,
+      "pitch_k": 64.0,
+      "pitch_d": 2.0
+    },
+    {
+      "name": "hip128_pitch0_d2",
+      "hip_k": 128.0,
+      "hip_d": 3.919183588453085,
+      "pitch_k": 0.0,
+      "pitch_d": 2.0
+    },
+    {
+      "name": "hip128_pitch16_d4",
+      "hip_k": 128.0,
+      "hip_d": 3.919183588453085,
+      "pitch_k": 16.0,
+      "pitch_d": 4.0
+    },
+    {
+      "name": "hip128_pitch64_d8",
+      "hip_k": 128.0,
+      "hip_d": 3.919183588453085,
+      "pitch_k": 64.0,
+      "pitch_d": 8.0
+    }
+  ],
+  "benchmark": {
+    "version": "robustness-baseline-v1",
+    "cases": [
+      {
+        "name": "nominal",
+        "kind": "nominal",
+        "value": 0.0,
+        "unit": "none"
+      },
+      {
+        "name": "pitch_small_-1",
+        "kind": "pitch",
+        "strength": "small",
+        "value": -0.08,
+        "unit": "rad"
+      },
+      {
+        "name": "pitch_small_+1",
+        "kind": "pitch",
+        "strength": "small",
+        "value": 0.08,
+        "unit": "rad"
+      },
+      {
+        "name": "pitch_medium_-1",
+        "kind": "pitch",
+        "strength": "medium",
+        "value": -0.16,
+        "unit": "rad"
+      },
+      {
+        "name": "pitch_medium_+1",
+        "kind": "pitch",
+        "strength": "medium",
+        "value": 0.16,
+        "unit": "rad"
+      },
+      {
+        "name": "linear_velocity_small_-1",
+        "kind": "linear_velocity",
+        "strength": "small",
+        "value": -0.2,
+        "unit": "m/s"
+      },
+      {
+        "name": "linear_velocity_small_+1",
+        "kind": "linear_velocity",
+        "strength": "small",
+        "value": 0.2,
+        "unit": "m/s"
+      },
+      {
+        "name": "linear_velocity_medium_-1",
+        "kind": "linear_velocity",
+        "strength": "medium",
+        "value": -0.5,
+        "unit": "m/s"
+      },
+      {
+        "name": "linear_velocity_medium_+1",
+        "kind": "linear_velocity",
+        "strength": "medium",
+        "value": 0.5,
+        "unit": "m/s"
+      },
+      {
+        "name": "angular_velocity_small_-1",
+        "kind": "angular_velocity",
+        "strength": "small",
+        "value": -0.5,
+        "unit": "rad/s"
+      },
+      {
+        "name": "angular_velocity_small_+1",
+        "kind": "angular_velocity",
+        "strength": "small",
+        "value": 0.5,
+        "unit": "rad/s"
+      },
+      {
+        "name": "angular_velocity_medium_-1",
+        "kind": "angular_velocity",
+        "strength": "medium",
+        "value": -1.0,
+        "unit": "rad/s"
+      },
+      {
+        "name": "angular_velocity_medium_+1",
+        "kind": "angular_velocity",
+        "strength": "medium",
+        "value": 1.0,
+        "unit": "rad/s"
+      },
+      {
+        "name": "push_small_-1",
+        "kind": "push",
+        "strength": "small",
+        "value": -0.5,
+        "unit": "N s"
+      },
+      {
+        "name": "push_small_+1",
+        "kind": "push",
+        "strength": "small",
+        "value": 0.5,
+        "unit": "N s"
+      },
+      {
+        "name": "push_medium_-1",
+        "kind": "push",
+        "strength": "medium",
+        "value": -1.5,
+        "unit": "N s"
+      },
+      {
+        "name": "push_medium_+1",
+        "kind": "push",
+        "strength": "medium",
+        "value": 1.5,
+        "unit": "N s"
+      }
+    ],
+    "axes": "world x forward, y lateral, z up; pitch about +y",
+    "reset": "same seeded nominal reset; replace root pitch or add root velocity",
+    "push": {
+      "start_step": 50,
+      "end_step_exclusive": 55,
+      "start_seconds": 1.0,
+      "duration_seconds": 0.1,
+      "substep_seconds": 0.01,
+      "application": "constant world-x force at torso COM; zero torque",
+      "force_newtons": "signed impulse / 0.1; +/-5 N or +/-15 N"
+    },
+    "recovery": {
+      "max_tilt_rad": 0.1,
+      "max_angular_speed_rad_s": 0.3,
+      "sustained_seconds": 0.5,
+      "start": "reset disturbances: t=0; pushes: end of force at t=1.1",
+      "definition": "first 0.5 s continuous qualifying window; latency to window end; falls fail"
+    },
+    "success": "10 s horizon reached without fall, including last step",
+    "development_seeds": [
+      4000,
+      4001,
+      4002,
+      4003,
+      4004,
+      4005,
+      4006,
+      4007,
+      4008,
+      4009
+    ],
+    "holdout_seeds": [
+      5000,
+      5001,
+      5002,
+      5003,
+      5004,
+      5005,
+      5006,
+      5007,
+      5008,
+      5009,
+      5010,
+      5011,
+      5012,
+      5013,
+      5014,
+      5015,
+      5016,
+      5017,
+      5018,
+      5019
+    ]
+  }
+}

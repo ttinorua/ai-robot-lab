@@ -45,3 +45,41 @@ Next task is Work review of this negative experiment. Proposed next experiment
 only if separately approved: lower initial action standard deviation to 0.1 with
 this objective/curriculum otherwise fixed. CI is PR/manual plus main-only pushes
 and CPU PyTorch. No training dispatch, merge/deployment or paid resources.
+
+
+## Upright-feedback feasibility milestone
+
+Prior reviewed head 74180dc retained; failed PPO candidate not promoted. No PPO
+training in this milestone. Audit confirms original ~0.803-rad lean accompanies
+hips at soft -0.8 limits, active limit forces, sustained negative bias and foot-only
+support. Neutral gear-aware PD restores upright from reset and the leaned state.
+A fixed 32-setting observation-only feedback search selected index 5 (hip K=2,
+D=0.48989795; torso K=4, D=0.5; action=torque/[45,35]).
+
+Development survival/recovery: feedback 169/170 and 169/170; PPO 168/170 and 0/170;
+zero 75/170 and 20/170. Candidate nominal 10/10. Predeclared engineering gate passed.
+One final 6000–6019 evaluation: feedback 336/340 survival AND recovery, PPO 332/340
+and 0/340, zero 145/340 and 46/340. All 336 surviving feedback trials finish inside
+the band; no clipping or non-foot contacts. Four feedback falls at +0.16-rad initial
+pitch retained; no post-holdout adjustment. Seeds 6000–6019 are retired.
+
+See experiments/upright-feedback for joint/contact/COM/reward audit, every gain
+trial, fixed protocol, final code/parameter/model hashes, raw paired JSON/CSV,
+versions and budget. Three new and eleven preserved local tests pass. Budget at
+report generation: 2246 local counted rollouts/resets, 2446 including CI reserve,
+~170.57 local process CPU s including allowance; within all caps. No merge,
+deployment, security/network/billing change or paid resources. Prior artifacts
+and viewer remain byte-identical. CI remains one standard free public Linux PR run.
+
+Upright active recovery is feasible on this grid, not general robotics completion.
+Next task: independent Work review. Only after review consider residual control
+around this feasible feedback baseline and expanded development disturbances;
+no additional development path starts in this task.
+
+Owner steering during publication: prioritize established published solutions.
+Preferred next bounded path after Root Work review is Johannink et al. (ICRA2019)
+residual control around this frozen successful feedback baseline, not another
+blind lower-exploration PPO attempt. Official MuJoCo MPC standing objectives are
+a reference; its full C++/gRPC stack/model is not drop-in. Community PD+SAC claims
+and licensing remain unverified; nothing installed/copied. Primary references and
+reuse rationale: experiments/upright-feedback/REUSE.md. No extra experiment run.
