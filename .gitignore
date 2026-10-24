@@ -7,3 +7,10 @@ models/
 *.egg-info/
 .pytest_cache/
 .DS_Store
+
+# Android local outputs
+.gradle/
+**/build/
+local.properties
+*.jks
+*.keystore
