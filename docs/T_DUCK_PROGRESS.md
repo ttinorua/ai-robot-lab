@@ -160,8 +160,14 @@ initial-state hashes, but found a medium-severity stale-derived-state defect aft
 `mj_step`. The correction calls `mj_forward` immediately after every physics
 integration and adds a real MuJoCo regression crossing the 30° boundary in one
 step, including site-position consistency. Development was rerun and a fresh
-holdout uses seeds 30000–30009; the earlier 20000 range is retired. Corrected code
-and results require a final independent read-only check at their published SHA.
+holdout uses seeds 30000–30009; the earlier 20000 range is retired. Final independent read-only review of corrected commit
+`03e9acbd7922c8db37989fba86195bc06833e214` accepted the narrow simulated movement
+milestone, found no material remaining defect within its bounded scope, and
+independently verified all 140 CSV/JSON rows, 70 paired initial hashes and both
+report evaluator hashes. Physics CI
+https://github.com/ttinorua/ai-robot-lab/actions/runs/40105913649
+passed all twelve tests; readiness CI 40105913660 also passed. CI tests do not
+rerun the externally sourced motion batches.
 
 The earlier PR #1 residual experiment was preserved at
 `bfa9a29552042ca9a157701c9c0c4c0012ce281c`; its interrupted 8192-step attempt
@@ -184,7 +190,27 @@ conditionally delegate one bounded task only after verifying no active task,
 included allowances and zero-spend guards. **Future scheduled browser access and
 task launching remain unverified. Continuous unattended engineering is not claimed.**
 
-Next priorities: independent harness/results review and CI; resolve asset rights;
+Next priorities: resolve asset rights;
 then validate fuller collision/sensing/runtime parity before integrating a verified
 T-Duck replay/model into the existing viewer on this development branch. No merge,
 production publication, hardware purchase, paid training or security change is authorized.
+
+## Management ledger and owner decision
+
+- One new Codex review thread, three bounded read-only handoffs: source review,
+  initial code/evidence audit, correction review. Zero duplicate T-Duck coding tasks.
+- Two evaluator issues were corrected and archived: the initial push window and
+  stale post-integration derived state. The review defect was fixed before
+  promoting the strict gate; no failed training or new training occurred.
+- Shared included-usage snapshots during this session: 5-hour allowance 93%→52%
+  remaining; weekly 77%→70%. These are account-wide observations, not isolated
+  per-task metering. Credits stayed zero; auto-reload and app-credit use remained off.
+- No merge, production deployment, hardware purchase, credentials/security change
+  or additional spending. Existing robot work/viewer remains preserved.
+- Owner authorization is needed before contacting upstream maintainers.
+  [Prepared licensing inquiry](T_DUCK_LICENSE_INQUIRY.md) contains the exact proposed
+  public destination, title and message. It has **not** been sent. Resolving the
+  missing grants is necessary before model/weight redistribution in the viewer.
+- The existing hourly monitor is configured for T-Duck, with no duplicate schedule.
+  Scheduled browser task launching remains unverified; no continuous unattended
+  development claim is made.
