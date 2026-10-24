@@ -1,0 +1,68 @@
+{
+  "milestone": "TC-03",
+  "complete": false,
+  "source": "f7fa479673761d18e03da9622ecbd7eacaed5004",
+  "ci_run": 40142093488,
+  "all_three_jobs": "success",
+  "tests": {
+    "jvm": 50,
+    "reference_protocol": 9,
+    "real_bridge_physics_tls": 12,
+    "cloud_adapter_idle_security": 10,
+    "android_instrumentation": 7,
+    "total": 88,
+    "upgrade_acceptance_cases_passed": 5,
+    "upgrade_cases_blocked": 0
+  },
+  "initial_run": {
+    "source": "8e9502987b842546700263e8f06e100d00e5f779",
+    "ci_run": 40141505678,
+    "tests": 88,
+    "upgrade_cases": 4,
+    "unit_html_and_android_xml_independently_inspected": true,
+    "screenshot_inspected": true,
+    "app_audit_correlated_independently": true
+  },
+  "android_to_local_tls_mujoco_verified": true,
+  "android_to_public_mujoco_verified": false,
+  "physical_phone_verified": false,
+  "cloud_service_created": false,
+  "owner_cloud_token_created": false,
+  "stable_owner_signing_key_provisioned": false,
+  "robotics_branch_modified": false,
+  "production_deployed": false,
+  "merged": false,
+  "additional_spending": 0,
+  "resource_limits": {
+    "cpu": 0.1,
+    "memory_mib": 512,
+    "extra_swap_mib": 0,
+    "network": "none",
+    "assets": "private read-only CI mounts; not published image/APK contents"
+  },
+  "resource_limit_caveat": "Aggregate throughput only; p95 tick exceeds 20 ms. Hosted latency, scheduling and watchdog behavior with network traffic remain unverified.",
+  "candidate_apk": {
+    "version_code": 3,
+    "version_name": "0.2.1-dev",
+    "package": "com.tduck.companion",
+    "sha256": "6ed30c31ca0caf31740d4d4ba28c28e7ae4e789b90dfe7dfd98afd187ab7e3e0",
+    "signature_and_hash_verified_by_ci": true,
+    "final_apk_independently_downloaded": false,
+    "artifact_id": 12578679941,
+    "owner_install_offered": false,
+    "cloud_ready": false,
+    "stable_update_channel": false
+  },
+  "artifacts": {
+    "emulator": 12579590486,
+    "unit_lint": 12579655300,
+    "resource": 12579372005
+  },
+  "scope": "Local Android emulator/MuJoCo and private resource-limited container only. Environment became unavailable after initial artifact inspection; final JSON recovered from complete CI logs. No final raw artifact independent inspection claimed.",
+  "blockers": [
+    "Specific nonproduction deployment/workspace approval and verified zero-charge account/quota state",
+    "Runtime asset/weight provenance and source-use review",
+    "Approved owner cloud-token custody and stable APK signing identity/backup",
+    "Actual public-endpoint Android roundtrip and physical-phone acceptance"
+  ]
+}
