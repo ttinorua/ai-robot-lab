@@ -1,0 +1,12 @@
+{
+  "evaluation_episodes": 766,
+  "cpu_seconds": 101.181022245,
+  "wall_start_unix": 1792822340.5952191,
+  "overhead_reserve_cpu_seconds": 25,
+  "pretraining_test_reset_count": 56,
+  "wall_seconds": 1097.5565884113312,
+  "original_nominal_regression_episodes": 10,
+  "ci_episode_reserve": 250,
+  "evaluation_with_ci_reserve": 1016,
+  "execution_complete_before_publication": true
+}

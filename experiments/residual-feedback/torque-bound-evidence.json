@@ -1,0 +1,32 @@
+{
+  "source": "upright-feedback/development.json, candidate snapshots and finals only; no holdout used",
+  "sampled_states": 578,
+  "absolute_joint_torque_quantiles_Nm": [
+    [
+      0.001314546479989076,
+      0.0009404062484463793
+    ],
+    [
+      0.11656055232742797,
+      0.09241039404878365
+    ],
+    [
+      0.5047047978267083,
+      0.4947546583134684
+    ],
+    [
+      0.8100976143032312,
+      0.8488993160426617
+    ]
+  ],
+  "quantiles": [
+    0.5,
+    0.95,
+    0.99,
+    1.0
+  ],
+  "minimum_actuator_capacity_Nm": 35.0,
+  "base_mean_effort_action_squared_seconds": 9.67775680727818e-05,
+  "chosen_residual_bound_Nm": 0.1,
+  "rationale": "0.10 Nm per hip, below sampled p99/max transient baseline torque and <0.3% of weaker 35 Nm actuator authority; initial std 0.05 gives 0.005 Nm residual std. Small but task-scale correction; sampled extrema are not guaranteed global bounds."
+}

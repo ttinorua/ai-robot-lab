@@ -1,0 +1,139 @@
+{
+  "summaries": [
+    {
+      "case": "nominal",
+      "controller": "original",
+      "survived_seconds": 10.0,
+      "late_mean_pitch": 0.8033029418631118,
+      "late_pitch_std": 1.1343126367494834e-08,
+      "late_mean_tilt": 0.803457954167128,
+      "late_mean_angular_speed": 1.0510203418740549e-07,
+      "tilt_band_fraction": 0.0,
+      "speed_band_fraction": 1.0
+    },
+    {
+      "case": "nominal",
+      "controller": "zero",
+      "survived_seconds": 2.18,
+      "late_mean_pitch": -0.949102014563238,
+      "late_pitch_std": 0.035277636690682956,
+      "late_mean_tilt": 0.9491955936435623,
+      "late_mean_angular_speed": 0.6189002397892672,
+      "tilt_band_fraction": 0.0,
+      "speed_band_fraction": 0.0
+    },
+    {
+      "case": "pitch_medium_-1",
+      "controller": "original",
+      "survived_seconds": 10.0,
+      "late_mean_pitch": 0.8033527315380491,
+      "late_pitch_std": 1.4491255197809688e-08,
+      "late_mean_tilt": 0.8034510659658533,
+      "late_mean_angular_speed": 1.3744717401805024e-07,
+      "tilt_band_fraction": 0.0,
+      "speed_band_fraction": 1.0
+    },
+    {
+      "case": "pitch_medium_-1",
+      "controller": "zero",
+      "survived_seconds": 1.34,
+      "late_mean_pitch": -0.532274458170929,
+      "late_pitch_std": 0.2792523490935758,
+      "late_mean_tilt": 0.5328360427976175,
+      "late_mean_angular_speed": 0.6691904727065896,
+      "tilt_band_fraction": 0.0,
+      "speed_band_fraction": 0.1044776119402985
+    },
+    {
+      "case": "linear_velocity_medium_-1",
+      "controller": "original",
+      "survived_seconds": 10.0,
+      "late_mean_pitch": 0.8042248654010953,
+      "late_pitch_std": 0.02385591410561211,
+      "late_mean_tilt": 0.8055633298663903,
+      "late_mean_angular_speed": 0.07920075447301504,
+      "tilt_band_fraction": 0.0,
+      "speed_band_fraction": 0.9152119700748129
+    },
+    {
+      "case": "linear_velocity_medium_-1",
+      "controller": "zero",
+      "survived_seconds": 1.22,
+      "late_mean_pitch": -0.5458828204632796,
+      "late_pitch_std": 0.3065575360847522,
+      "late_mean_tilt": 0.5473887674218559,
+      "late_mean_angular_speed": 0.846039988543681,
+      "tilt_band_fraction": 0.09836065573770492,
+      "speed_band_fraction": 0.0
+    },
+    {
+      "case": "angular_velocity_medium_+1",
+      "controller": "original",
+      "survived_seconds": 10.0,
+      "late_mean_pitch": 0.8032952777176164,
+      "late_pitch_std": 7.002691759573324e-09,
+      "late_mean_tilt": 0.803457846533112,
+      "late_mean_angular_speed": 6.462974555144336e-08,
+      "tilt_band_fraction": 0.0,
+      "speed_band_fraction": 1.0
+    },
+    {
+      "case": "angular_velocity_medium_+1",
+      "controller": "zero",
+      "survived_seconds": 10.0,
+      "late_mean_pitch": 0.7746145560645042,
+      "late_pitch_std": 0.10659841232937337,
+      "late_mean_tilt": 0.7747970468347335,
+      "late_mean_angular_speed": 0.08055100233564877,
+      "tilt_band_fraction": 0.0,
+      "speed_band_fraction": 0.9177057356608479
+    },
+    {
+      "case": "push_medium_-1",
+      "controller": "original",
+      "survived_seconds": 10.0,
+      "late_mean_pitch": 0.8033378315875317,
+      "late_pitch_std": 0.00016110072985467972,
+      "late_mean_tilt": 0.8034515561325016,
+      "late_mean_angular_speed": 0.001387191918835981,
+      "tilt_band_fraction": 0.0,
+      "speed_band_fraction": 1.0
+    },
+    {
+      "case": "push_medium_-1",
+      "controller": "zero",
+      "survived_seconds": 1.56,
+      "late_mean_pitch": -0.23524191520189788,
+      "late_pitch_std": 0.28978972998716696,
+      "late_mean_tilt": 0.23736007087649005,
+      "late_mean_angular_speed": 0.6797882868364786,
+      "tilt_band_fraction": 0.5256410256410257,
+      "speed_band_fraction": 0.6025641025641025
+    },
+    {
+      "case": "push_medium_+1",
+      "controller": "original",
+      "survived_seconds": 10.0,
+      "late_mean_pitch": 0.8040584125387247,
+      "late_pitch_std": 0.005653602961566065,
+      "late_mean_tilt": 0.8043815985609907,
+      "late_mean_angular_speed": 0.015019423359957448,
+      "tilt_band_fraction": 0.0,
+      "speed_band_fraction": 0.9800498753117207
+    },
+    {
+      "case": "push_medium_+1",
+      "controller": "zero",
+      "survived_seconds": 3.46,
+      "late_mean_pitch": -0.46761434940646684,
+      "late_pitch_std": 0.3147564300906719,
+      "late_mean_tilt": 0.46772402835605587,
+      "late_mean_angular_speed": 0.6319339126336407,
+      "tilt_band_fraction": 0.0945945945945946,
+      "speed_band_fraction": 0.1891891891891892
+    }
+  ],
+  "episodes": 12,
+  "cpu_seconds": 1.031369265,
+  "wall_seconds": 1.0314594559999932
+}

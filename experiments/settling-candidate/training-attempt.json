@@ -1,0 +1,9 @@
+{
+  "status": "complete",
+  "actual_steps": 20480,
+  "training_cpu_seconds": 5.691519022000001,
+  "validation_cpu_seconds": 18.121314959,
+  "selected_steps": 5120,
+  "candidate_sha256": "bb5cda047e39940ecb3a5e28c31f47bd4a4ac32e2047e87decad9b9b955adab1",
+  "single_attempt": true
+}

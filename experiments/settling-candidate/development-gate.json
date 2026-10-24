@@ -1,0 +1,7 @@
+{
+  "accepted": false,
+  "nominal_successes": 10,
+  "candidate_sha256": "bb5cda047e39940ecb3a5e28c31f47bd4a4ac32e2047e87decad9b9b955adab1",
+  "choices_sha256": "5ed0c520ab82d35eb30209d7d2ee0bc231b2547d9575a76596ea718bdc5b75ec",
+  "holdout": "6000-6019 authorized only if accepted; choices now immutable"
+}

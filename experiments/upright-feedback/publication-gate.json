@@ -1,0 +1,16 @@
+{
+  "visibility": "public",
+  "branch": "improve/verified-balance",
+  "parent": "74180dc0a41a54371c53d369a193739c756d0d89",
+  "runner": "ubuntu-latest",
+  "pr_only_for_this_branch": true,
+  "cpu_dependencies": true,
+  "training_and_pages_push_main_only": true,
+  "manual_dispatches": 0,
+  "paid_resources": 0,
+  "workflow_hashes": {
+    "physics-validation.yml": "a3a6def9f2d8747e88d4b80d1b1a12c6722d29ee808d895c2168a2ed5d276a1c",
+    "publish-viewer.yml": "f02925a2896ef4ed32ebbd48a03481b1d376d20b174260bbbe639510460b6612",
+    "train-balance.yml": "75c1393040610d56c53eda16185004efe65f8eb2d9e4eabeacc72d551b62360f"
+  }
+}

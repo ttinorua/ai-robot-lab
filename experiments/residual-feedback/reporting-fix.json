@@ -1,0 +1,6 @@
+{
+  "reason": "CSV treated added paired-base-hash string as a trial; fix skips metadata and permits only attested reporting-source change. No change to residual.py, reward, torque bound, gains, checkpoints or physics. No resumed/new training.",
+  "frozen_run_sha256": "bffcdf1c9f77a07f616511f693df2315e60b23774513d9523ba82fb20b936376",
+  "corrected_run_sha256": "9e10712869d4cdfccd33b637ad6f1243ff86c81526c3c224ca771e926e43910b",
+  "training_retry_forbidden": true
+}

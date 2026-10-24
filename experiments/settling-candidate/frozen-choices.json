@@ -1,0 +1,197 @@
+{
+  "original_sha256": "d00ffe9a13cb9a71e9f596d7b4392bf10edc004b18d6f4c1565fb338021b7244",
+  "sources": {
+    "improve_settling.py": "a5cc6817330df012b524ecc239295e99b43db38f32c01109be3e5ba680fc0baf",
+    "robot_lab/settling.py": "a89f11ada89d22e6a62d74ef6dfe4a6cef1afdb1febe549df254864d02671dad",
+    "tests/test_settling.py": "746284c9e966c3e288083f14e11b778a69a885fb680a3ffb085d9dff4acbd0cb",
+    "robot_lab/robustness.py": "66c7d843b37fb63b34ca621014977535cea5286ebdb080250b653a47a0d94201",
+    "robot_lab/env.py": "9c4dc6e97ae9793da65a80122982c507174ad05518960a4cb962719da6872f9e",
+    "assets/robot.xml": "5becb4218e15a54e45b048bd9c26117fb2edd532aedad7758b0f9161994695a3",
+    "train.py": "a45a38eb75147c3c4a17a886a152273aef5735ca76f780fd836edba408fedcf4"
+  },
+  "protocol_sha256": "9e4b0b8022843c0750b4be5dfdaaede8b595216f09f2b88481f26cc009ec7aa2",
+  "benchmark_protocol": {
+    "version": "robustness-baseline-v1",
+    "cases": [
+      {
+        "name": "nominal",
+        "kind": "nominal",
+        "value": 0.0,
+        "unit": "none"
+      },
+      {
+        "name": "pitch_small_-1",
+        "kind": "pitch",
+        "strength": "small",
+        "value": -0.08,
+        "unit": "rad"
+      },
+      {
+        "name": "pitch_small_+1",
+        "kind": "pitch",
+        "strength": "small",
+        "value": 0.08,
+        "unit": "rad"
+      },
+      {
+        "name": "pitch_medium_-1",
+        "kind": "pitch",
+        "strength": "medium",
+        "value": -0.16,
+        "unit": "rad"
+      },
+      {
+        "name": "pitch_medium_+1",
+        "kind": "pitch",
+        "strength": "medium",
+        "value": 0.16,
+        "unit": "rad"
+      },
+      {
+        "name": "linear_velocity_small_-1",
+        "kind": "linear_velocity",
+        "strength": "small",
+        "value": -0.2,
+        "unit": "m/s"
+      },
+      {
+        "name": "linear_velocity_small_+1",
+        "kind": "linear_velocity",
+        "strength": "small",
+        "value": 0.2,
+        "unit": "m/s"
+      },
+      {
+        "name": "linear_velocity_medium_-1",
+        "kind": "linear_velocity",
+        "strength": "medium",
+        "value": -0.5,
+        "unit": "m/s"
+      },
+      {
+        "name": "linear_velocity_medium_+1",
+        "kind": "linear_velocity",
+        "strength": "medium",
+        "value": 0.5,
+        "unit": "m/s"
+      },
+      {
+        "name": "angular_velocity_small_-1",
+        "kind": "angular_velocity",
+        "strength": "small",
+        "value": -0.5,
+        "unit": "rad/s"
+      },
+      {
+        "name": "angular_velocity_small_+1",
+        "kind": "angular_velocity",
+        "strength": "small",
+        "value": 0.5,
+        "unit": "rad/s"
+      },
+      {
+        "name": "angular_velocity_medium_-1",
+        "kind": "angular_velocity",
+        "strength": "medium",
+        "value": -1.0,
+        "unit": "rad/s"
+      },
+      {
+        "name": "angular_velocity_medium_+1",
+        "kind": "angular_velocity",
+        "strength": "medium",
+        "value": 1.0,
+        "unit": "rad/s"
+      },
+      {
+        "name": "push_small_-1",
+        "kind": "push",
+        "strength": "small",
+        "value": -0.5,
+        "unit": "N s"
+      },
+      {
+        "name": "push_small_+1",
+        "kind": "push",
+        "strength": "small",
+        "value": 0.5,
+        "unit": "N s"
+      },
+      {
+        "name": "push_medium_-1",
+        "kind": "push",
+        "strength": "medium",
+        "value": -1.5,
+        "unit": "N s"
+      },
+      {
+        "name": "push_medium_+1",
+        "kind": "push",
+        "strength": "medium",
+        "value": 1.5,
+        "unit": "N s"
+      }
+    ],
+    "axes": "world x forward, y lateral, z up; pitch about +y",
+    "reset": "same seeded nominal reset; replace root pitch or add root velocity",
+    "push": {
+      "start_step": 50,
+      "end_step_exclusive": 55,
+      "start_seconds": 1.0,
+      "duration_seconds": 0.1,
+      "substep_seconds": 0.01,
+      "application": "constant world-x force at torso COM; zero torque",
+      "force_newtons": "signed impulse / 0.1; +/-5 N or +/-15 N"
+    },
+    "recovery": {
+      "max_tilt_rad": 0.1,
+      "max_angular_speed_rad_s": 0.3,
+      "sustained_seconds": 0.5,
+      "start": "reset disturbances: t=0; pushes: end of force at t=1.1",
+      "definition": "first 0.5 s continuous qualifying window; latency to window end; falls fail"
+    },
+    "success": "10 s horizon reached without fall, including last step",
+    "development_seeds": [
+      4000,
+      4001,
+      4002,
+      4003,
+      4004,
+      4005,
+      4006,
+      4007,
+      4008,
+      4009
+    ],
+    "holdout_seeds": [
+      5000,
+      5001,
+      5002,
+      5003,
+      5004,
+      5005,
+      5006,
+      5007,
+      5008,
+      5009,
+      5010,
+      5011,
+      5012,
+      5013,
+      5014,
+      5015,
+      5016,
+      5017,
+      5018,
+      5019
+    ]
+  },
+  "packages": {
+    "mujoco": "3.17.0",
+    "gymnasium": "1.4.0",
+    "stable-baselines3": "2.9.0",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.4.6"
+  },
+  "python": "3.11.17"
+}

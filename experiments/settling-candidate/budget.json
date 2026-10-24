@@ -1,0 +1,11 @@
+{
+  "cpu_seconds": 72.395701368,
+  "evaluation_episodes": 810,
+  "wall_start_unix": 1792802131.780822,
+  "overhead_reserve_cpu_seconds": 20,
+  "wall_elapsed_seconds": 453.24684500694275,
+  "unit_test_evaluation_episode_upper_bound": 100,
+  "total_evaluation_episode_upper_bound": 910,
+  "cpu_note": "Process CPU measured for experiment phases/diagnostics, plus conservative 20 s reserve for tests/imports/postprocessing; publication excluded.",
+  "execution_complete_before_publication": true
+}

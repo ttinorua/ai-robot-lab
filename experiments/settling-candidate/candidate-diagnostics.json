@@ -1,0 +1,73 @@
+{
+  "summaries": [
+    {
+      "case": "nominal",
+      "controller": "candidate",
+      "survived_seconds": 10.0,
+      "late_mean_pitch": 0.8033609364926991,
+      "late_pitch_std": 6.270085885050263e-08,
+      "late_mean_tilt": 0.8035687786978487,
+      "late_mean_angular_speed": 5.685746316437706e-07,
+      "tilt_band_fraction": 0.0,
+      "speed_band_fraction": 1.0
+    },
+    {
+      "case": "pitch_medium_-1",
+      "controller": "candidate",
+      "survived_seconds": 10.0,
+      "late_mean_pitch": 0.8030648937533907,
+      "late_pitch_std": 1.756889443759884e-08,
+      "late_mean_tilt": 0.8035618842339844,
+      "late_mean_angular_speed": 1.490909054263953e-07,
+      "tilt_band_fraction": 0.0,
+      "speed_band_fraction": 1.0
+    },
+    {
+      "case": "linear_velocity_medium_-1",
+      "controller": "candidate",
+      "survived_seconds": 1.6400000000000001,
+      "late_mean_pitch": 0.15098292181573333,
+      "late_pitch_std": 0.19697910347287637,
+      "late_mean_tilt": 0.21758300779172857,
+      "late_mean_angular_speed": 0.8034387552903995,
+      "tilt_band_fraction": 0.23170731707317074,
+      "speed_band_fraction": 0.21951219512195122
+    },
+    {
+      "case": "angular_velocity_medium_+1",
+      "controller": "candidate",
+      "survived_seconds": 10.0,
+      "late_mean_pitch": 0.8033575804614155,
+      "late_pitch_std": 3.3099496906791264e-08,
+      "late_mean_tilt": 0.8035686099903568,
+      "late_mean_angular_speed": 2.999835961634033e-07,
+      "tilt_band_fraction": 0.0,
+      "speed_band_fraction": 1.0
+    },
+    {
+      "case": "push_medium_-1",
+      "controller": "candidate",
+      "survived_seconds": 10.0,
+      "late_mean_pitch": 0.8034127042934328,
+      "late_pitch_std": 1.8259461410320214e-06,
+      "late_mean_tilt": 0.8035688723482917,
+      "late_mean_angular_speed": 2.582851839801195e-05,
+      "tilt_band_fraction": 0.0,
+      "speed_band_fraction": 1.0
+    },
+    {
+      "case": "push_medium_+1",
+      "controller": "candidate",
+      "survived_seconds": 10.0,
+      "late_mean_pitch": 0.8037160958873149,
+      "late_pitch_std": 0.0033645458738911943,
+      "late_mean_tilt": 0.8039154693559802,
+      "late_mean_angular_speed": 0.007660663801327247,
+      "tilt_band_fraction": 0.0,
+      "speed_band_fraction": 0.9925187032418953
+    }
+  ],
+  "episodes": 6,
+  "cpu_seconds": 0.884233284,
+  "wall_seconds": 0.8851058070001727
+}

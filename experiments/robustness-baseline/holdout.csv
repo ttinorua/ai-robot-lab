@@ -1,0 +1,681 @@
+scenario,kind,value,unit,seed,controller,seconds,success,terminated,truncated,recovery_window_seconds,recovered_without_later_fall,action_squared_integral,actual_impulse_Ns,initial_state_sha256
+nominal,nominal,0.0,none,5000,ppo,10.0,True,False,True,,False,0.016923827195714898,0,1e6aa6a5e13411a29f7a00e31fb51d08899297d4ac4ae607e2327a5600f9ef31
+nominal,nominal,0.0,none,5000,zero,10.0,True,False,True,0.62,True,0.0,0,1e6aa6a5e13411a29f7a00e31fb51d08899297d4ac4ae607e2327a5600f9ef31
+nominal,nominal,0.0,none,5001,ppo,10.0,True,False,True,,False,0.017034214992308935,0,b4bec25ab0c97db702be3727e4287ed9270676826574b66da883b06a7131f5c9
+nominal,nominal,0.0,none,5001,zero,2.54,False,True,False,0.5,False,0.0,0,b4bec25ab0c97db702be3727e4287ed9270676826574b66da883b06a7131f5c9
+nominal,nominal,0.0,none,5002,ppo,10.0,True,False,True,,False,0.01699207871482936,0,e9f1c14d889ff8067b2bb1d94802a170c894cfb59346842c054b4c47e89764a2
+nominal,nominal,0.0,none,5002,zero,2.48,False,True,False,0.52,False,0.0,0,e9f1c14d889ff8067b2bb1d94802a170c894cfb59346842c054b4c47e89764a2
+nominal,nominal,0.0,none,5003,ppo,10.0,True,False,True,,False,0.016851864810887553,0,cb4745cbe7f7290652ce1ea6be957766a7f3661221fd16c6e850d1ea479edd51
+nominal,nominal,0.0,none,5003,zero,10.0,True,False,True,0.5,True,0.0,0,cb4745cbe7f7290652ce1ea6be957766a7f3661221fd16c6e850d1ea479edd51
+nominal,nominal,0.0,none,5004,ppo,10.0,True,False,True,,False,0.016904915852355918,0,a8f56eea6ce73c236670f0f9b96bbfbeef0cdae8a47d84829d5c0defad009c97
+nominal,nominal,0.0,none,5004,zero,10.0,True,False,True,0.5,True,0.0,0,a8f56eea6ce73c236670f0f9b96bbfbeef0cdae8a47d84829d5c0defad009c97
+nominal,nominal,0.0,none,5005,ppo,10.0,True,False,True,,False,0.016905768851866076,0,dc90862fc076dc89048f98f859bec27061d16cc277bf017bbdda933d49baaaca
+nominal,nominal,0.0,none,5005,zero,10.0,True,False,True,0.5,True,0.0,0,dc90862fc076dc89048f98f859bec27061d16cc277bf017bbdda933d49baaaca
+nominal,nominal,0.0,none,5006,ppo,10.0,True,False,True,,False,0.016943790738878355,0,b0ea3db3a476478fa39a38011d208b4de5c7ef48672fcb6d9fbd9ad973a69781
+nominal,nominal,0.0,none,5006,zero,2.52,False,True,False,0.54,False,0.0,0,b0ea3db3a476478fa39a38011d208b4de5c7ef48672fcb6d9fbd9ad973a69781
+nominal,nominal,0.0,none,5007,ppo,10.0,True,False,True,,False,0.016883657532598503,0,24715dca6acd5f07f8324bd9e830506cfaa9b9d7dac692c33e9cfff79eb0410d
+nominal,nominal,0.0,none,5007,zero,1.8800000000000001,False,True,False,0.52,False,0.0,0,24715dca6acd5f07f8324bd9e830506cfaa9b9d7dac692c33e9cfff79eb0410d
+nominal,nominal,0.0,none,5008,ppo,10.0,True,False,True,,False,0.016891323956369896,0,6088a71dd3ef77a04214b1062094df2243bcc7c7fffa9d004b75c19a4d5c2cde
+nominal,nominal,0.0,none,5008,zero,10.0,True,False,True,0.5,True,0.0,0,6088a71dd3ef77a04214b1062094df2243bcc7c7fffa9d004b75c19a4d5c2cde
+nominal,nominal,0.0,none,5009,ppo,10.0,True,False,True,,False,0.016980032490973972,0,cd49b4f8ff39af3e9ae26625dda8e00451d1c736bd67948cd90a0509352e0c7e
+nominal,nominal,0.0,none,5009,zero,10.0,True,False,True,0.5,True,0.0,0,cd49b4f8ff39af3e9ae26625dda8e00451d1c736bd67948cd90a0509352e0c7e
+nominal,nominal,0.0,none,5010,ppo,10.0,True,False,True,,False,0.016857774817908712,0,9db7b37813efcbd7770c5ad60d6da33e96dcdaf6ddd6fa9e29dc9bd28923f737
+nominal,nominal,0.0,none,5010,zero,10.0,True,False,True,0.5,True,0.0,0,9db7b37813efcbd7770c5ad60d6da33e96dcdaf6ddd6fa9e29dc9bd28923f737
+nominal,nominal,0.0,none,5011,ppo,10.0,True,False,True,,False,0.0169007377891103,0,057183960fb20a197a3297970e29c30abd1cfd2f4972b23bd13775c441392426
+nominal,nominal,0.0,none,5011,zero,10.0,True,False,True,0.5,True,0.0,0,057183960fb20a197a3297970e29c30abd1cfd2f4972b23bd13775c441392426
+nominal,nominal,0.0,none,5012,ppo,10.0,True,False,True,,False,0.01706312796333809,0,a4a25f1bef3cd80ee3bde162ca3c33b92ed338623c272e3a11f0b180a3065170
+nominal,nominal,0.0,none,5012,zero,2.04,False,True,False,0.68,False,0.0,0,a4a25f1bef3cd80ee3bde162ca3c33b92ed338623c272e3a11f0b180a3065170
+nominal,nominal,0.0,none,5013,ppo,10.0,True,False,True,,False,0.016991963218606545,0,3cc8bfe8da3790adf2658a4ede45993b6a304dfb967f286f0141d393a070204e
+nominal,nominal,0.0,none,5013,zero,2.2600000000000002,False,True,False,0.62,False,0.0,0,3cc8bfe8da3790adf2658a4ede45993b6a304dfb967f286f0141d393a070204e
+nominal,nominal,0.0,none,5014,ppo,10.0,True,False,True,,False,0.01696845068654496,0,9c87a89dbb8f329eae04bdb6aa82c8858454fbe8069027b80b6f114c29029f2c
+nominal,nominal,0.0,none,5014,zero,2.4,False,True,False,0.54,False,0.0,0,9c87a89dbb8f329eae04bdb6aa82c8858454fbe8069027b80b6f114c29029f2c
+nominal,nominal,0.0,none,5015,ppo,10.0,True,False,True,,False,0.016851255125657084,0,fe9b2f394e832f16343682c6c7c732099f6c45918510a36b6bb434893fa0fcc8
+nominal,nominal,0.0,none,5015,zero,10.0,True,False,True,0.62,True,0.0,0,fe9b2f394e832f16343682c6c7c732099f6c45918510a36b6bb434893fa0fcc8
+nominal,nominal,0.0,none,5016,ppo,10.0,True,False,True,,False,0.01703950354683902,0,13d704c7d0f5adc9b1b2bba2d106b6b17b1fe3699d2034e7b5ef3dbe87b1fcc2
+nominal,nominal,0.0,none,5016,zero,2.1,False,True,False,0.64,False,0.0,0,13d704c7d0f5adc9b1b2bba2d106b6b17b1fe3699d2034e7b5ef3dbe87b1fcc2
+nominal,nominal,0.0,none,5017,ppo,10.0,True,False,True,,False,0.017075180822576023,0,6b841c4990f6d65d38b5ab8517d74ac1591a8edc97c23f770823f3f994f6d597
+nominal,nominal,0.0,none,5017,zero,3.2,False,True,False,0.5,False,0.0,0,6b841c4990f6d65d38b5ab8517d74ac1591a8edc97c23f770823f3f994f6d597
+nominal,nominal,0.0,none,5018,ppo,10.0,True,False,True,,False,0.016904314232815416,0,29447a163737fd52def7b4ea67f5db0ed91c9cca4947975b4af33054bed32852
+nominal,nominal,0.0,none,5018,zero,10.0,True,False,True,0.5,True,0.0,0,29447a163737fd52def7b4ea67f5db0ed91c9cca4947975b4af33054bed32852
+nominal,nominal,0.0,none,5019,ppo,10.0,True,False,True,,False,0.016874425092391704,0,144abf13986f50ae3ab53ce570fa094a938b90ffc15a30ef47bbb6fb692ac29d
+nominal,nominal,0.0,none,5019,zero,2.22,False,True,False,0.52,False,0.0,0,144abf13986f50ae3ab53ce570fa094a938b90ffc15a30ef47bbb6fb692ac29d
+pitch_small_-1,pitch,-0.08,rad,5000,ppo,10.0,True,False,True,,False,0.016702513212512572,0,fd42db7d099c470a2651c606fbd685c6ecf338bd1cca44b9397c4a0fe922d0b3
+pitch_small_-1,pitch,-0.08,rad,5000,zero,1.84,False,True,False,,False,0.0,0,fd42db7d099c470a2651c606fbd685c6ecf338bd1cca44b9397c4a0fe922d0b3
+pitch_small_-1,pitch,-0.08,rad,5001,ppo,10.0,True,False,True,,False,0.01670348428680885,0,b01fb0bb073f226e9e14991bc50c22b061dff0dbad4610529e4c49117bcd41be
+pitch_small_-1,pitch,-0.08,rad,5001,zero,1.72,False,True,False,,False,0.0,0,b01fb0bb073f226e9e14991bc50c22b061dff0dbad4610529e4c49117bcd41be
+pitch_small_-1,pitch,-0.08,rad,5002,ppo,10.0,True,False,True,,False,0.016634235013625605,0,c6b2b4f02bfacf561b344dedd45b2bad8826d59b5152460d4d1b9a76aed479b8
+pitch_small_-1,pitch,-0.08,rad,5002,zero,1.72,False,True,False,,False,0.0,0,c6b2b4f02bfacf561b344dedd45b2bad8826d59b5152460d4d1b9a76aed479b8
+pitch_small_-1,pitch,-0.08,rad,5003,ppo,10.0,True,False,True,,False,0.0166307421715827,0,2606432767e6fda71e8aea67634f80b1dc95fddb4e5be4010fe799262dea811a
+pitch_small_-1,pitch,-0.08,rad,5003,zero,1.84,False,True,False,,False,0.0,0,2606432767e6fda71e8aea67634f80b1dc95fddb4e5be4010fe799262dea811a
+pitch_small_-1,pitch,-0.08,rad,5004,ppo,10.0,True,False,True,,False,0.01669203374709475,0,76d94cf7ac0ad05bfb4de9e16521919d41db5927810003111665052248c3d9da
+pitch_small_-1,pitch,-0.08,rad,5004,zero,1.82,False,True,False,,False,0.0,0,76d94cf7ac0ad05bfb4de9e16521919d41db5927810003111665052248c3d9da
+pitch_small_-1,pitch,-0.08,rad,5005,ppo,10.0,True,False,True,,False,0.016683574804774396,0,df36ec63b405ceec131f63d9a2b27d7211697180e826184c9c9bc7ba394c2f32
+pitch_small_-1,pitch,-0.08,rad,5005,zero,1.8,False,True,False,,False,0.0,0,df36ec63b405ceec131f63d9a2b27d7211697180e826184c9c9bc7ba394c2f32
+pitch_small_-1,pitch,-0.08,rad,5006,ppo,10.0,True,False,True,,False,0.016592499428370606,0,69cc1560b90a967170495134e19ffd5ad369c9760831b67c84bc1d814029e3c9
+pitch_small_-1,pitch,-0.08,rad,5006,zero,1.7,False,True,False,,False,0.0,0,69cc1560b90a967170495134e19ffd5ad369c9760831b67c84bc1d814029e3c9
+pitch_small_-1,pitch,-0.08,rad,5007,ppo,10.0,True,False,True,,False,0.016629909424809707,0,0d915f3a50f97bdefef06fb8850b09271467845028e2c620abdd00a6d15a8250
+pitch_small_-1,pitch,-0.08,rad,5007,zero,1.46,False,True,False,,False,0.0,0,0d915f3a50f97bdefef06fb8850b09271467845028e2c620abdd00a6d15a8250
+pitch_small_-1,pitch,-0.08,rad,5008,ppo,10.0,True,False,True,,False,0.016602198923283337,0,545333c1c53545c5e0f123823aa371943d07b63d8391dc1963a142d43a23aa94
+pitch_small_-1,pitch,-0.08,rad,5008,zero,1.82,False,True,False,,False,0.0,0,545333c1c53545c5e0f123823aa371943d07b63d8391dc1963a142d43a23aa94
+pitch_small_-1,pitch,-0.08,rad,5009,ppo,10.0,True,False,True,,False,0.01665062899832257,0,7665176ba4b6e38908b8b9ef5eae30a1792c54f620abe379b88799be672834e7
+pitch_small_-1,pitch,-0.08,rad,5009,zero,1.84,False,True,False,,False,0.0,0,7665176ba4b6e38908b8b9ef5eae30a1792c54f620abe379b88799be672834e7
+pitch_small_-1,pitch,-0.08,rad,5010,ppo,10.0,True,False,True,,False,0.016599747062719113,0,d62ebc6a405f8f6cb5c79c4a0b328d6b1ef3c62a6a5d9b271939a48e923a355a
+pitch_small_-1,pitch,-0.08,rad,5010,zero,1.94,False,True,False,,False,0.0,0,d62ebc6a405f8f6cb5c79c4a0b328d6b1ef3c62a6a5d9b271939a48e923a355a
+pitch_small_-1,pitch,-0.08,rad,5011,ppo,10.0,True,False,True,,False,0.016650445714258378,0,9a6a0625929c7a238e5c8a325de21bdccf364709d2c174b41d1dc3eca4e5b9af
+pitch_small_-1,pitch,-0.08,rad,5011,zero,1.78,False,True,False,,False,0.0,0,9a6a0625929c7a238e5c8a325de21bdccf364709d2c174b41d1dc3eca4e5b9af
+pitch_small_-1,pitch,-0.08,rad,5012,ppo,10.0,True,False,True,,False,0.016684086153109047,0,91cdadcb56b7c9369a3e36623e885eb8d0c6942080f2c20922afdfa7d55801be
+pitch_small_-1,pitch,-0.08,rad,5012,zero,1.62,False,True,False,,False,0.0,0,91cdadcb56b7c9369a3e36623e885eb8d0c6942080f2c20922afdfa7d55801be
+pitch_small_-1,pitch,-0.08,rad,5013,ppo,10.0,True,False,True,,False,0.016662093414924972,0,3f7866e5d9c401b9ea0f33c612e8ac233c14be8d859424ba082436ea8e92fd53
+pitch_small_-1,pitch,-0.08,rad,5013,zero,1.68,False,True,False,,False,0.0,0,3f7866e5d9c401b9ea0f33c612e8ac233c14be8d859424ba082436ea8e92fd53
+pitch_small_-1,pitch,-0.08,rad,5014,ppo,10.0,True,False,True,,False,0.016636333033966274,0,265dc06663821e5a41b6c78418fb3d1170945559d9c1cd34c319e1c31bb7116b
+pitch_small_-1,pitch,-0.08,rad,5014,zero,1.7,False,True,False,,False,0.0,0,265dc06663821e5a41b6c78418fb3d1170945559d9c1cd34c319e1c31bb7116b
+pitch_small_-1,pitch,-0.08,rad,5015,ppo,10.0,True,False,True,,False,0.016623633724047956,0,7534b64e9d90202792ef61c5a17809d702ecce9ca4e18521c5ed51e4b90690f3
+pitch_small_-1,pitch,-0.08,rad,5015,zero,2.0,False,True,False,,False,0.0,0,7534b64e9d90202792ef61c5a17809d702ecce9ca4e18521c5ed51e4b90690f3
+pitch_small_-1,pitch,-0.08,rad,5016,ppo,10.0,True,False,True,,False,0.016679552825808106,0,1b45b10b2857ca665b2dd7f6d3185d8d16dc3633f225bd5d6d4f02256f3720a7
+pitch_small_-1,pitch,-0.08,rad,5016,zero,1.62,False,True,False,,False,0.0,0,1b45b10b2857ca665b2dd7f6d3185d8d16dc3633f225bd5d6d4f02256f3720a7
+pitch_small_-1,pitch,-0.08,rad,5017,ppo,10.0,True,False,True,,False,0.016680804545176346,0,cdaddc29ed202870d125ab3b8c8d3fd1d8c8c2eedb997004aa69038fa3a4c580
+pitch_small_-1,pitch,-0.08,rad,5017,zero,1.76,False,True,False,,False,0.0,0,cdaddc29ed202870d125ab3b8c8d3fd1d8c8c2eedb997004aa69038fa3a4c580
+pitch_small_-1,pitch,-0.08,rad,5018,ppo,10.0,True,False,True,,False,0.01664192848733352,0,0376661d8ba7d9d850dbad7826c8b67bc02f4b54ab5987891156ed1a5d8d89f0
+pitch_small_-1,pitch,-0.08,rad,5018,zero,1.74,False,True,False,,False,0.0,0,0376661d8ba7d9d850dbad7826c8b67bc02f4b54ab5987891156ed1a5d8d89f0
+pitch_small_-1,pitch,-0.08,rad,5019,ppo,10.0,True,False,True,,False,0.016631409765905214,0,3c81823087bfd1dbbfa22ecba4bfb5a163e763cfbcded28c59bd4c4674e314b1
+pitch_small_-1,pitch,-0.08,rad,5019,zero,1.6,False,True,False,,False,0.0,0,3c81823087bfd1dbbfa22ecba4bfb5a163e763cfbcded28c59bd4c4674e314b1
+pitch_small_+1,pitch,0.08,rad,5000,ppo,10.0,True,False,True,,False,0.017320607012370717,0,9f96eb42042bc299fa484d45efda20dc950ff9a13759166fa7d9e26ad63483e8
+pitch_small_+1,pitch,0.08,rad,5000,zero,10.0,True,False,True,,False,0.0,0,9f96eb42042bc299fa484d45efda20dc950ff9a13759166fa7d9e26ad63483e8
+pitch_small_+1,pitch,0.08,rad,5001,ppo,10.0,True,False,True,,False,0.017471202609594796,0,ea4b8b135a6669271d4e96ed2db0a1fc88cfb9ae01adf1fe39316f8003d86f4e
+pitch_small_+1,pitch,0.08,rad,5001,zero,10.0,True,False,True,,False,0.0,0,ea4b8b135a6669271d4e96ed2db0a1fc88cfb9ae01adf1fe39316f8003d86f4e
+pitch_small_+1,pitch,0.08,rad,5002,ppo,10.0,True,False,True,,False,0.017503975770123307,0,3f56ad9183cbd72d1860100667f3b26a0904ce927911892d1386522c11970c9b
+pitch_small_+1,pitch,0.08,rad,5002,zero,10.0,True,False,True,,False,0.0,0,3f56ad9183cbd72d1860100667f3b26a0904ce927911892d1386522c11970c9b
+pitch_small_+1,pitch,0.08,rad,5003,ppo,10.0,True,False,True,,False,0.017365078312031823,0,bc9ba27f984184e336b4ff1e5c24b604ca77db149b21a315e424210cf545619a
+pitch_small_+1,pitch,0.08,rad,5003,zero,10.0,True,False,True,,False,0.0,0,bc9ba27f984184e336b4ff1e5c24b604ca77db149b21a315e424210cf545619a
+pitch_small_+1,pitch,0.08,rad,5004,ppo,10.0,True,False,True,,False,0.01734480246974261,0,029f5afc92422b60f018ed6db5e4f43a6be6fa6f2e12fabcea94fdfacfaaa92b
+pitch_small_+1,pitch,0.08,rad,5004,zero,10.0,True,False,True,,False,0.0,0,029f5afc92422b60f018ed6db5e4f43a6be6fa6f2e12fabcea94fdfacfaaa92b
+pitch_small_+1,pitch,0.08,rad,5005,ppo,10.0,True,False,True,,False,0.017395632530078566,0,c7dcbef512b90a9ecd4b846f1ba350e7061849de75ddabeeceb2ba43a79295bf
+pitch_small_+1,pitch,0.08,rad,5005,zero,10.0,True,False,True,,False,0.0,0,c7dcbef512b90a9ecd4b846f1ba350e7061849de75ddabeeceb2ba43a79295bf
+pitch_small_+1,pitch,0.08,rad,5006,ppo,10.0,True,False,True,,False,0.01744188098364233,0,6cc665f858b9850d24c7f31684c3d9079934a43558ad62e3ea26d2a4343d0cee
+pitch_small_+1,pitch,0.08,rad,5006,zero,10.0,True,False,True,,False,0.0,0,6cc665f858b9850d24c7f31684c3d9079934a43558ad62e3ea26d2a4343d0cee
+pitch_small_+1,pitch,0.08,rad,5007,ppo,10.0,True,False,True,,False,0.017103601577036946,0,084404bbc3ce686a9359789a0844f309eb5c2ce46e9dde20fb50b746b7070234
+pitch_small_+1,pitch,0.08,rad,5007,zero,10.0,True,False,True,,False,0.0,0,084404bbc3ce686a9359789a0844f309eb5c2ce46e9dde20fb50b746b7070234
+pitch_small_+1,pitch,0.08,rad,5008,ppo,10.0,True,False,True,,False,0.01741858660512656,0,12f081ebce55de9f30fb1bf969b8247c9ea46dc56184e910896d7cb4682e48b5
+pitch_small_+1,pitch,0.08,rad,5008,zero,10.0,True,False,True,,False,0.0,0,12f081ebce55de9f30fb1bf969b8247c9ea46dc56184e910896d7cb4682e48b5
+pitch_small_+1,pitch,0.08,rad,5009,ppo,10.0,True,False,True,,False,0.0174496197373082,0,529db78a746ea3cdbd00c3dab88967f66fc5ac44a6d48d8e4fd95d8554cab489
+pitch_small_+1,pitch,0.08,rad,5009,zero,10.0,True,False,True,,False,0.0,0,529db78a746ea3cdbd00c3dab88967f66fc5ac44a6d48d8e4fd95d8554cab489
+pitch_small_+1,pitch,0.08,rad,5010,ppo,10.0,True,False,True,,False,0.017336638317938205,0,a05a6bbb979e87f20f9af13659e4440b40eab7a696bd81ee7450d8353baf1b51
+pitch_small_+1,pitch,0.08,rad,5010,zero,10.0,True,False,True,,False,0.0,0,a05a6bbb979e87f20f9af13659e4440b40eab7a696bd81ee7450d8353baf1b51
+pitch_small_+1,pitch,0.08,rad,5011,ppo,10.0,True,False,True,,False,0.017384837994981278,0,02f156b7804f8b04dd081cee8d9c5dfdd6d6863efc3fe06e4a26dd6f57282276
+pitch_small_+1,pitch,0.08,rad,5011,zero,10.0,True,False,True,,False,0.0,0,02f156b7804f8b04dd081cee8d9c5dfdd6d6863efc3fe06e4a26dd6f57282276
+pitch_small_+1,pitch,0.08,rad,5012,ppo,10.0,True,False,True,,False,0.017547991640028578,0,b4181c1e8703f63fa8bbe461e4fe920dad2fa76ffe44365171d560dae7c0b57c
+pitch_small_+1,pitch,0.08,rad,5012,zero,10.0,True,False,True,,False,0.0,0,b4181c1e8703f63fa8bbe461e4fe920dad2fa76ffe44365171d560dae7c0b57c
+pitch_small_+1,pitch,0.08,rad,5013,ppo,10.0,True,False,True,,False,0.017515563217402663,0,9450078ac6f9421cc7ec3681c00eeba1b3eedb98f16eb04ef15d961807616d58
+pitch_small_+1,pitch,0.08,rad,5013,zero,10.0,True,False,True,,False,0.0,0,9450078ac6f9421cc7ec3681c00eeba1b3eedb98f16eb04ef15d961807616d58
+pitch_small_+1,pitch,0.08,rad,5014,ppo,10.0,True,False,True,,False,0.017503327315189495,0,5a7a8f60f0802bd2702ce7fe854a7eb85022c0fc238b52ac49f767843302d97c
+pitch_small_+1,pitch,0.08,rad,5014,zero,10.0,True,False,True,,False,0.0,0,5a7a8f60f0802bd2702ce7fe854a7eb85022c0fc238b52ac49f767843302d97c
+pitch_small_+1,pitch,0.08,rad,5015,ppo,10.0,True,False,True,,False,0.017307110876136036,0,4e72545852f3b5fdc30bb3df3ee48fa0823b85e9894644235c195113a39acda1
+pitch_small_+1,pitch,0.08,rad,5015,zero,10.0,True,False,True,,False,0.0,0,4e72545852f3b5fdc30bb3df3ee48fa0823b85e9894644235c195113a39acda1
+pitch_small_+1,pitch,0.08,rad,5016,ppo,10.0,True,False,True,,False,0.017569178551939388,0,d89eb8c8c51091ec1eacb9f1a9a7f383a8261709a4e4b8a0718976a7aadf223a
+pitch_small_+1,pitch,0.08,rad,5016,zero,10.0,True,False,True,,False,0.0,0,d89eb8c8c51091ec1eacb9f1a9a7f383a8261709a4e4b8a0718976a7aadf223a
+pitch_small_+1,pitch,0.08,rad,5017,ppo,10.0,True,False,True,,False,0.017471345672383922,0,2ef3437487ce562bd3035667da25fa2c9f33f9577e5df9555f8f4e2e525ed4c3
+pitch_small_+1,pitch,0.08,rad,5017,zero,10.0,True,False,True,,False,0.0,0,2ef3437487ce562bd3035667da25fa2c9f33f9577e5df9555f8f4e2e525ed4c3
+pitch_small_+1,pitch,0.08,rad,5018,ppo,10.0,True,False,True,,False,0.017381663820531218,0,4de421885d027928c2c8902fe925d296efee202c44b1eadabb6b863626a63935
+pitch_small_+1,pitch,0.08,rad,5018,zero,10.0,True,False,True,,False,0.0,0,4de421885d027928c2c8902fe925d296efee202c44b1eadabb6b863626a63935
+pitch_small_+1,pitch,0.08,rad,5019,ppo,10.0,True,False,True,,False,0.01732196340104544,0,323db841039a1821914eea266e7fbfaee594322d4b496074ddb8f8b5ecacd088
+pitch_small_+1,pitch,0.08,rad,5019,zero,10.0,True,False,True,,False,0.0,0,323db841039a1821914eea266e7fbfaee594322d4b496074ddb8f8b5ecacd088
+pitch_medium_-1,pitch,-0.16,rad,5000,ppo,10.0,True,False,True,,False,0.0166234076117689,0,0a4999d9c3d59d2b65ab9554696cca87566ebb4fe461337b0413b76354e3e843
+pitch_medium_-1,pitch,-0.16,rad,5000,zero,1.3800000000000001,False,True,False,,False,0.0,0,0a4999d9c3d59d2b65ab9554696cca87566ebb4fe461337b0413b76354e3e843
+pitch_medium_-1,pitch,-0.16,rad,5001,ppo,10.0,True,False,True,,False,0.016551049946629776,0,14067c1c84852fe69a6f6cb8394f71dcfb97879abca952104bc3dd3af6e83bfa
+pitch_medium_-1,pitch,-0.16,rad,5001,zero,1.36,False,True,False,,False,0.0,0,14067c1c84852fe69a6f6cb8394f71dcfb97879abca952104bc3dd3af6e83bfa
+pitch_medium_-1,pitch,-0.16,rad,5002,ppo,10.0,True,False,True,,False,0.01641056619842863,0,9910a031e47ff37cb337b4cb82322a43fd370889779358dc154b1010cf426b8a
+pitch_medium_-1,pitch,-0.16,rad,5002,zero,1.3800000000000001,False,True,False,,False,0.0,0,9910a031e47ff37cb337b4cb82322a43fd370889779358dc154b1010cf426b8a
+pitch_medium_-1,pitch,-0.16,rad,5003,ppo,10.0,True,False,True,,False,0.016381522705278293,0,8d7dc8301770469b714c9e4cad3eba385861020254b55ca979e3561fa8a7eab4
+pitch_medium_-1,pitch,-0.16,rad,5003,zero,1.4000000000000001,False,True,False,,False,0.0,0,8d7dc8301770469b714c9e4cad3eba385861020254b55ca979e3561fa8a7eab4
+pitch_medium_-1,pitch,-0.16,rad,5004,ppo,10.0,True,False,True,,False,0.01660932824750493,0,2e897433027a40641cdb5a7896829a77b06c375456e7549e068a276c8c0b0765
+pitch_medium_-1,pitch,-0.16,rad,5004,zero,1.3800000000000001,False,True,False,,False,0.0,0,2e897433027a40641cdb5a7896829a77b06c375456e7549e068a276c8c0b0765
+pitch_medium_-1,pitch,-0.16,rad,5005,ppo,10.0,True,False,True,,False,0.016476012707180417,0,1c538cd234ea9c5b6dcaa3f35dad9fd38f4298967b4d4d626335c74872f03222
+pitch_medium_-1,pitch,-0.16,rad,5005,zero,1.3800000000000001,False,True,False,,False,0.0,0,1c538cd234ea9c5b6dcaa3f35dad9fd38f4298967b4d4d626335c74872f03222
+pitch_medium_-1,pitch,-0.16,rad,5006,ppo,10.0,True,False,True,,False,0.01629850547265946,0,18eabe819c674f8279a51b2a5f73c8efcb3b032de36a923615c4b7e919947396
+pitch_medium_-1,pitch,-0.16,rad,5006,zero,1.36,False,True,False,,False,0.0,0,18eabe819c674f8279a51b2a5f73c8efcb3b032de36a923615c4b7e919947396
+pitch_medium_-1,pitch,-0.16,rad,5007,ppo,10.0,True,False,True,,False,0.016311111092509236,0,be1126af209de15228b9c1b271a12a65f6dfca822d24b36ed5e3d2a1080c8811
+pitch_medium_-1,pitch,-0.16,rad,5007,zero,1.22,False,True,False,,False,0.0,0,be1126af209de15228b9c1b271a12a65f6dfca822d24b36ed5e3d2a1080c8811
+pitch_medium_-1,pitch,-0.16,rad,5008,ppo,10.0,True,False,True,,False,0.016320902304482753,0,a1bc4ceff57caa81d2e343b14cecea16a51ab8eff27217d9f258c3dbb2bd393e
+pitch_medium_-1,pitch,-0.16,rad,5008,zero,1.3800000000000001,False,True,False,,False,0.0,0,a1bc4ceff57caa81d2e343b14cecea16a51ab8eff27217d9f258c3dbb2bd393e
+pitch_medium_-1,pitch,-0.16,rad,5009,ppo,10.0,True,False,True,,False,0.016441038893281034,0,958a02442798f75d890af0c88945d7c1082ac55edf1eed2f80ff808c90cc590c
+pitch_medium_-1,pitch,-0.16,rad,5009,zero,1.42,False,True,False,,False,0.0,0,958a02442798f75d890af0c88945d7c1082ac55edf1eed2f80ff808c90cc590c
+pitch_medium_-1,pitch,-0.16,rad,5010,ppo,10.0,True,False,True,,False,0.01637447234727024,0,adc53f5cc9a758b3e179aaacae45b1966ca8cd6432155f31836ff6a00b077e40
+pitch_medium_-1,pitch,-0.16,rad,5010,zero,1.44,False,True,False,,False,0.0,0,adc53f5cc9a758b3e179aaacae45b1966ca8cd6432155f31836ff6a00b077e40
+pitch_medium_-1,pitch,-0.16,rad,5011,ppo,10.0,True,False,True,,False,0.01636312728318433,0,7f3468d5290ae717a707f9c3abf72d87e0bafadc7e0663079670a088cb66b859
+pitch_medium_-1,pitch,-0.16,rad,5011,zero,1.3800000000000001,False,True,False,,False,0.0,0,7f3468d5290ae717a707f9c3abf72d87e0bafadc7e0663079670a088cb66b859
+pitch_medium_-1,pitch,-0.16,rad,5012,ppo,10.0,True,False,True,,False,0.01638799771695617,0,c441935a88401698908162a94149dbe0556b3708b646c15bb381ef147673a962
+pitch_medium_-1,pitch,-0.16,rad,5012,zero,1.34,False,True,False,,False,0.0,0,c441935a88401698908162a94149dbe0556b3708b646c15bb381ef147673a962
+pitch_medium_-1,pitch,-0.16,rad,5013,ppo,10.0,True,False,True,,False,0.01635961773808962,0,ceaba8e104596b58beed531d656f358fc33ff24416a641b51030fa9c880f10d9
+pitch_medium_-1,pitch,-0.16,rad,5013,zero,1.34,False,True,False,,False,0.0,0,ceaba8e104596b58beed531d656f358fc33ff24416a641b51030fa9c880f10d9
+pitch_medium_-1,pitch,-0.16,rad,5014,ppo,10.0,True,False,True,,False,0.01638121208707165,0,82a1479a903bcade049963118f92049d05881f01d5e8b4be7d0316e7a2b48919
+pitch_medium_-1,pitch,-0.16,rad,5014,zero,1.3800000000000001,False,True,False,,False,0.0,0,82a1479a903bcade049963118f92049d05881f01d5e8b4be7d0316e7a2b48919
+pitch_medium_-1,pitch,-0.16,rad,5015,ppo,10.0,True,False,True,,False,0.01634557114704877,0,661697567b305bb344a3c46e57bf61522292663d4a0eab8e085127b401ab39d3
+pitch_medium_-1,pitch,-0.16,rad,5015,zero,1.44,False,True,False,,False,0.0,0,661697567b305bb344a3c46e57bf61522292663d4a0eab8e085127b401ab39d3
+pitch_medium_-1,pitch,-0.16,rad,5016,ppo,10.0,True,False,True,,False,0.01643080971545715,0,2962c8d4670b3a6693f50cd26da89a747a89a353e79eea9ee549616f46f05558
+pitch_medium_-1,pitch,-0.16,rad,5016,zero,1.34,False,True,False,,False,0.0,0,2962c8d4670b3a6693f50cd26da89a747a89a353e79eea9ee549616f46f05558
+pitch_medium_-1,pitch,-0.16,rad,5017,ppo,10.0,True,False,True,,False,0.01644317479187525,0,bdf0603421fd3b8a76e41480efbf6cea23fa6d990a310bf9d7bbac698ccca7a1
+pitch_medium_-1,pitch,-0.16,rad,5017,zero,1.36,False,True,False,,False,0.0,0,bdf0603421fd3b8a76e41480efbf6cea23fa6d990a310bf9d7bbac698ccca7a1
+pitch_medium_-1,pitch,-0.16,rad,5018,ppo,10.0,True,False,True,,False,0.016493975883154367,0,5d387a163c33062b08fe224ed959283f87955bb072458108231bc9572332ead6
+pitch_medium_-1,pitch,-0.16,rad,5018,zero,1.36,False,True,False,,False,0.0,0,5d387a163c33062b08fe224ed959283f87955bb072458108231bc9572332ead6
+pitch_medium_-1,pitch,-0.16,rad,5019,ppo,10.0,True,False,True,,False,0.016279505555685213,0,57be74edd3446e0ea14b37b1ab87db274319326b8d33bb4aae291a7c81d57757
+pitch_medium_-1,pitch,-0.16,rad,5019,zero,1.34,False,True,False,,False,0.0,0,57be74edd3446e0ea14b37b1ab87db274319326b8d33bb4aae291a7c81d57757
+pitch_medium_+1,pitch,0.16,rad,5000,ppo,10.0,True,False,True,,False,0.017729451699488155,0,6a8c34eda0e89cb4b240cfd37ee0ac168edd4682d67e47f921b55fd94b80c3c1
+pitch_medium_+1,pitch,0.16,rad,5000,zero,10.0,True,False,True,,False,0.0,0,6a8c34eda0e89cb4b240cfd37ee0ac168edd4682d67e47f921b55fd94b80c3c1
+pitch_medium_+1,pitch,0.16,rad,5001,ppo,10.0,True,False,True,,False,0.017934304402297093,0,6c22672cce8d328cd54c7b23cecbdcebd0c12ce027b0724dd65bfe7bc2a01600
+pitch_medium_+1,pitch,0.16,rad,5001,zero,10.0,True,False,True,,False,0.0,0,6c22672cce8d328cd54c7b23cecbdcebd0c12ce027b0724dd65bfe7bc2a01600
+pitch_medium_+1,pitch,0.16,rad,5002,ppo,10.0,True,False,True,,False,0.018685147828509874,0,47246c4eba67a993567a476a24749adaead13b1034c14a100c22f87720dfe7b4
+pitch_medium_+1,pitch,0.16,rad,5002,zero,10.0,True,False,True,,False,0.0,0,47246c4eba67a993567a476a24749adaead13b1034c14a100c22f87720dfe7b4
+pitch_medium_+1,pitch,0.16,rad,5003,ppo,10.0,True,False,True,,False,0.017807151289127934,0,7b00bbe0ad882222e138de42d45db71ef80ca5a9f8b730ff1f3e928b235bab16
+pitch_medium_+1,pitch,0.16,rad,5003,zero,10.0,True,False,True,,False,0.0,0,7b00bbe0ad882222e138de42d45db71ef80ca5a9f8b730ff1f3e928b235bab16
+pitch_medium_+1,pitch,0.16,rad,5004,ppo,10.0,True,False,True,,False,0.017770234057970694,0,287afef1c7b464432b7d366d60bb81cb1ee732dd178331d22fabcf18077a673c
+pitch_medium_+1,pitch,0.16,rad,5004,zero,10.0,True,False,True,,False,0.0,0,287afef1c7b464432b7d366d60bb81cb1ee732dd178331d22fabcf18077a673c
+pitch_medium_+1,pitch,0.16,rad,5005,ppo,10.0,True,False,True,,False,0.018113788503978958,0,bb020ca59d3bd98c43fcf13ae51a43f837b184d4c6d9cbfffbb266de93308417
+pitch_medium_+1,pitch,0.16,rad,5005,zero,10.0,True,False,True,,False,0.0,0,bb020ca59d3bd98c43fcf13ae51a43f837b184d4c6d9cbfffbb266de93308417
+pitch_medium_+1,pitch,0.16,rad,5006,ppo,10.0,True,False,True,,False,0.018054233536822735,0,26578b164c232b350ab62534925a0e2e52dbb12a1537be04f24b73570a50a609
+pitch_medium_+1,pitch,0.16,rad,5006,zero,10.0,True,False,True,,False,0.0,0,26578b164c232b350ab62534925a0e2e52dbb12a1537be04f24b73570a50a609
+pitch_medium_+1,pitch,0.16,rad,5007,ppo,10.0,True,False,True,,False,0.01830716589756766,0,5b0686f9d31a31984da16c62c4d6d53d82f3adcfd0a9c09cc23341cb777211f0
+pitch_medium_+1,pitch,0.16,rad,5007,zero,10.0,True,False,True,,False,0.0,0,5b0686f9d31a31984da16c62c4d6d53d82f3adcfd0a9c09cc23341cb777211f0
+pitch_medium_+1,pitch,0.16,rad,5008,ppo,10.0,True,False,True,,False,0.01790607425793491,0,1589eac32a12a4fd8e7e3a30846dd2b9456cd5c8649d7cba6f7d810ae8c81a0c
+pitch_medium_+1,pitch,0.16,rad,5008,zero,10.0,True,False,True,,False,0.0,0,1589eac32a12a4fd8e7e3a30846dd2b9456cd5c8649d7cba6f7d810ae8c81a0c
+pitch_medium_+1,pitch,0.16,rad,5009,ppo,10.0,True,False,True,,False,0.01785608987149315,0,dcad5231ba460c96f20314050d5049e556e6359bab4cea0162f2fc775a00fdd5
+pitch_medium_+1,pitch,0.16,rad,5009,zero,10.0,True,False,True,,False,0.0,0,dcad5231ba460c96f20314050d5049e556e6359bab4cea0162f2fc775a00fdd5
+pitch_medium_+1,pitch,0.16,rad,5010,ppo,10.0,True,False,True,,False,0.017697299199062426,0,9be420a9573eacae497b0607e2556e4ad4c7bb055130efa48ff8f9713e281e8d
+pitch_medium_+1,pitch,0.16,rad,5010,zero,10.0,True,False,True,,False,0.0,0,9be420a9573eacae497b0607e2556e4ad4c7bb055130efa48ff8f9713e281e8d
+pitch_medium_+1,pitch,0.16,rad,5011,ppo,10.0,True,False,True,,False,0.017911331959330794,0,465121ce6b65c0b2f716e050cdb8a45fe14d76d8156beaa4e1c04c04e55dd74e
+pitch_medium_+1,pitch,0.16,rad,5011,zero,10.0,True,False,True,,False,0.0,0,465121ce6b65c0b2f716e050cdb8a45fe14d76d8156beaa4e1c04c04e55dd74e
+pitch_medium_+1,pitch,0.16,rad,5012,ppo,10.0,True,False,True,,False,0.0180414966013633,0,2738a859805f8923d856946526739671e4f77c6a6924c809bd3720e84bf87052
+pitch_medium_+1,pitch,0.16,rad,5012,zero,10.0,True,False,True,,False,0.0,0,2738a859805f8923d856946526739671e4f77c6a6924c809bd3720e84bf87052
+pitch_medium_+1,pitch,0.16,rad,5013,ppo,10.0,True,False,True,,False,0.018128809544577927,0,2fa25405ae7137620ac7cdf298ce24652697b30ed469b474222231e2137c67ae
+pitch_medium_+1,pitch,0.16,rad,5013,zero,10.0,True,False,True,,False,0.0,0,2fa25405ae7137620ac7cdf298ce24652697b30ed469b474222231e2137c67ae
+pitch_medium_+1,pitch,0.16,rad,5014,ppo,10.0,True,False,True,,False,0.01793984454936886,0,454200f2a19a2755b321e42820ea0b0d90f9101ab40f765019894422eabf8635
+pitch_medium_+1,pitch,0.16,rad,5014,zero,10.0,True,False,True,,False,0.0,0,454200f2a19a2755b321e42820ea0b0d90f9101ab40f765019894422eabf8635
+pitch_medium_+1,pitch,0.16,rad,5015,ppo,10.0,True,False,True,,False,0.017773565255415787,0,5d5bf71f2b8c602779d89cb8b26e853c9de966698e3381efb00cc5b7a0cebcc5
+pitch_medium_+1,pitch,0.16,rad,5015,zero,10.0,True,False,True,,False,0.0,0,5d5bf71f2b8c602779d89cb8b26e853c9de966698e3381efb00cc5b7a0cebcc5
+pitch_medium_+1,pitch,0.16,rad,5016,ppo,10.0,True,False,True,,False,0.018683091784769165,0,b05478d513fb33d242bff7be38c57cae7f93cc1f5a7cbe10e2518d6720e12ff1
+pitch_medium_+1,pitch,0.16,rad,5016,zero,10.0,True,False,True,,False,0.0,0,b05478d513fb33d242bff7be38c57cae7f93cc1f5a7cbe10e2518d6720e12ff1
+pitch_medium_+1,pitch,0.16,rad,5017,ppo,10.0,True,False,True,,False,0.01791233721261939,0,1f7d79e6241765a3acd7d6c55b04beeb5904b28ab3ee9ab7e456379516ba8f45
+pitch_medium_+1,pitch,0.16,rad,5017,zero,10.0,True,False,True,,False,0.0,0,1f7d79e6241765a3acd7d6c55b04beeb5904b28ab3ee9ab7e456379516ba8f45
+pitch_medium_+1,pitch,0.16,rad,5018,ppo,10.0,True,False,True,,False,0.017892266284325154,0,8b711ab04eeee03a9bfe857c088f0dd8d6fe7a61c3092c1ed0462013dfc8a584
+pitch_medium_+1,pitch,0.16,rad,5018,zero,10.0,True,False,True,,False,0.0,0,8b711ab04eeee03a9bfe857c088f0dd8d6fe7a61c3092c1ed0462013dfc8a584
+pitch_medium_+1,pitch,0.16,rad,5019,ppo,10.0,True,False,True,,False,0.01799359096155968,0,d9b93ea9598f1ec0bb4004417d605135319bab4306c210db7de0e269aebc81d3
+pitch_medium_+1,pitch,0.16,rad,5019,zero,10.0,True,False,True,,False,0.0,0,d9b93ea9598f1ec0bb4004417d605135319bab4306c210db7de0e269aebc81d3
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5000,ppo,10.0,True,False,True,,False,0.017136392285028664,0,0bf1c5f61784389cbcf284d2255b91adaf4407782f0ca4ebd8ea70c0e68b3e95
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5000,zero,1.84,False,True,False,,False,0.0,0,0bf1c5f61784389cbcf284d2255b91adaf4407782f0ca4ebd8ea70c0e68b3e95
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5001,ppo,10.0,True,False,True,,False,0.017108531394551485,0,92991fe710d0363a3ddb343e40ce5aab5ab28bfbc1003d4ee7de46e62c146245
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5001,zero,1.72,False,True,False,,False,0.0,0,92991fe710d0363a3ddb343e40ce5aab5ab28bfbc1003d4ee7de46e62c146245
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5002,ppo,10.0,True,False,True,,False,0.017022106066870237,0,f01e22f06eedaa7a4c582ea0de4392af791623b74c19fbc461c814212fd911e4
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5002,zero,1.6600000000000001,False,True,False,,False,0.0,0,f01e22f06eedaa7a4c582ea0de4392af791623b74c19fbc461c814212fd911e4
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5003,ppo,10.0,True,False,True,,False,0.01693242024250132,0,bfdb653d46e91bec312a1b53e7d9308cb9b1a50b46cd8ff28d3b96e26bf19d93
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5003,zero,1.8,False,True,False,,False,0.0,0,bfdb653d46e91bec312a1b53e7d9308cb9b1a50b46cd8ff28d3b96e26bf19d93
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5004,ppo,10.0,True,False,True,,False,0.01720227723577398,0,6438a7a3655703b69a3aafa0f7d012845e0157d81a63bce00b547ad09dee2f68
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5004,zero,1.8,False,True,False,,False,0.0,0,6438a7a3655703b69a3aafa0f7d012845e0157d81a63bce00b547ad09dee2f68
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5005,ppo,10.0,True,False,True,,False,0.017160893836262497,0,f54cc01459a928687f4e6fb412340bfeec02793d2cefa467b1f4923a27b95433
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5005,zero,1.78,False,True,False,,False,0.0,0,f54cc01459a928687f4e6fb412340bfeec02793d2cefa467b1f4923a27b95433
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5006,ppo,10.0,True,False,True,,False,0.017005728251242615,0,5adc79af95eff20367455d21d26aac3567a585931f28ca868f72e6de432b6b37
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5006,zero,1.62,False,True,False,,False,0.0,0,5adc79af95eff20367455d21d26aac3567a585931f28ca868f72e6de432b6b37
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5007,ppo,10.0,True,False,True,,False,0.016644040330074925,0,4db28a1716825d26270c00ba1371edc65dbb26de4684e363b40eeac511551876
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5007,zero,1.44,False,True,False,,False,0.0,0,4db28a1716825d26270c00ba1371edc65dbb26de4684e363b40eeac511551876
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5008,ppo,10.0,True,False,True,,False,0.016964089696702992,0,990b36499f4a84267bd98b3e4a9dea885ea236721e3f6428183d05300d6931d0
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5008,zero,1.76,False,True,False,,False,0.0,0,990b36499f4a84267bd98b3e4a9dea885ea236721e3f6428183d05300d6931d0
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5009,ppo,10.0,True,False,True,,False,0.01709927710442588,0,f192a3c97b859320c2b624660f603e04314d707aef66fb8f58186c699ea5741b
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5009,zero,1.78,False,True,False,,False,0.0,0,f192a3c97b859320c2b624660f603e04314d707aef66fb8f58186c699ea5741b
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5010,ppo,10.0,True,False,True,,False,0.016942299897755017,0,3d627e91a0fe700f40ad70cd6862e6061b5df56ce235c574409e052ddb75f5f0
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5010,zero,1.8800000000000001,False,True,False,,False,0.0,0,3d627e91a0fe700f40ad70cd6862e6061b5df56ce235c574409e052ddb75f5f0
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5011,ppo,10.0,True,False,True,,False,0.016974429138972475,0,0294f4e49ef49f60ac2862c80d236b83162002fe7eb40c5ddb4c13ea9f45c137
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5011,zero,1.72,False,True,False,,False,0.0,0,0294f4e49ef49f60ac2862c80d236b83162002fe7eb40c5ddb4c13ea9f45c137
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5012,ppo,10.0,True,False,True,,False,0.01714472805802877,0,6fb2119541743d6899bce9221e570f91ca478338ccaa2985b4d543b3dbba159b
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5012,zero,1.56,False,True,False,,False,0.0,0,6fb2119541743d6899bce9221e570f91ca478338ccaa2985b4d543b3dbba159b
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5013,ppo,10.0,True,False,True,,False,0.017020857442694298,0,61c9686e2f195fd65e715eb307432f1edb7f9dd7f7531c1e5e38cb3cea729455
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5013,zero,1.62,False,True,False,,False,0.0,0,61c9686e2f195fd65e715eb307432f1edb7f9dd7f7531c1e5e38cb3cea729455
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5014,ppo,10.0,True,False,True,,False,0.01704499024650438,0,03111cb87a519c5052aeeae02cd48bc400576cf9afb3824508bf25d50a604e75
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5014,zero,1.6600000000000001,False,True,False,,False,0.0,0,03111cb87a519c5052aeeae02cd48bc400576cf9afb3824508bf25d50a604e75
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5015,ppo,10.0,True,False,True,,False,0.016916571531692126,0,8c562ea14845a9c91899a55f1ece71ad23fd76022c165ad7dccf56b5ef754ce4
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5015,zero,1.94,False,True,False,,False,0.0,0,8c562ea14845a9c91899a55f1ece71ad23fd76022c165ad7dccf56b5ef754ce4
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5016,ppo,10.0,True,False,True,,False,0.017101381452448404,0,544b8d5c820922ad708b4c7d0c863f51b1d522fbec4e40b4a223e63659c60728
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5016,zero,1.56,False,True,False,,False,0.0,0,544b8d5c820922ad708b4c7d0c863f51b1d522fbec4e40b4a223e63659c60728
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5017,ppo,10.0,True,False,True,,False,0.017181102357863187,0,3f2ad97219eadc1ac2d789fc9856ee73f39d9f449eb6135d3c142bd09c169ea8
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5017,zero,1.74,False,True,False,,False,0.0,0,3f2ad97219eadc1ac2d789fc9856ee73f39d9f449eb6135d3c142bd09c169ea8
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5018,ppo,10.0,True,False,True,,False,0.017006362172405812,0,4a6408ee4a9cb945874bab6cda5f3e64577c699507ff50db091dd4e43273f56e
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5018,zero,1.74,False,True,False,,False,0.0,0,4a6408ee4a9cb945874bab6cda5f3e64577c699507ff50db091dd4e43273f56e
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5019,ppo,10.0,True,False,True,,False,0.01691003341446039,0,9ad3473afcd77755cce27c0efaecbd7eee597939802dc2d97c7a8718d0cee61a
+linear_velocity_small_-1,linear_velocity,-0.2,m/s,5019,zero,1.56,False,True,False,,False,0.0,0,9ad3473afcd77755cce27c0efaecbd7eee597939802dc2d97c7a8718d0cee61a
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5000,ppo,10.0,True,False,True,,False,0.016906975063393545,0,e44955c9bafc7c359cf2c9f6935ed94b69c35a67593f1e9eaf37cf0fd93b237e
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5000,zero,10.0,True,False,True,,False,0.0,0,e44955c9bafc7c359cf2c9f6935ed94b69c35a67593f1e9eaf37cf0fd93b237e
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5001,ppo,10.0,True,False,True,,False,0.01707049028249462,0,939741ea638d39b68ba52e274a053e5bb1ffc239aab84d38470b5e9a344e7953
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5001,zero,10.0,True,False,True,,False,0.0,0,939741ea638d39b68ba52e274a053e5bb1ffc239aab84d38470b5e9a344e7953
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5002,ppo,10.0,True,False,True,,False,0.016988069798972195,0,a3827df53770c47910279e02d28b215da57e5be71b1ed09432cd16d8d7c7b8b5
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5002,zero,10.0,True,False,True,,False,0.0,0,a3827df53770c47910279e02d28b215da57e5be71b1ed09432cd16d8d7c7b8b5
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5003,ppo,10.0,True,False,True,,False,0.016880636778951193,0,822f109b4f6de26fabce74a0446a3944534886ef47eb6de063d0a6b46abd5ab6
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5003,zero,10.0,True,False,True,,False,0.0,0,822f109b4f6de26fabce74a0446a3944534886ef47eb6de063d0a6b46abd5ab6
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5004,ppo,10.0,True,False,True,,False,0.01699099553326958,0,1f85be96f257ccea3c098fc16fe8c836049d9a732b68663f25f11aacc4048982
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5004,zero,10.0,True,False,True,,False,0.0,0,1f85be96f257ccea3c098fc16fe8c836049d9a732b68663f25f11aacc4048982
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5005,ppo,10.0,True,False,True,,False,0.016941084971476835,0,323e6602ae052e96d0adbbb16f3c927006133fc8fc32f6e9097ed3b795e49882
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5005,zero,10.0,True,False,True,,False,0.0,0,323e6602ae052e96d0adbbb16f3c927006133fc8fc32f6e9097ed3b795e49882
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5006,ppo,10.0,True,False,True,,False,0.01699653320523805,0,30780a1866f2836f5884b2af1e63e4c9e407dcc85f299f66454d37c1004d1edf
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5006,zero,10.0,True,False,True,,False,0.0,0,30780a1866f2836f5884b2af1e63e4c9e407dcc85f299f66454d37c1004d1edf
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5007,ppo,10.0,True,False,True,,False,0.016963488574256048,0,7439f008561203a62caa9e5c590023ccd0fcbdb14e590eb8463a290b01b2b9c8
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5007,zero,10.0,True,False,True,0.56,True,0.0,0,7439f008561203a62caa9e5c590023ccd0fcbdb14e590eb8463a290b01b2b9c8
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5008,ppo,10.0,True,False,True,,False,0.016914849360764286,0,d39eb26766571ee70a7fc2229229c2fe28c67abaf07be0162379d34e400ad9a1
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5008,zero,10.0,True,False,True,,False,0.0,0,d39eb26766571ee70a7fc2229229c2fe28c67abaf07be0162379d34e400ad9a1
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5009,ppo,10.0,True,False,True,,False,0.01705717810662459,0,f8502a34bae33abf32ad44c493522a8dd80bd7c55ff489b6cf2fef8a36045678
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5009,zero,10.0,True,False,True,,False,0.0,0,f8502a34bae33abf32ad44c493522a8dd80bd7c55ff489b6cf2fef8a36045678
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5010,ppo,10.0,True,False,True,,False,0.016899192923592668,0,f4935e5d187d1bb00b3a69c58e72760009eccc258bac60747ad7c07101cc6c42
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5010,zero,10.0,True,False,True,,False,0.0,0,f4935e5d187d1bb00b3a69c58e72760009eccc258bac60747ad7c07101cc6c42
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5011,ppo,10.0,True,False,True,,False,0.01690786745835793,0,f8f830dbfae0ec4a9e706adf4062fd87f15c9c674c2f95df3723dec8ae93e935
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5011,zero,10.0,True,False,True,,False,0.0,0,f8f830dbfae0ec4a9e706adf4062fd87f15c9c674c2f95df3723dec8ae93e935
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5012,ppo,10.0,True,False,True,,False,0.017078245085867718,0,b6c65973f59812c242d28afa7ed0facc0360d899ea269eb75f694e417cb12833
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5012,zero,10.0,True,False,True,,False,0.0,0,b6c65973f59812c242d28afa7ed0facc0360d899ea269eb75f694e417cb12833
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5013,ppo,10.0,True,False,True,,False,0.017009520882275114,0,661f7991cef32e4dfce3bc50762f23662714e39d51fc7eee3c73bad3a8632ebb
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5013,zero,10.0,True,False,True,,False,0.0,0,661f7991cef32e4dfce3bc50762f23662714e39d51fc7eee3c73bad3a8632ebb
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5014,ppo,10.0,True,False,True,,False,0.017006153932307116,0,29cf6f59bc79432f2ccbc66a368c24c6837fa6754892b2c675e35109240be771
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5014,zero,10.0,True,False,True,,False,0.0,0,29cf6f59bc79432f2ccbc66a368c24c6837fa6754892b2c675e35109240be771
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5015,ppo,10.0,True,False,True,,False,0.01688947617600186,0,6c416abe4a967378ae79abb4b0f12062a3e046b2fc3915885cdf891b5109f26a
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5015,zero,10.0,True,False,True,,False,0.0,0,6c416abe4a967378ae79abb4b0f12062a3e046b2fc3915885cdf891b5109f26a
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5016,ppo,10.0,True,False,True,,False,0.017067473485658367,0,94ef449c34d62f6b2ca87303d5f3bd6daac181763b4c2ee7178ec0624e92755b
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5016,zero,10.0,True,False,True,,False,0.0,0,94ef449c34d62f6b2ca87303d5f3bd6daac181763b4c2ee7178ec0624e92755b
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5017,ppo,10.0,True,False,True,,False,0.017112978189543403,0,b83946c872da517aaec81af2319fa3198f64e96563272226e347d71e34f62ba2
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5017,zero,10.0,True,False,True,,False,0.0,0,b83946c872da517aaec81af2319fa3198f64e96563272226e347d71e34f62ba2
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5018,ppo,10.0,True,False,True,,False,0.016899974831321673,0,d0f8fdd18b7cd603504e2a5c4b0920ba8a85f424cf377b4056b7f30fe528b412
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5018,zero,10.0,True,False,True,,False,0.0,0,d0f8fdd18b7cd603504e2a5c4b0920ba8a85f424cf377b4056b7f30fe528b412
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5019,ppo,10.0,True,False,True,,False,0.016931610138417357,0,141c6d6aeff29a840379de39fd9667e46f1f4a4188b27cff8176f4ea4a1f0c7b
+linear_velocity_small_+1,linear_velocity,0.2,m/s,5019,zero,10.0,True,False,True,,False,0.0,0,141c6d6aeff29a840379de39fd9667e46f1f4a4188b27cff8176f4ea4a1f0c7b
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5000,ppo,1.1400000000000001,False,True,False,,False,0.01005870839697309,0,3e34551c6956ed2d29a77416f933a8e1ce2b7bf37bc8c8d781d239ecfd414cc6
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5000,zero,1.46,False,True,False,,False,0.0,0,3e34551c6956ed2d29a77416f933a8e1ce2b7bf37bc8c8d781d239ecfd414cc6
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5001,ppo,1.62,False,True,False,,False,0.01189481030392926,0,3f524fb46d1fe872d08d95fe1e64d41646e7101bcb5b1f4c8585200c18cb5123
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5001,zero,1.22,False,True,False,,False,0.0,0,3f524fb46d1fe872d08d95fe1e64d41646e7101bcb5b1f4c8585200c18cb5123
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5002,ppo,10.0,True,False,True,,False,0.01829048497602352,0,be89a335746aae04ac8a811debde4c9dd83fd4059476af97dbf4c69dc1aa5ee5
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5002,zero,1.26,False,True,False,,False,0.0,0,be89a335746aae04ac8a811debde4c9dd83fd4059476af97dbf4c69dc1aa5ee5
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5003,ppo,1.36,False,True,False,,False,0.0012823203681909944,0,4f6f4ca92d27722add5fd80513107baba2ce9d9149d508f8fac2fc72a7e6601e
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5003,zero,1.26,False,True,False,,False,0.0,0,4f6f4ca92d27722add5fd80513107baba2ce9d9149d508f8fac2fc72a7e6601e
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5004,ppo,1.22,False,True,False,,False,0.010244470838224516,0,9c45612db4762d734e7548e664f51c6d224fbb4c0a1e258609467b6f14f6961d
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5004,zero,1.26,False,True,False,,False,0.0,0,9c45612db4762d734e7548e664f51c6d224fbb4c0a1e258609467b6f14f6961d
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5005,ppo,10.0,True,False,True,,False,0.018246544817848133,0,c7c62c37b2be7654bc7fd61411ebc0fc70c714887e3443eb30f6ebae3d073fa8
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5005,zero,1.28,False,True,False,,False,0.0,0,c7c62c37b2be7654bc7fd61411ebc0fc70c714887e3443eb30f6ebae3d073fa8
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5006,ppo,10.0,True,False,True,,False,0.017487044116762676,0,cf15f73281b32ac6abb368c75d621bb3b36c143641a8a3b65a4972b4ab6c87f7
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5006,zero,1.2,False,True,False,,False,0.0,0,cf15f73281b32ac6abb368c75d621bb3b36c143641a8a3b65a4972b4ab6c87f7
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5007,ppo,1.5,False,True,False,,False,0.0013524727433104997,0,37915128cc0677a8799bd5eddd4e9e18cb1f03e772499843c758e9e6a52d890c
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5007,zero,1.04,False,True,False,,False,0.0,0,37915128cc0677a8799bd5eddd4e9e18cb1f03e772499843c758e9e6a52d890c
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5008,ppo,10.0,True,False,True,,False,0.018359652885446782,0,e2c91aa21c406afbf867caa3ac1f8fc465dc1589d230edba9f107a5eb2b0e2f5
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5008,zero,1.1,False,True,False,,False,0.0,0,e2c91aa21c406afbf867caa3ac1f8fc465dc1589d230edba9f107a5eb2b0e2f5
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5009,ppo,10.0,True,False,True,,False,0.018000728362466134,0,f5c7ab7e7fed64f12383f112757a12c14d0df3d83f60c443295ab06eeb3dc091
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5009,zero,1.3,False,True,False,,False,0.0,0,f5c7ab7e7fed64f12383f112757a12c14d0df3d83f60c443295ab06eeb3dc091
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5010,ppo,10.0,True,False,True,,False,0.019373511446135524,0,e247fea3fb351b07051c7b4224e0ec03a3aaec1b3e6bd37706dd776c78f5a491
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5010,zero,1.28,False,True,False,,False,0.0,0,e247fea3fb351b07051c7b4224e0ec03a3aaec1b3e6bd37706dd776c78f5a491
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5011,ppo,1.36,False,True,False,,False,0.001211959054780891,0,6c835730ae7ff24c684f12526a095b8520be553a3ae0b4a470c81ca8a2870c68
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5011,zero,1.12,False,True,False,,False,0.0,0,6c835730ae7ff24c684f12526a095b8520be553a3ae0b4a470c81ca8a2870c68
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5012,ppo,10.0,True,False,True,,False,0.01805158974137138,0,9c76b08a572d46999f9ec1274b2bce3d503ddff025c016cbf894e6936091a168
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5012,zero,1.18,False,True,False,,False,0.0,0,9c76b08a572d46999f9ec1274b2bce3d503ddff025c016cbf894e6936091a168
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5013,ppo,10.0,True,False,True,,False,0.01764034750754953,0,096830f4c2b73d5b92bedb457d7f76893e5ce87e22db8791ce4a3e149525a5ce
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5013,zero,1.24,False,True,False,,False,0.0,0,096830f4c2b73d5b92bedb457d7f76893e5ce87e22db8791ce4a3e149525a5ce
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5014,ppo,10.0,True,False,True,,False,0.01817497878742865,0,d3cd54f6d1428c675d675f06ff145df548047438a0b44f561895733d4f21721b
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5014,zero,1.24,False,True,False,,False,0.0,0,d3cd54f6d1428c675d675f06ff145df548047438a0b44f561895733d4f21721b
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5015,ppo,10.0,True,False,True,,False,0.019501562399455157,0,b8908648e1604804d54258d26726fd7c890f9cfd1efe141fcd9e28700cb8a3a5
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5015,zero,1.3,False,True,False,,False,0.0,0,b8908648e1604804d54258d26726fd7c890f9cfd1efe141fcd9e28700cb8a3a5
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5016,ppo,10.0,True,False,True,,False,0.01897721185523566,0,683bfbaca56b5dee5de4a2a82665a6be4a597f9b42100577f0dba106a61b4bc9
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5016,zero,1.2,False,True,False,,False,0.0,0,683bfbaca56b5dee5de4a2a82665a6be4a597f9b42100577f0dba106a61b4bc9
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5017,ppo,1.52,False,True,False,,False,0.011351282155665103,0,e4632b5d9a373b474a5d85facdbbb416c1f034474dc8d238d94a16a8b271c322
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5017,zero,1.3800000000000001,False,True,False,,False,0.0,0,e4632b5d9a373b474a5d85facdbbb416c1f034474dc8d238d94a16a8b271c322
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5018,ppo,1.5,False,True,False,,False,0.011111915690125897,0,ed0dc1ed6df6fb5be8e684bae8f495ffd58dbd8b566bd527a44003aa8455ec31
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5018,zero,1.22,False,True,False,,False,0.0,0,ed0dc1ed6df6fb5be8e684bae8f495ffd58dbd8b566bd527a44003aa8455ec31
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5019,ppo,1.28,False,True,False,,False,0.0012470410466630714,0,7347a89c67273f48527efc25fd7bc9e8803e9ba8a3c1a8055b2b3faf289dc225
+linear_velocity_medium_-1,linear_velocity,-0.5,m/s,5019,zero,1.04,False,True,False,,False,0.0,0,7347a89c67273f48527efc25fd7bc9e8803e9ba8a3c1a8055b2b3faf289dc225
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5000,ppo,10.0,True,False,True,,False,0.017088171444193133,0,f77deefb619ccfa6db0d4ce0a579486098b758f1f931499dbb9930541001fd8c
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5000,zero,10.0,True,False,True,,False,0.0,0,f77deefb619ccfa6db0d4ce0a579486098b758f1f931499dbb9930541001fd8c
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5001,ppo,10.0,True,False,True,,False,0.01720069418974161,0,d1e86ee71686a2702af2835ebc24c1a8e818411ef1316ed35f6bc0ec0add0b37
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5001,zero,10.0,True,False,True,,False,0.0,0,d1e86ee71686a2702af2835ebc24c1a8e818411ef1316ed35f6bc0ec0add0b37
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5002,ppo,10.0,True,False,True,,False,0.017182174609333745,0,bfc24c712b5778d34d3e06cdbd384a1b8c790ece9f8d597c7fe56d1e6f76f617
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5002,zero,10.0,True,False,True,,False,0.0,0,bfc24c712b5778d34d3e06cdbd384a1b8c790ece9f8d597c7fe56d1e6f76f617
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5003,ppo,10.0,True,False,True,,False,0.017046844096330515,0,8e78a5a57935ec5ef61ebe52eff27cd8a25f5dee023d8b6316cc77cf3e3bfcd9
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5003,zero,10.0,True,False,True,,False,0.0,0,8e78a5a57935ec5ef61ebe52eff27cd8a25f5dee023d8b6316cc77cf3e3bfcd9
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5004,ppo,10.0,True,False,True,,False,0.01709181651764079,0,1d72aa84624a44a0688b6f0e5cf2d3eb21e014979fad188c25f03259b607d6bb
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5004,zero,10.0,True,False,True,,False,0.0,0,1d72aa84624a44a0688b6f0e5cf2d3eb21e014979fad188c25f03259b607d6bb
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5005,ppo,10.0,True,False,True,,False,0.017133414932905152,0,ea5cc2fea1da7c7f737a60a0a95825348aecec5f13143116c1ba2a17c5621d1a
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5005,zero,10.0,True,False,True,,False,0.0,0,ea5cc2fea1da7c7f737a60a0a95825348aecec5f13143116c1ba2a17c5621d1a
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5006,ppo,10.0,True,False,True,,False,0.017095496165566257,0,55e476aad4039d667a3a9a821f2776d04d490151211145e68f632163d927a93d
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5006,zero,10.0,True,False,True,,False,0.0,0,55e476aad4039d667a3a9a821f2776d04d490151211145e68f632163d927a93d
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5007,ppo,10.0,True,False,True,,False,0.01711199532117454,0,06c0b8b27238ecabb9d28b91e84e52f13685f3c0fbfbd18ae1d1de24e06b16b4
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5007,zero,10.0,True,False,True,,False,0.0,0,06c0b8b27238ecabb9d28b91e84e52f13685f3c0fbfbd18ae1d1de24e06b16b4
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5008,ppo,10.0,True,False,True,,False,0.01705830025282917,0,d3c3b81bb92f22301048a219a66cfa1e9f6ef2e6e8d9797296fc6334f850929b
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5008,zero,10.0,True,False,True,,False,0.0,0,d3c3b81bb92f22301048a219a66cfa1e9f6ef2e6e8d9797296fc6334f850929b
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5009,ppo,10.0,True,False,True,,False,0.017186594219456362,0,7f8c0d9ae9ef24191218ed2b6b63cbd698b809b3a55459cc9ba8a319db1877a6
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5009,zero,10.0,True,False,True,,False,0.0,0,7f8c0d9ae9ef24191218ed2b6b63cbd698b809b3a55459cc9ba8a319db1877a6
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5010,ppo,10.0,True,False,True,,False,0.01709055381514185,0,eba47a44d308eb171d48e627d30a42f1730f595ad11db65c5d808ab8d89531ec
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5010,zero,10.0,True,False,True,,False,0.0,0,eba47a44d308eb171d48e627d30a42f1730f595ad11db65c5d808ab8d89531ec
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5011,ppo,10.0,True,False,True,,False,0.017061129016510673,0,9c0241fca2d1e05ae253dcc909424f2b2b0769983a0fe9759e8051a517246c3b
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5011,zero,10.0,True,False,True,,False,0.0,0,9c0241fca2d1e05ae253dcc909424f2b2b0769983a0fe9759e8051a517246c3b
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5012,ppo,10.0,True,False,True,,False,0.017227023701562004,0,88c7c40db9fbe7b73554cc25009bc241340904bc09b035ae0b4d80cc250056c2
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5012,zero,10.0,True,False,True,,False,0.0,0,88c7c40db9fbe7b73554cc25009bc241340904bc09b035ae0b4d80cc250056c2
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5013,ppo,10.0,True,False,True,,False,0.01714206808894243,0,1d7aa498f0c264d9042f58e7345b5f7e2c6b6df54f2476aff011d6b59646bbdb
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5013,zero,10.0,True,False,True,,False,0.0,0,1d7aa498f0c264d9042f58e7345b5f7e2c6b6df54f2476aff011d6b59646bbdb
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5014,ppo,10.0,True,False,True,,False,0.017126606506353614,0,68cfb09ef098f22af04207b62ae4aa24996c6a152e4bea352efd6bc19cdc63cb
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5014,zero,10.0,True,False,True,,False,0.0,0,68cfb09ef098f22af04207b62ae4aa24996c6a152e4bea352efd6bc19cdc63cb
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5015,ppo,10.0,True,False,True,,False,0.017100087952421683,0,35598961e5b5428ff3933cb323aa51716a95913cb4699c36e22de04d77d9d696
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5015,zero,10.0,True,False,True,,False,0.0,0,35598961e5b5428ff3933cb323aa51716a95913cb4699c36e22de04d77d9d696
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5016,ppo,10.0,True,False,True,,False,0.017214270938966207,0,e896043e64e0bca766406047e313ec24c7f52f758e00662ad5f279aa27c021fc
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5016,zero,10.0,True,False,True,,False,0.0,0,e896043e64e0bca766406047e313ec24c7f52f758e00662ad5f279aa27c021fc
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5017,ppo,10.0,True,False,True,,False,0.01723821109586414,0,d78fd88e458dc11fb6537d6fc8125e7c65a1f0543fbddc2f4ede7113742c740b
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5017,zero,10.0,True,False,True,,False,0.0,0,d78fd88e458dc11fb6537d6fc8125e7c65a1f0543fbddc2f4ede7113742c740b
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5018,ppo,10.0,True,False,True,,False,0.01705255332388354,0,969ad27e1d61d46387965cbb4776bf451c20dcc521f072c1cf93f722cf32bef7
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5018,zero,10.0,True,False,True,,False,0.0,0,969ad27e1d61d46387965cbb4776bf451c20dcc521f072c1cf93f722cf32bef7
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5019,ppo,10.0,True,False,True,,False,0.017058507809269954,0,ee54f76fae6785bf11bb3bbffbb3755e672292cfcb308eb307debf69bc6ca432
+linear_velocity_medium_+1,linear_velocity,0.5,m/s,5019,zero,10.0,True,False,True,,False,0.0,0,ee54f76fae6785bf11bb3bbffbb3755e672292cfcb308eb307debf69bc6ca432
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5000,ppo,10.0,True,False,True,,False,0.017025886099727255,0,add459a722834af84da675fcb684463152653a13ec57017cf351830946a2bbdf
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5000,zero,10.0,True,False,True,0.6,True,0.0,0,add459a722834af84da675fcb684463152653a13ec57017cf351830946a2bbdf
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5001,ppo,10.0,True,False,True,,False,0.01712474164261958,0,5dad68186de7f69f87f775bf0c2a04cff462cdb48b359703277f64a6f1d136bf
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5001,zero,2.16,False,True,False,0.5,False,0.0,0,5dad68186de7f69f87f775bf0c2a04cff462cdb48b359703277f64a6f1d136bf
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5002,ppo,10.0,True,False,True,,False,0.017094976974476546,0,0a722d6ad6ac7c13fb07f6ea74ad66f6072d3eae241598a71b3a27c2458e7605
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5002,zero,2.1,False,True,False,0.5,False,0.0,0,0a722d6ad6ac7c13fb07f6ea74ad66f6072d3eae241598a71b3a27c2458e7605
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5003,ppo,10.0,True,False,True,,False,0.01697169087376111,0,84b63f79779d4eba994594da7f10cecbaf835e68a73d59f0e86300b376f29250
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5003,zero,3.7600000000000002,False,True,False,0.52,False,0.0,0,84b63f79779d4eba994594da7f10cecbaf835e68a73d59f0e86300b376f29250
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5004,ppo,10.0,True,False,True,,False,0.017003593559711545,0,8dd9747493aa07538df01882d3180cdd8fb1176e55ab7ac239672489b91ab07f
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5004,zero,2.96,False,True,False,0.56,False,0.0,0,8dd9747493aa07538df01882d3180cdd8fb1176e55ab7ac239672489b91ab07f
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5005,ppo,10.0,True,False,True,,False,0.016992363129975385,0,6c72a01bd1b12ecda8ee4e1dd92d21b56b70783a01d49b26c1742b6208f8fd4b
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5005,zero,2.6,False,True,False,0.5,False,0.0,0,6c72a01bd1b12ecda8ee4e1dd92d21b56b70783a01d49b26c1742b6208f8fd4b
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5006,ppo,10.0,True,False,True,,False,0.01706115766181028,0,9bd333bed2d74e263de7459b3c71ac96f160045757b907a07a56c01b9d3344bf
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5006,zero,2.08,False,True,False,0.62,False,0.0,0,9bd333bed2d74e263de7459b3c71ac96f160045757b907a07a56c01b9d3344bf
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5007,ppo,10.0,True,False,True,,False,0.016993128596222956,0,f7e6f67cdf5e52ba9623b769bb66cf3fed11390e1f69bfa2377d56e6c715266a
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5007,zero,1.72,False,True,False,,False,0.0,0,f7e6f67cdf5e52ba9623b769bb66cf3fed11390e1f69bfa2377d56e6c715266a
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5008,ppo,10.0,True,False,True,,False,0.01699388271692426,0,87220409f1fca56d8539e04cb002ea05c53180333b703b87dc74a666b104cbef
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5008,zero,2.66,False,True,False,0.5,False,0.0,0,87220409f1fca56d8539e04cb002ea05c53180333b703b87dc74a666b104cbef
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5009,ppo,10.0,True,False,True,,False,0.017090603312535813,0,ee5ffaa40f0c0775f762e7d8e9ff50564e5a18d816f1631684b222aec940eaaf
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5009,zero,2.64,False,True,False,0.5,False,0.0,0,ee5ffaa40f0c0775f762e7d8e9ff50564e5a18d816f1631684b222aec940eaaf
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5010,ppo,10.0,True,False,True,,False,0.016955596688203543,0,c09a378fa34337f477b711c28a8106655875e77e007bf7b1b53757fa68eeb52e
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5010,zero,10.0,True,False,True,0.52,True,0.0,0,c09a378fa34337f477b711c28a8106655875e77e007bf7b1b53757fa68eeb52e
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5011,ppo,10.0,True,False,True,,False,0.017013874713738955,0,1cbcd660e456f3064941159cf1926d76c45adbb3c0bb28d45b5d59ed88d2f167
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5011,zero,2.4,False,True,False,0.5,False,0.0,0,1cbcd660e456f3064941159cf1926d76c45adbb3c0bb28d45b5d59ed88d2f167
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5012,ppo,10.0,True,False,True,,False,0.017184749181906385,0,48ec981a2f9c57373a56e7cd07c937b3b55e0907b4bab368e95d4fd919b5445e
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5012,zero,1.8800000000000001,False,True,False,,False,0.0,0,48ec981a2f9c57373a56e7cd07c937b3b55e0907b4bab368e95d4fd919b5445e
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5013,ppo,10.0,True,False,True,,False,0.017118615855579424,0,4c92ba96422045f1720edff7cc82a02d717152bd40b5f4e3885248e1a366e533
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5013,zero,2.02,False,True,False,0.64,False,0.0,0,4c92ba96422045f1720edff7cc82a02d717152bd40b5f4e3885248e1a366e533
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5014,ppo,10.0,True,False,True,,False,0.017090666045260137,0,151451abfb25535a1ab14db16ee346e391907f079b203858dc1053bfec3534fb
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5014,zero,2.08,False,True,False,0.6,False,0.0,0,151451abfb25535a1ab14db16ee346e391907f079b203858dc1053bfec3534fb
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5015,ppo,10.0,True,False,True,,False,0.016954507924674594,0,b2d682414649a3a7935987c673c4ab64e040c5981e6ab66479c15c155510eab7
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5015,zero,10.0,True,False,True,0.6,True,0.0,0,b2d682414649a3a7935987c673c4ab64e040c5981e6ab66479c15c155510eab7
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5016,ppo,10.0,True,False,True,,False,0.017170356837886883,0,6009cb03457ba25b4941505b295c5314cea3923aaa15483db6c326adf6d43ad7
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5016,zero,1.9000000000000001,False,True,False,,False,0.0,0,6009cb03457ba25b4941505b295c5314cea3923aaa15483db6c326adf6d43ad7
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5017,ppo,10.0,True,False,True,,False,0.01718346911802657,0,b7b99c3d8b0124fb33f95eaeed440271a0bf37e672fb923d870f7c2f70f4cc7b
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5017,zero,2.34,False,True,False,0.5,False,0.0,0,b7b99c3d8b0124fb33f95eaeed440271a0bf37e672fb923d870f7c2f70f4cc7b
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5018,ppo,10.0,True,False,True,,False,0.016997454847733184,0,cc7636d6084f07665b087945999b69411917619a45a6dde7e04e93b8cfe153f8
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5018,zero,2.44,False,True,False,0.54,False,0.0,0,cc7636d6084f07665b087945999b69411917619a45a6dde7e04e93b8cfe153f8
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5019,ppo,10.0,True,False,True,,False,0.017021563043090337,0,e8fe6afef7c64bc064c4566faa3478fa1856c935a82f9ffbecb54fbd39c059b5
+angular_velocity_small_-1,angular_velocity,-0.5,rad/s,5019,zero,1.96,False,True,False,0.5,False,0.0,0,e8fe6afef7c64bc064c4566faa3478fa1856c935a82f9ffbecb54fbd39c059b5
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5000,ppo,10.0,True,False,True,,False,0.016950017460912778,0,a33d430a2f61aabc729a35c08baa0d70f0ad503c4f177707eb5391d3ee805458
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5000,zero,10.0,True,False,True,0.64,True,0.0,0,a33d430a2f61aabc729a35c08baa0d70f0ad503c4f177707eb5391d3ee805458
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5001,ppo,10.0,True,False,True,,False,0.017000933428935334,0,487cb9817e416390866955b8409ab87dcdf60c700b738413c5cf223f8e3f0ac0
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5001,zero,10.0,True,False,True,0.5,True,0.0,0,487cb9817e416390866955b8409ab87dcdf60c700b738413c5cf223f8e3f0ac0
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5002,ppo,10.0,True,False,True,,False,0.016922266600304166,0,c4f0d20949e54523edfebaaa13500f7bf1dee39a066f1d068fe42bce2fca3850
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5002,zero,10.0,True,False,True,0.52,True,0.0,0,c4f0d20949e54523edfebaaa13500f7bf1dee39a066f1d068fe42bce2fca3850
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5003,ppo,10.0,True,False,True,,False,0.016805992028385005,0,a1b751b9a9a9ed1596190702d778235b16e0974fc75cebedd57b70a29eed001c
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5003,zero,10.0,True,False,True,0.5,True,0.0,0,a1b751b9a9a9ed1596190702d778235b16e0974fc75cebedd57b70a29eed001c
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5004,ppo,10.0,True,False,True,,False,0.01702060777548478,0,4c0f34b79d34a5c231a3cbcf6f9c5da42164d1b5d748a31ebefbdf0df0de6a16
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5004,zero,10.0,True,False,True,0.5,True,0.0,0,4c0f34b79d34a5c231a3cbcf6f9c5da42164d1b5d748a31ebefbdf0df0de6a16
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5005,ppo,10.0,True,False,True,,False,0.016943326517939655,0,003f8acb6cc2fb79d19bbafbd2071fda1352bc91a9c395c088826803b5a9eeca
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5005,zero,10.0,True,False,True,0.5,True,0.0,0,003f8acb6cc2fb79d19bbafbd2071fda1352bc91a9c395c088826803b5a9eeca
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5006,ppo,10.0,True,False,True,,False,0.016923503990110618,0,dbe7a6b98a3187f4533c7ae358b7f190f70fb93b2090f4f3f316f132ce3f5c89
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5006,zero,10.0,True,False,True,0.54,True,0.0,0,dbe7a6b98a3187f4533c7ae358b7f190f70fb93b2090f4f3f316f132ce3f5c89
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5007,ppo,10.0,True,False,True,,False,0.01686564742907658,0,2e06eedbd96957a9a8bc9ed62a604ee9c4485720ae2046cbdfedc654f7406b5f
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5007,zero,2.08,False,True,False,0.52,False,0.0,0,2e06eedbd96957a9a8bc9ed62a604ee9c4485720ae2046cbdfedc654f7406b5f
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5008,ppo,10.0,True,False,True,,False,0.01682971545509643,0,ae2945e86e812faa958c0cab7691d492201154bc2b3b63d54a1d12745d90989a
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5008,zero,10.0,True,False,True,0.5,True,0.0,0,ae2945e86e812faa958c0cab7691d492201154bc2b3b63d54a1d12745d90989a
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5009,ppo,10.0,True,False,True,,False,0.016969453827187047,0,9e102db7ad18e310d1fa94146b6f8201e96fe25e48fdcfe16c0f2c47cd207467
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5009,zero,10.0,True,False,True,0.5,True,0.0,0,9e102db7ad18e310d1fa94146b6f8201e96fe25e48fdcfe16c0f2c47cd207467
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5010,ppo,10.0,True,False,True,,False,0.016825083199218972,0,b64c824e5fdc0a70098e1bee1a5ba57556c1a5de79b0842d34da9bd90f98dbcb
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5010,zero,10.0,True,False,True,0.62,True,0.0,0,b64c824e5fdc0a70098e1bee1a5ba57556c1a5de79b0842d34da9bd90f98dbcb
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5011,ppo,10.0,True,False,True,,False,0.01683741155982713,0,aa9eed53cc4f37684a759d7d057c7d7b658f9c5aeed4e45ab38c8d3f0beeddeb
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5011,zero,10.0,True,False,True,0.5,True,0.0,0,aa9eed53cc4f37684a759d7d057c7d7b658f9c5aeed4e45ab38c8d3f0beeddeb
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5012,ppo,10.0,True,False,True,,False,0.017048962605768044,0,108556d9673345b373d9f0d8deb30675509eb9d8ea119328b853f317c0c747d6
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5012,zero,2.3000000000000003,False,True,False,0.66,False,0.0,0,108556d9673345b373d9f0d8deb30675509eb9d8ea119328b853f317c0c747d6
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5013,ppo,10.0,True,False,True,,False,0.016923105398600563,0,174d6282100b4217257b12bd4337899329f71ddb4c70e9f4c4c3c48ac80a8273
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5013,zero,2.88,False,True,False,0.6,False,0.0,0,174d6282100b4217257b12bd4337899329f71ddb4c70e9f4c4c3c48ac80a8273
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5014,ppo,10.0,True,False,True,,False,0.016944862238597223,0,cf65996071ee30b68ea3a6d8ef33ac5c0a5400e14766ee9f325ac47cc9374bcc
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5014,zero,10.0,True,False,True,0.52,True,0.0,0,cf65996071ee30b68ea3a6d8ef33ac5c0a5400e14766ee9f325ac47cc9374bcc
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5015,ppo,10.0,True,False,True,,False,0.016831698407477353,0,86784e0819801224694b9ee0c365f3d15b9a8ad73bdacdc623f8502d04a44665
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5015,zero,10.0,True,False,True,,False,0.0,0,86784e0819801224694b9ee0c365f3d15b9a8ad73bdacdc623f8502d04a44665
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5016,ppo,10.0,True,False,True,,False,0.017025921066233372,0,ea6c7b7462f06cc33409ab08f75690cf7dd4f82d8a5eb1a47614f8ac0e5d4c9c
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5016,zero,2.4,False,True,False,0.64,False,0.0,0,ea6c7b7462f06cc33409ab08f75690cf7dd4f82d8a5eb1a47614f8ac0e5d4c9c
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5017,ppo,10.0,True,False,True,,False,0.01707508231484108,0,6fd8f03e0fdb58dc33691ce0ca9d5458679c52d76a514fcde50fdccab955d9af
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5017,zero,10.0,True,False,True,0.52,True,0.0,0,6fd8f03e0fdb58dc33691ce0ca9d5458679c52d76a514fcde50fdccab955d9af
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5018,ppo,10.0,True,False,True,,False,0.016870263778837196,0,b41b02581e337ea161fda6849e3335fdc0d0ff2b63cf6722dff578dd9358f9b7
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5018,zero,10.0,True,False,True,0.62,True,0.0,0,b41b02581e337ea161fda6849e3335fdc0d0ff2b63cf6722dff578dd9358f9b7
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5019,ppo,10.0,True,False,True,,False,0.0168319228879408,0,f9ca9c46b9b5e13cfa1f3341c18347ff9ae9de9ba5868573560eed229769e148
+angular_velocity_small_+1,angular_velocity,0.5,rad/s,5019,zero,2.82,False,True,False,0.52,False,0.0,0,f9ca9c46b9b5e13cfa1f3341c18347ff9ae9de9ba5868573560eed229769e148
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5000,ppo,10.0,True,False,True,,False,0.01714942842620087,0,cd66996b3f61b38cb5e62f42fa219fe41ade6d0171844a431c63bac109eb545a
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5000,zero,2.46,False,True,False,0.54,False,0.0,0,cd66996b3f61b38cb5e62f42fa219fe41ade6d0171844a431c63bac109eb545a
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5001,ppo,10.0,True,False,True,,False,0.017304249570297685,0,8a12379deee5ae9b30ab818e357a59b288e1e622403c5fe7b358e2a4023c8c99
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5001,zero,1.96,False,True,False,0.52,False,0.0,0,8a12379deee5ae9b30ab818e357a59b288e1e622403c5fe7b358e2a4023c8c99
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5002,ppo,10.0,True,False,True,,False,0.017252480429015123,0,f7d0fc3286a6bc39ddc97c4cc9dcbc7f1853dc337432d219ef1d85c6891764e0
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5002,zero,1.8800000000000001,False,True,False,0.52,False,0.0,0,f7d0fc3286a6bc39ddc97c4cc9dcbc7f1853dc337432d219ef1d85c6891764e0
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5003,ppo,10.0,True,False,True,,False,0.01704405334428895,0,36ff460d5622b762baa50e8107cffc8cab6ae4ac936bd53de2897f3ae248a668
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5003,zero,2.38,False,True,False,0.52,False,0.0,0,36ff460d5622b762baa50e8107cffc8cab6ae4ac936bd53de2897f3ae248a668
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5004,ppo,10.0,True,False,True,,False,0.017121319877332897,0,e3e9324e71b775c8209d60ef26bf77a48e651319f193ddaf632919c05070ad75
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5004,zero,2.2800000000000002,False,True,False,0.54,False,0.0,0,e3e9324e71b775c8209d60ef26bf77a48e651319f193ddaf632919c05070ad75
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5005,ppo,10.0,True,False,True,,False,0.017139726244204005,0,22cc6da2c7322eec71f3070bac4e28cb59d9f458cc02626158adc12ae42c6aae
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5005,zero,2.18,False,True,False,0.52,False,0.0,0,22cc6da2c7322eec71f3070bac4e28cb59d9f458cc02626158adc12ae42c6aae
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5006,ppo,10.0,True,False,True,,False,0.01718040680767439,0,bfed3c1d481bd74f643f7c1a7a5986b2dff2384a870c489607e9bc55ed592fc6
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5006,zero,1.82,False,True,False,,False,0.0,0,bfed3c1d481bd74f643f7c1a7a5986b2dff2384a870c489607e9bc55ed592fc6
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5007,ppo,10.0,True,False,True,,False,0.017128622306190663,0,85a7d84369c17ff582f1e5413d0ae41a493d78e9e6590822bc669ae420341b2e
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5007,zero,1.6,False,True,False,,False,0.0,0,85a7d84369c17ff582f1e5413d0ae41a493d78e9e6590822bc669ae420341b2e
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5008,ppo,10.0,True,False,True,,False,0.017137547176098406,0,eded7336a9cca2e40a557b2f9faae2fc3fb016f0ef86f9f9df2d963042463c29
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5008,zero,2.2,False,True,False,0.52,False,0.0,0,eded7336a9cca2e40a557b2f9faae2fc3fb016f0ef86f9f9df2d963042463c29
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5009,ppo,10.0,True,False,True,,False,0.017209270320309004,0,a25fbfb312eb24b3a35b762bf6e9fe54f22f3d040b7a6b170e13978496802570
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5009,zero,2.18,False,True,False,0.52,False,0.0,0,a25fbfb312eb24b3a35b762bf6e9fe54f22f3d040b7a6b170e13978496802570
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5010,ppo,10.0,True,False,True,,False,0.01706963572549289,0,1bf95a05346f46528ee2365f1cd5df04f99adc188c1379865b18de1704a882e3
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5010,zero,2.96,False,True,False,0.54,False,0.0,0,1bf95a05346f46528ee2365f1cd5df04f99adc188c1379865b18de1704a882e3
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5011,ppo,10.0,True,False,True,,False,0.017204540014499947,0,42a4bddfcb306822ae305fb45f88e0b5bb43f8af3cac2a3eee1e2570e687b3bf
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5011,zero,2.08,False,True,False,0.52,False,0.0,0,42a4bddfcb306822ae305fb45f88e0b5bb43f8af3cac2a3eee1e2570e687b3bf
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5012,ppo,10.0,True,False,True,,False,0.017297206325165515,0,5c7807bdaeb749c64c922c960029c4fc469d004aa0c3cea7accc8efe13b2eb81
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5012,zero,1.76,False,True,False,,False,0.0,0,5c7807bdaeb749c64c922c960029c4fc469d004aa0c3cea7accc8efe13b2eb81
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5013,ppo,10.0,True,False,True,,False,0.01721537627832737,0,eda5999539df6cf641a0694351b894caa8a9e62e7b082649257ec6a6defdce75
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5013,zero,1.86,False,True,False,,False,0.0,0,eda5999539df6cf641a0694351b894caa8a9e62e7b082649257ec6a6defdce75
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5014,ppo,10.0,True,False,True,,False,0.01722988367837392,0,0f427fc2aacb974720d15fa4a1fcc9e3e43bd9d809a1ac6409652ad6f48b3cb9
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5014,zero,1.9000000000000001,False,True,False,,False,0.0,0,0f427fc2aacb974720d15fa4a1fcc9e3e43bd9d809a1ac6409652ad6f48b3cb9
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5015,ppo,10.0,True,False,True,,False,0.017075079133792203,0,d253155a8e3f1aa62b30832523c24aa1d352bfa1931536978e2aeeabbd3fec4f
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5015,zero,10.0,True,False,True,0.58,True,0.0,0,d253155a8e3f1aa62b30832523c24aa1d352bfa1931536978e2aeeabbd3fec4f
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5016,ppo,10.0,True,False,True,,False,0.01730375736646238,0,bc020014aedd8b7c3fb0d3f4160d236ccd5646c9d13fc2085fda34d7942a7565
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5016,zero,1.76,False,True,False,,False,0.0,0,bc020014aedd8b7c3fb0d3f4160d236ccd5646c9d13fc2085fda34d7942a7565
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5017,ppo,10.0,True,False,True,,False,0.017329480054904915,0,73107914d9722ef615a2e3c2696675505df6c1ba74dc7bec817539a6727c00d7
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5017,zero,2.06,False,True,False,0.5,False,0.0,0,73107914d9722ef615a2e3c2696675505df6c1ba74dc7bec817539a6727c00d7
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5018,ppo,10.0,True,False,True,,False,0.01713266228529392,0,b43e8d8282d5c2562184ae277f84cdca7c52a20827b709c53ceeb94b613209d3
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5018,zero,2.1,False,True,False,0.52,False,0.0,0,b43e8d8282d5c2562184ae277f84cdca7c52a20827b709c53ceeb94b613209d3
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5019,ppo,10.0,True,False,True,,False,0.017159277731116116,0,50ef98cac56886672add770ab310aa928b6b694276acaa875e11949036831bd8
+angular_velocity_medium_-1,angular_velocity,-1.0,rad/s,5019,zero,1.76,False,True,False,,False,0.0,0,50ef98cac56886672add770ab310aa928b6b694276acaa875e11949036831bd8
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5000,ppo,10.0,True,False,True,,False,0.017003705074020933,0,586c1989c7797e59b00223c80314861fb60075aee03641a6ad07804a6ff79576
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5000,zero,10.0,True,False,True,0.52,True,0.0,0,586c1989c7797e59b00223c80314861fb60075aee03641a6ad07804a6ff79576
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5001,ppo,10.0,True,False,True,,False,0.016977882611099487,0,80bba1925e6956fced333e370845ed5eb78736d8e435cb11b19ee24d81361b6c
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5001,zero,10.0,True,False,True,0.52,True,0.0,0,80bba1925e6956fced333e370845ed5eb78736d8e435cb11b19ee24d81361b6c
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5002,ppo,10.0,True,False,True,,False,0.016915560866473136,0,942242652156bc332034875d4be2501393803e53dc312ebed544b8790ed45f86
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5002,zero,10.0,True,False,True,0.52,True,0.0,0,942242652156bc332034875d4be2501393803e53dc312ebed544b8790ed45f86
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5003,ppo,10.0,True,False,True,,False,0.016844414968509226,0,da353d268d14e0380a360fac8a80261f031d6a886898d7b50d16458d78969530
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5003,zero,10.0,True,False,True,,False,0.0,0,da353d268d14e0380a360fac8a80261f031d6a886898d7b50d16458d78969530
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5004,ppo,10.0,True,False,True,,False,0.01703529373131459,0,0a913dbc6ec9427d658ec01a430db49364b5cef0452fae2e3c55632096b63efa
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5004,zero,10.0,True,False,True,0.52,True,0.0,0,0a913dbc6ec9427d658ec01a430db49364b5cef0452fae2e3c55632096b63efa
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5005,ppo,10.0,True,False,True,,False,0.016986548657296215,0,8a715b1fc9cd28dbd657a9d1877f95b9f5b308256b6f9a6ec8f152ee613428dd
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5005,zero,10.0,True,False,True,0.52,True,0.0,0,8a715b1fc9cd28dbd657a9d1877f95b9f5b308256b6f9a6ec8f152ee613428dd
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5006,ppo,10.0,True,False,True,,False,0.01690291113074628,0,9df195dc0960a318b7240a58f6e12c391959c1eddf6c6f51fd27d5861112fcfc
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5006,zero,10.0,True,False,True,0.54,True,0.0,0,9df195dc0960a318b7240a58f6e12c391959c1eddf6c6f51fd27d5861112fcfc
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5007,ppo,10.0,True,False,True,,False,0.016864075696357776,0,4b500b2d067b0f40abc4baf129a5997472ed87f9eac3397eab46934920e97655
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5007,zero,2.48,False,True,False,0.52,False,0.0,0,4b500b2d067b0f40abc4baf129a5997472ed87f9eac3397eab46934920e97655
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5008,ppo,10.0,True,False,True,,False,0.01684724460297729,0,2c0ed309c5154530224218eeb0e5ec6b01a6d91e64e1c7dd92fc76df251a7412
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5008,zero,10.0,True,False,True,0.52,True,0.0,0,2c0ed309c5154530224218eeb0e5ec6b01a6d91e64e1c7dd92fc76df251a7412
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5009,ppo,10.0,True,False,True,,False,0.016989041619235538,0,cf75360c2c37b10151d038444c8bf9cb931ca30bf4451bd1acf3570e0c3eefbb
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5009,zero,10.0,True,False,True,0.52,True,0.0,0,cf75360c2c37b10151d038444c8bf9cb931ca30bf4451bd1acf3570e0c3eefbb
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5010,ppo,10.0,True,False,True,,False,0.016854148462152812,0,bbb09b6e2009afb8ec2c25f3180b4210fbc1dd70f205deeaa5c8998d63b4a705
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5010,zero,10.0,True,False,True,,False,0.0,0,bbb09b6e2009afb8ec2c25f3180b4210fbc1dd70f205deeaa5c8998d63b4a705
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5011,ppo,10.0,True,False,True,,False,0.016844091482635184,0,4cda2cfae6ed3ffdfb33626a700c5467edec4ddce20178890e03d605d962950e
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5011,zero,10.0,True,False,True,0.52,True,0.0,0,4cda2cfae6ed3ffdfb33626a700c5467edec4ddce20178890e03d605d962950e
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5012,ppo,10.0,True,False,True,,False,0.017023938982456525,0,a2c92470f3441d4fffd0813c738d243bb9a4a54d4a47d7b941454c42e3d7b040
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5012,zero,3.0,False,True,False,0.64,False,0.0,0,a2c92470f3441d4fffd0813c738d243bb9a4a54d4a47d7b941454c42e3d7b040
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5013,ppo,10.0,True,False,True,,False,0.016951333747420097,0,b8292f374f1deffd0276d76b2ed57f51322f89d93a1484f5a479ecf90196edee
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5013,zero,10.0,True,False,True,0.52,True,0.0,0,b8292f374f1deffd0276d76b2ed57f51322f89d93a1484f5a479ecf90196edee
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5014,ppo,10.0,True,False,True,,False,0.01693666280931205,0,566d7e1708ed15b928225ce41d6dc85038bf8a34c3bc8a382c61e91f17d24843
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5014,zero,10.0,True,False,True,0.52,True,0.0,0,566d7e1708ed15b928225ce41d6dc85038bf8a34c3bc8a382c61e91f17d24843
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5015,ppo,10.0,True,False,True,,False,0.016805619769729625,0,3a06500a73dccf049a9859ea5ca96e7e519b44338887cec38a4df7423a01d186
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5015,zero,10.0,True,False,True,,False,0.0,0,3a06500a73dccf049a9859ea5ca96e7e519b44338887cec38a4df7423a01d186
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5016,ppo,10.0,True,False,True,,False,0.016999971425684584,0,784cffdb5bd8c00d4fe19e3da12cf167af6a77bf97e48ee5c9c613af741d1bef
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5016,zero,4.08,False,True,False,0.62,False,0.0,0,784cffdb5bd8c00d4fe19e3da12cf167af6a77bf97e48ee5c9c613af741d1bef
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5017,ppo,10.0,True,False,True,,False,0.017035978999338272,0,90e2a8debbe05d4315951ec95172866153446f9c2bec3fc9385aee8e12a4433e
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5017,zero,10.0,True,False,True,0.52,True,0.0,0,90e2a8debbe05d4315951ec95172866153446f9c2bec3fc9385aee8e12a4433e
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5018,ppo,10.0,True,False,True,,False,0.016914474602672338,0,0971bfacdf9423253ce2b1460b445341b7211937c9d724a82bdf479f5333f222
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5018,zero,10.0,True,False,True,0.66,True,0.0,0,0971bfacdf9423253ce2b1460b445341b7211937c9d724a82bdf479f5333f222
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5019,ppo,10.0,True,False,True,,False,0.016924840777937673,0,65984f4b0ba7dd3409d6a91431c1e4f24630dd34e238662db2e35286cecea5e1
+angular_velocity_medium_+1,angular_velocity,1.0,rad/s,5019,zero,10.0,True,False,True,0.52,True,0.0,0,65984f4b0ba7dd3409d6a91431c1e4f24630dd34e238662db2e35286cecea5e1
+push_small_-1,push,-0.5,N s,5000,ppo,10.0,True,False,True,,False,0.01695299446902943,-0.5,1e6aa6a5e13411a29f7a00e31fb51d08899297d4ac4ae607e2327a5600f9ef31
+push_small_-1,push,-0.5,N s,5000,zero,10.0,True,False,True,,False,0.0,-0.5,1e6aa6a5e13411a29f7a00e31fb51d08899297d4ac4ae607e2327a5600f9ef31
+push_small_-1,push,-0.5,N s,5001,ppo,10.0,True,False,True,,False,0.01709056946216155,-0.5,b4bec25ab0c97db702be3727e4287ed9270676826574b66da883b06a7131f5c9
+push_small_-1,push,-0.5,N s,5001,zero,2.3000000000000003,False,True,False,,False,0.0,-0.5,b4bec25ab0c97db702be3727e4287ed9270676826574b66da883b06a7131f5c9
+push_small_-1,push,-0.5,N s,5002,ppo,10.0,True,False,True,,False,0.017031059870787364,-0.5,e9f1c14d889ff8067b2bb1d94802a170c894cfb59346842c054b4c47e89764a2
+push_small_-1,push,-0.5,N s,5002,zero,2.2600000000000002,False,True,False,,False,0.0,-0.5,e9f1c14d889ff8067b2bb1d94802a170c894cfb59346842c054b4c47e89764a2
+push_small_-1,push,-0.5,N s,5003,ppo,10.0,True,False,True,,False,0.016884910934459197,-0.5,cb4745cbe7f7290652ce1ea6be957766a7f3661221fd16c6e850d1ea479edd51
+push_small_-1,push,-0.5,N s,5003,zero,10.0,True,False,True,,False,0.0,-0.5,cb4745cbe7f7290652ce1ea6be957766a7f3661221fd16c6e850d1ea479edd51
+push_small_-1,push,-0.5,N s,5004,ppo,10.0,True,False,True,,False,0.016936233899905492,-0.5,a8f56eea6ce73c236670f0f9b96bbfbeef0cdae8a47d84829d5c0defad009c97
+push_small_-1,push,-0.5,N s,5004,zero,10.0,True,False,True,0.5,True,0.0,-0.5,a8f56eea6ce73c236670f0f9b96bbfbeef0cdae8a47d84829d5c0defad009c97
+push_small_-1,push,-0.5,N s,5005,ppo,10.0,True,False,True,,False,0.016904883981333017,-0.5,dc90862fc076dc89048f98f859bec27061d16cc277bf017bbdda933d49baaaca
+push_small_-1,push,-0.5,N s,5005,zero,3.2800000000000002,False,True,False,0.52,False,0.0,-0.5,dc90862fc076dc89048f98f859bec27061d16cc277bf017bbdda933d49baaaca
+push_small_-1,push,-0.5,N s,5006,ppo,10.0,True,False,True,,False,0.016982076791755334,-0.5,b0ea3db3a476478fa39a38011d208b4de5c7ef48672fcb6d9fbd9ad973a69781
+push_small_-1,push,-0.5,N s,5006,zero,2.3000000000000003,False,True,False,,False,0.0,-0.5,b0ea3db3a476478fa39a38011d208b4de5c7ef48672fcb6d9fbd9ad973a69781
+push_small_-1,push,-0.5,N s,5007,ppo,10.0,True,False,True,,False,0.01690591658043554,-0.5,24715dca6acd5f07f8324bd9e830506cfaa9b9d7dac692c33e9cfff79eb0410d
+push_small_-1,push,-0.5,N s,5007,zero,1.74,False,True,False,,False,0.0,-0.5,24715dca6acd5f07f8324bd9e830506cfaa9b9d7dac692c33e9cfff79eb0410d
+push_small_-1,push,-0.5,N s,5008,ppo,10.0,True,False,True,,False,0.01689976546884274,-0.5,6088a71dd3ef77a04214b1062094df2243bcc7c7fffa9d004b75c19a4d5c2cde
+push_small_-1,push,-0.5,N s,5008,zero,3.8000000000000003,False,True,False,0.52,False,0.0,-0.5,6088a71dd3ef77a04214b1062094df2243bcc7c7fffa9d004b75c19a4d5c2cde
+push_small_-1,push,-0.5,N s,5009,ppo,10.0,True,False,True,,False,0.01703398991347057,-0.5,cd49b4f8ff39af3e9ae26625dda8e00451d1c736bd67948cd90a0509352e0c7e
+push_small_-1,push,-0.5,N s,5009,zero,3.46,False,True,False,0.52,False,0.0,-0.5,cd49b4f8ff39af3e9ae26625dda8e00451d1c736bd67948cd90a0509352e0c7e
+push_small_-1,push,-0.5,N s,5010,ppo,10.0,True,False,True,,False,0.016896004741138438,-0.5,9db7b37813efcbd7770c5ad60d6da33e96dcdaf6ddd6fa9e29dc9bd28923f737
+push_small_-1,push,-0.5,N s,5010,zero,10.0,True,False,True,,False,0.0,-0.5,9db7b37813efcbd7770c5ad60d6da33e96dcdaf6ddd6fa9e29dc9bd28923f737
+push_small_-1,push,-0.5,N s,5011,ppo,10.0,True,False,True,,False,0.016898766247904977,-0.5,057183960fb20a197a3297970e29c30abd1cfd2f4972b23bd13775c441392426
+push_small_-1,push,-0.5,N s,5011,zero,2.7,False,True,False,,False,0.0,-0.5,057183960fb20a197a3297970e29c30abd1cfd2f4972b23bd13775c441392426
+push_small_-1,push,-0.5,N s,5012,ppo,10.0,True,False,True,,False,0.017063280781731117,-0.5,a4a25f1bef3cd80ee3bde162ca3c33b92ed338623c272e3a11f0b180a3065170
+push_small_-1,push,-0.5,N s,5012,zero,1.94,False,True,False,,False,0.0,-0.5,a4a25f1bef3cd80ee3bde162ca3c33b92ed338623c272e3a11f0b180a3065170
+push_small_-1,push,-0.5,N s,5013,ppo,10.0,True,False,True,,False,0.016992501313506946,-0.5,3cc8bfe8da3790adf2658a4ede45993b6a304dfb967f286f0141d393a070204e
+push_small_-1,push,-0.5,N s,5013,zero,2.12,False,True,False,,False,0.0,-0.5,3cc8bfe8da3790adf2658a4ede45993b6a304dfb967f286f0141d393a070204e
+push_small_-1,push,-0.5,N s,5014,ppo,10.0,True,False,True,,False,0.016965574497007807,-0.5,9c87a89dbb8f329eae04bdb6aa82c8858454fbe8069027b80b6f114c29029f2c
+push_small_-1,push,-0.5,N s,5014,zero,2.22,False,True,False,,False,0.0,-0.5,9c87a89dbb8f329eae04bdb6aa82c8858454fbe8069027b80b6f114c29029f2c
+push_small_-1,push,-0.5,N s,5015,ppo,10.0,True,False,True,,False,0.01684535434265856,-0.5,fe9b2f394e832f16343682c6c7c732099f6c45918510a36b6bb434893fa0fcc8
+push_small_-1,push,-0.5,N s,5015,zero,10.0,True,False,True,,False,0.0,-0.5,fe9b2f394e832f16343682c6c7c732099f6c45918510a36b6bb434893fa0fcc8
+push_small_-1,push,-0.5,N s,5016,ppo,10.0,True,False,True,,False,0.01703600600681971,-0.5,13d704c7d0f5adc9b1b2bba2d106b6b17b1fe3699d2034e7b5ef3dbe87b1fcc2
+push_small_-1,push,-0.5,N s,5016,zero,1.98,False,True,False,,False,0.0,-0.5,13d704c7d0f5adc9b1b2bba2d106b6b17b1fe3699d2034e7b5ef3dbe87b1fcc2
+push_small_-1,push,-0.5,N s,5017,ppo,10.0,True,False,True,,False,0.01711559695570045,-0.5,6b841c4990f6d65d38b5ab8517d74ac1591a8edc97c23f770823f3f994f6d597
+push_small_-1,push,-0.5,N s,5017,zero,2.58,False,True,False,,False,0.0,-0.5,6b841c4990f6d65d38b5ab8517d74ac1591a8edc97c23f770823f3f994f6d597
+push_small_-1,push,-0.5,N s,5018,ppo,10.0,True,False,True,,False,0.016902914316451526,-0.5,29447a163737fd52def7b4ea67f5db0ed91c9cca4947975b4af33054bed32852
+push_small_-1,push,-0.5,N s,5018,zero,2.7600000000000002,False,True,False,,False,0.0,-0.5,29447a163737fd52def7b4ea67f5db0ed91c9cca4947975b4af33054bed32852
+push_small_-1,push,-0.5,N s,5019,ppo,10.0,True,False,True,,False,0.016896312020398995,-0.5,144abf13986f50ae3ab53ce570fa094a938b90ffc15a30ef47bbb6fb692ac29d
+push_small_-1,push,-0.5,N s,5019,zero,2.08,False,True,False,,False,0.0,-0.5,144abf13986f50ae3ab53ce570fa094a938b90ffc15a30ef47bbb6fb692ac29d
+push_small_+1,push,0.5,N s,5000,ppo,10.0,True,False,True,,False,0.01693390194530364,0.5,1e6aa6a5e13411a29f7a00e31fb51d08899297d4ac4ae607e2327a5600f9ef31
+push_small_+1,push,0.5,N s,5000,zero,10.0,True,False,True,,False,0.0,0.5,1e6aa6a5e13411a29f7a00e31fb51d08899297d4ac4ae607e2327a5600f9ef31
+push_small_+1,push,0.5,N s,5001,ppo,10.0,True,False,True,,False,0.017052107615163552,0.5,b4bec25ab0c97db702be3727e4287ed9270676826574b66da883b06a7131f5c9
+push_small_+1,push,0.5,N s,5001,zero,3.14,False,True,False,0.5,False,0.0,0.5,b4bec25ab0c97db702be3727e4287ed9270676826574b66da883b06a7131f5c9
+push_small_+1,push,0.5,N s,5002,ppo,10.0,True,False,True,,False,0.017012059998523902,0.5,e9f1c14d889ff8067b2bb1d94802a170c894cfb59346842c054b4c47e89764a2
+push_small_+1,push,0.5,N s,5002,zero,2.94,False,True,False,0.5,False,0.0,0.5,e9f1c14d889ff8067b2bb1d94802a170c894cfb59346842c054b4c47e89764a2
+push_small_+1,push,0.5,N s,5003,ppo,10.0,True,False,True,,False,0.016860795325919706,0.5,cb4745cbe7f7290652ce1ea6be957766a7f3661221fd16c6e850d1ea479edd51
+push_small_+1,push,0.5,N s,5003,zero,10.0,True,False,True,,False,0.0,0.5,cb4745cbe7f7290652ce1ea6be957766a7f3661221fd16c6e850d1ea479edd51
+push_small_+1,push,0.5,N s,5004,ppo,10.0,True,False,True,,False,0.01691535568272245,0.5,a8f56eea6ce73c236670f0f9b96bbfbeef0cdae8a47d84829d5c0defad009c97
+push_small_+1,push,0.5,N s,5004,zero,10.0,True,False,True,,False,0.0,0.5,a8f56eea6ce73c236670f0f9b96bbfbeef0cdae8a47d84829d5c0defad009c97
+push_small_+1,push,0.5,N s,5005,ppo,10.0,True,False,True,,False,0.01691630348854242,0.5,dc90862fc076dc89048f98f859bec27061d16cc277bf017bbdda933d49baaaca
+push_small_+1,push,0.5,N s,5005,zero,10.0,True,False,True,,False,0.0,0.5,dc90862fc076dc89048f98f859bec27061d16cc277bf017bbdda933d49baaaca
+push_small_+1,push,0.5,N s,5006,ppo,10.0,True,False,True,,False,0.01693448978097871,0.5,b0ea3db3a476478fa39a38011d208b4de5c7ef48672fcb6d9fbd9ad973a69781
+push_small_+1,push,0.5,N s,5006,zero,3.06,False,True,False,0.5,False,0.0,0.5,b0ea3db3a476478fa39a38011d208b4de5c7ef48672fcb6d9fbd9ad973a69781
+push_small_+1,push,0.5,N s,5007,ppo,10.0,True,False,True,,False,0.016889168600173386,0.5,24715dca6acd5f07f8324bd9e830506cfaa9b9d7dac692c33e9cfff79eb0410d
+push_small_+1,push,0.5,N s,5007,zero,2.0,False,True,False,,False,0.0,0.5,24715dca6acd5f07f8324bd9e830506cfaa9b9d7dac692c33e9cfff79eb0410d
+push_small_+1,push,0.5,N s,5008,ppo,10.0,True,False,True,,False,0.016886825307446916,0.5,6088a71dd3ef77a04214b1062094df2243bcc7c7fffa9d004b75c19a4d5c2cde
+push_small_+1,push,0.5,N s,5008,zero,10.0,True,False,True,,False,0.0,0.5,6088a71dd3ef77a04214b1062094df2243bcc7c7fffa9d004b75c19a4d5c2cde
+push_small_+1,push,0.5,N s,5009,ppo,10.0,True,False,True,,False,0.017000694290909404,0.5,cd49b4f8ff39af3e9ae26625dda8e00451d1c736bd67948cd90a0509352e0c7e
+push_small_+1,push,0.5,N s,5009,zero,10.0,True,False,True,,False,0.0,0.5,cd49b4f8ff39af3e9ae26625dda8e00451d1c736bd67948cd90a0509352e0c7e
+push_small_+1,push,0.5,N s,5010,ppo,10.0,True,False,True,,False,0.01685602269979427,0.5,9db7b37813efcbd7770c5ad60d6da33e96dcdaf6ddd6fa9e29dc9bd28923f737
+push_small_+1,push,0.5,N s,5010,zero,10.0,True,False,True,,False,0.0,0.5,9db7b37813efcbd7770c5ad60d6da33e96dcdaf6ddd6fa9e29dc9bd28923f737
+push_small_+1,push,0.5,N s,5011,ppo,10.0,True,False,True,,False,0.016911169484374065,0.5,057183960fb20a197a3297970e29c30abd1cfd2f4972b23bd13775c441392426
+push_small_+1,push,0.5,N s,5011,zero,10.0,True,False,True,,False,0.0,0.5,057183960fb20a197a3297970e29c30abd1cfd2f4972b23bd13775c441392426
+push_small_+1,push,0.5,N s,5012,ppo,10.0,True,False,True,,False,0.017059828983619872,0.5,a4a25f1bef3cd80ee3bde162ca3c33b92ed338623c272e3a11f0b180a3065170
+push_small_+1,push,0.5,N s,5012,zero,2.16,False,True,False,,False,0.0,0.5,a4a25f1bef3cd80ee3bde162ca3c33b92ed338623c272e3a11f0b180a3065170
+push_small_+1,push,0.5,N s,5013,ppo,10.0,True,False,True,,False,0.017001671951438608,0.5,3cc8bfe8da3790adf2658a4ede45993b6a304dfb967f286f0141d393a070204e
+push_small_+1,push,0.5,N s,5013,zero,2.48,False,True,False,,False,0.0,0.5,3cc8bfe8da3790adf2658a4ede45993b6a304dfb967f286f0141d393a070204e
+push_small_+1,push,0.5,N s,5014,ppo,10.0,True,False,True,,False,0.016980238925316332,0.5,9c87a89dbb8f329eae04bdb6aa82c8858454fbe8069027b80b6f114c29029f2c
+push_small_+1,push,0.5,N s,5014,zero,2.74,False,True,False,,False,0.0,0.5,9c87a89dbb8f329eae04bdb6aa82c8858454fbe8069027b80b6f114c29029f2c
+push_small_+1,push,0.5,N s,5015,ppo,10.0,True,False,True,,False,0.0168444824081964,0.5,fe9b2f394e832f16343682c6c7c732099f6c45918510a36b6bb434893fa0fcc8
+push_small_+1,push,0.5,N s,5015,zero,10.0,True,False,True,,False,0.0,0.5,fe9b2f394e832f16343682c6c7c732099f6c45918510a36b6bb434893fa0fcc8
+push_small_+1,push,0.5,N s,5016,ppo,10.0,True,False,True,,False,0.017051264004258132,0.5,13d704c7d0f5adc9b1b2bba2d106b6b17b1fe3699d2034e7b5ef3dbe87b1fcc2
+push_small_+1,push,0.5,N s,5016,zero,2.22,False,True,False,,False,0.0,0.5,13d704c7d0f5adc9b1b2bba2d106b6b17b1fe3699d2034e7b5ef3dbe87b1fcc2
+push_small_+1,push,0.5,N s,5017,ppo,10.0,True,False,True,,False,0.0170605971818442,0.5,6b841c4990f6d65d38b5ab8517d74ac1591a8edc97c23f770823f3f994f6d597
+push_small_+1,push,0.5,N s,5017,zero,10.0,True,False,True,,False,0.0,0.5,6b841c4990f6d65d38b5ab8517d74ac1591a8edc97c23f770823f3f994f6d597
+push_small_+1,push,0.5,N s,5018,ppo,10.0,True,False,True,,False,0.016915560474444705,0.5,29447a163737fd52def7b4ea67f5db0ed91c9cca4947975b4af33054bed32852
+push_small_+1,push,0.5,N s,5018,zero,10.0,True,False,True,,False,0.0,0.5,29447a163737fd52def7b4ea67f5db0ed91c9cca4947975b4af33054bed32852
+push_small_+1,push,0.5,N s,5019,ppo,10.0,True,False,True,,False,0.01687277266537428,0.5,144abf13986f50ae3ab53ce570fa094a938b90ffc15a30ef47bbb6fb692ac29d
+push_small_+1,push,0.5,N s,5019,zero,2.42,False,True,False,,False,0.0,0.5,144abf13986f50ae3ab53ce570fa094a938b90ffc15a30ef47bbb6fb692ac29d
+push_medium_-1,push,-1.5,N s,5000,ppo,10.0,True,False,True,,False,0.017403794697092988,-1.5,1e6aa6a5e13411a29f7a00e31fb51d08899297d4ac4ae607e2327a5600f9ef31
+push_medium_-1,push,-1.5,N s,5000,zero,2.68,False,True,False,,False,0.0,-1.5,1e6aa6a5e13411a29f7a00e31fb51d08899297d4ac4ae607e2327a5600f9ef31
+push_medium_-1,push,-1.5,N s,5001,ppo,10.0,True,False,True,,False,0.017768879576542673,-1.5,b4bec25ab0c97db702be3727e4287ed9270676826574b66da883b06a7131f5c9
+push_medium_-1,push,-1.5,N s,5001,zero,1.78,False,True,False,,False,0.0,-1.5,b4bec25ab0c97db702be3727e4287ed9270676826574b66da883b06a7131f5c9
+push_medium_-1,push,-1.5,N s,5002,ppo,10.0,True,False,True,,False,0.01744203838512483,-1.5,e9f1c14d889ff8067b2bb1d94802a170c894cfb59346842c054b4c47e89764a2
+push_medium_-1,push,-1.5,N s,5002,zero,1.8800000000000001,False,True,False,,False,0.0,-1.5,e9f1c14d889ff8067b2bb1d94802a170c894cfb59346842c054b4c47e89764a2
+push_medium_-1,push,-1.5,N s,5003,ppo,10.0,True,False,True,,False,0.017348731181118616,-1.5,cb4745cbe7f7290652ce1ea6be957766a7f3661221fd16c6e850d1ea479edd51
+push_medium_-1,push,-1.5,N s,5003,zero,2.54,False,True,False,,False,0.0,-1.5,cb4745cbe7f7290652ce1ea6be957766a7f3661221fd16c6e850d1ea479edd51
+push_medium_-1,push,-1.5,N s,5004,ppo,10.0,True,False,True,,False,0.017357280931901184,-1.5,a8f56eea6ce73c236670f0f9b96bbfbeef0cdae8a47d84829d5c0defad009c97
+push_medium_-1,push,-1.5,N s,5004,zero,2.44,False,True,False,,False,0.0,-1.5,a8f56eea6ce73c236670f0f9b96bbfbeef0cdae8a47d84829d5c0defad009c97
+push_medium_-1,push,-1.5,N s,5005,ppo,10.0,True,False,True,,False,0.017471678959627923,-1.5,dc90862fc076dc89048f98f859bec27061d16cc277bf017bbdda933d49baaaca
+push_medium_-1,push,-1.5,N s,5005,zero,2.2800000000000002,False,True,False,,False,0.0,-1.5,dc90862fc076dc89048f98f859bec27061d16cc277bf017bbdda933d49baaaca
+push_medium_-1,push,-1.5,N s,5006,ppo,10.0,True,False,True,,False,0.017459780761273604,-1.5,b0ea3db3a476478fa39a38011d208b4de5c7ef48672fcb6d9fbd9ad973a69781
+push_medium_-1,push,-1.5,N s,5006,zero,1.9000000000000001,False,True,False,,False,0.0,-1.5,b0ea3db3a476478fa39a38011d208b4de5c7ef48672fcb6d9fbd9ad973a69781
+push_medium_-1,push,-1.5,N s,5007,ppo,10.0,True,False,True,,False,0.017567750439375193,-1.5,24715dca6acd5f07f8324bd9e830506cfaa9b9d7dac692c33e9cfff79eb0410d
+push_medium_-1,push,-1.5,N s,5007,zero,1.42,False,True,False,,False,0.0,-1.5,24715dca6acd5f07f8324bd9e830506cfaa9b9d7dac692c33e9cfff79eb0410d
+push_medium_-1,push,-1.5,N s,5008,ppo,10.0,True,False,True,,False,0.017383319217042087,-1.5,6088a71dd3ef77a04214b1062094df2243bcc7c7fffa9d004b75c19a4d5c2cde
+push_medium_-1,push,-1.5,N s,5008,zero,2.3000000000000003,False,True,False,,False,0.0,-1.5,6088a71dd3ef77a04214b1062094df2243bcc7c7fffa9d004b75c19a4d5c2cde
+push_medium_-1,push,-1.5,N s,5009,ppo,10.0,True,False,True,,False,0.017389688156472384,-1.5,cd49b4f8ff39af3e9ae26625dda8e00451d1c736bd67948cd90a0509352e0c7e
+push_medium_-1,push,-1.5,N s,5009,zero,2.2800000000000002,False,True,False,,False,0.0,-1.5,cd49b4f8ff39af3e9ae26625dda8e00451d1c736bd67948cd90a0509352e0c7e
+push_medium_-1,push,-1.5,N s,5010,ppo,10.0,True,False,True,,False,0.01733761265859364,-1.5,9db7b37813efcbd7770c5ad60d6da33e96dcdaf6ddd6fa9e29dc9bd28923f737
+push_medium_-1,push,-1.5,N s,5010,zero,10.0,True,False,True,0.82,True,0.0,-1.5,9db7b37813efcbd7770c5ad60d6da33e96dcdaf6ddd6fa9e29dc9bd28923f737
+push_medium_-1,push,-1.5,N s,5011,ppo,10.0,True,False,True,,False,0.01721266369990185,-1.5,057183960fb20a197a3297970e29c30abd1cfd2f4972b23bd13775c441392426
+push_medium_-1,push,-1.5,N s,5011,zero,2.16,False,True,False,,False,0.0,-1.5,057183960fb20a197a3297970e29c30abd1cfd2f4972b23bd13775c441392426
+push_medium_-1,push,-1.5,N s,5012,ppo,10.0,True,False,True,,False,0.017427989690477305,-1.5,a4a25f1bef3cd80ee3bde162ca3c33b92ed338623c272e3a11f0b180a3065170
+push_medium_-1,push,-1.5,N s,5012,zero,1.5,False,True,False,,False,0.0,-1.5,a4a25f1bef3cd80ee3bde162ca3c33b92ed338623c272e3a11f0b180a3065170
+push_medium_-1,push,-1.5,N s,5013,ppo,10.0,True,False,True,,False,0.01735366469307348,-1.5,3cc8bfe8da3790adf2658a4ede45993b6a304dfb967f286f0141d393a070204e
+push_medium_-1,push,-1.5,N s,5013,zero,1.68,False,True,False,,False,0.0,-1.5,3cc8bfe8da3790adf2658a4ede45993b6a304dfb967f286f0141d393a070204e
+push_medium_-1,push,-1.5,N s,5014,ppo,10.0,True,False,True,,False,0.017319714308032287,-1.5,9c87a89dbb8f329eae04bdb6aa82c8858454fbe8069027b80b6f114c29029f2c
+push_medium_-1,push,-1.5,N s,5014,zero,1.84,False,True,False,,False,0.0,-1.5,9c87a89dbb8f329eae04bdb6aa82c8858454fbe8069027b80b6f114c29029f2c
+push_medium_-1,push,-1.5,N s,5015,ppo,10.0,True,False,True,,False,0.01745126499936311,-1.5,fe9b2f394e832f16343682c6c7c732099f6c45918510a36b6bb434893fa0fcc8
+push_medium_-1,push,-1.5,N s,5015,zero,10.0,True,False,True,,False,0.0,-1.5,fe9b2f394e832f16343682c6c7c732099f6c45918510a36b6bb434893fa0fcc8
+push_medium_-1,push,-1.5,N s,5016,ppo,10.0,True,False,True,,False,0.017378634137130592,-1.5,13d704c7d0f5adc9b1b2bba2d106b6b17b1fe3699d2034e7b5ef3dbe87b1fcc2
+push_medium_-1,push,-1.5,N s,5016,zero,1.54,False,True,False,,False,0.0,-1.5,13d704c7d0f5adc9b1b2bba2d106b6b17b1fe3699d2034e7b5ef3dbe87b1fcc2
+push_medium_-1,push,-1.5,N s,5017,ppo,10.0,True,False,True,,False,0.017901618856194637,-1.5,6b841c4990f6d65d38b5ab8517d74ac1591a8edc97c23f770823f3f994f6d597
+push_medium_-1,push,-1.5,N s,5017,zero,1.86,False,True,False,,False,0.0,-1.5,6b841c4990f6d65d38b5ab8517d74ac1591a8edc97c23f770823f3f994f6d597
+push_medium_-1,push,-1.5,N s,5018,ppo,10.0,True,False,True,,False,0.017251620598981277,-1.5,29447a163737fd52def7b4ea67f5db0ed91c9cca4947975b4af33054bed32852
+push_medium_-1,push,-1.5,N s,5018,zero,2.2,False,True,False,,False,0.0,-1.5,29447a163737fd52def7b4ea67f5db0ed91c9cca4947975b4af33054bed32852
+push_medium_-1,push,-1.5,N s,5019,ppo,10.0,True,False,True,,False,0.01744139027148755,-1.5,144abf13986f50ae3ab53ce570fa094a938b90ffc15a30ef47bbb6fb692ac29d
+push_medium_-1,push,-1.5,N s,5019,zero,1.56,False,True,False,,False,0.0,-1.5,144abf13986f50ae3ab53ce570fa094a938b90ffc15a30ef47bbb6fb692ac29d
+push_medium_+1,push,1.5,N s,5000,ppo,10.0,True,False,True,,False,0.017836862706462814,1.5,1e6aa6a5e13411a29f7a00e31fb51d08899297d4ac4ae607e2327a5600f9ef31
+push_medium_+1,push,1.5,N s,5000,zero,10.0,True,False,True,,False,0.0,1.5,1e6aa6a5e13411a29f7a00e31fb51d08899297d4ac4ae607e2327a5600f9ef31
+push_medium_+1,push,1.5,N s,5001,ppo,10.0,True,False,True,,False,0.01816962612152582,1.5,b4bec25ab0c97db702be3727e4287ed9270676826574b66da883b06a7131f5c9
+push_medium_+1,push,1.5,N s,5001,zero,10.0,True,False,True,,False,0.0,1.5,b4bec25ab0c97db702be3727e4287ed9270676826574b66da883b06a7131f5c9
+push_medium_+1,push,1.5,N s,5002,ppo,10.0,True,False,True,,False,0.01818298788693944,1.5,e9f1c14d889ff8067b2bb1d94802a170c894cfb59346842c054b4c47e89764a2
+push_medium_+1,push,1.5,N s,5002,zero,10.0,True,False,True,,False,0.0,1.5,e9f1c14d889ff8067b2bb1d94802a170c894cfb59346842c054b4c47e89764a2
+push_medium_+1,push,1.5,N s,5003,ppo,10.0,True,False,True,,False,0.017848119801456005,1.5,cb4745cbe7f7290652ce1ea6be957766a7f3661221fd16c6e850d1ea479edd51
+push_medium_+1,push,1.5,N s,5003,zero,10.0,True,False,True,,False,0.0,1.5,cb4745cbe7f7290652ce1ea6be957766a7f3661221fd16c6e850d1ea479edd51
+push_medium_+1,push,1.5,N s,5004,ppo,10.0,True,False,True,,False,0.01788594818328429,1.5,a8f56eea6ce73c236670f0f9b96bbfbeef0cdae8a47d84829d5c0defad009c97
+push_medium_+1,push,1.5,N s,5004,zero,10.0,True,False,True,,False,0.0,1.5,a8f56eea6ce73c236670f0f9b96bbfbeef0cdae8a47d84829d5c0defad009c97
+push_medium_+1,push,1.5,N s,5005,ppo,10.0,True,False,True,,False,0.017898031234835854,1.5,dc90862fc076dc89048f98f859bec27061d16cc277bf017bbdda933d49baaaca
+push_medium_+1,push,1.5,N s,5005,zero,10.0,True,False,True,,False,0.0,1.5,dc90862fc076dc89048f98f859bec27061d16cc277bf017bbdda933d49baaaca
+push_medium_+1,push,1.5,N s,5006,ppo,10.0,True,False,True,,False,0.017691182977905513,1.5,b0ea3db3a476478fa39a38011d208b4de5c7ef48672fcb6d9fbd9ad973a69781
+push_medium_+1,push,1.5,N s,5006,zero,10.0,True,False,True,,False,0.0,1.5,b0ea3db3a476478fa39a38011d208b4de5c7ef48672fcb6d9fbd9ad973a69781
+push_medium_+1,push,1.5,N s,5007,ppo,10.0,True,False,True,,False,0.017594996310799596,1.5,24715dca6acd5f07f8324bd9e830506cfaa9b9d7dac692c33e9cfff79eb0410d
+push_medium_+1,push,1.5,N s,5007,zero,2.2800000000000002,False,True,False,,False,0.0,1.5,24715dca6acd5f07f8324bd9e830506cfaa9b9d7dac692c33e9cfff79eb0410d
+push_medium_+1,push,1.5,N s,5008,ppo,10.0,True,False,True,,False,0.017823332654333984,1.5,6088a71dd3ef77a04214b1062094df2243bcc7c7fffa9d004b75c19a4d5c2cde
+push_medium_+1,push,1.5,N s,5008,zero,10.0,True,False,True,,False,0.0,1.5,6088a71dd3ef77a04214b1062094df2243bcc7c7fffa9d004b75c19a4d5c2cde
+push_medium_+1,push,1.5,N s,5009,ppo,10.0,True,False,True,,False,0.018138616314699853,1.5,cd49b4f8ff39af3e9ae26625dda8e00451d1c736bd67948cd90a0509352e0c7e
+push_medium_+1,push,1.5,N s,5009,zero,10.0,True,False,True,,False,0.0,1.5,cd49b4f8ff39af3e9ae26625dda8e00451d1c736bd67948cd90a0509352e0c7e
+push_medium_+1,push,1.5,N s,5010,ppo,10.0,True,False,True,,False,0.017594661593357267,1.5,9db7b37813efcbd7770c5ad60d6da33e96dcdaf6ddd6fa9e29dc9bd28923f737
+push_medium_+1,push,1.5,N s,5010,zero,10.0,True,False,True,,False,0.0,1.5,9db7b37813efcbd7770c5ad60d6da33e96dcdaf6ddd6fa9e29dc9bd28923f737
+push_medium_+1,push,1.5,N s,5011,ppo,10.0,True,False,True,,False,0.017762427280031405,1.5,057183960fb20a197a3297970e29c30abd1cfd2f4972b23bd13775c441392426
+push_medium_+1,push,1.5,N s,5011,zero,10.0,True,False,True,,False,0.0,1.5,057183960fb20a197a3297970e29c30abd1cfd2f4972b23bd13775c441392426
+push_medium_+1,push,1.5,N s,5012,ppo,10.0,True,False,True,,False,0.018040200026625774,1.5,a4a25f1bef3cd80ee3bde162ca3c33b92ed338623c272e3a11f0b180a3065170
+push_medium_+1,push,1.5,N s,5012,zero,2.56,False,True,False,,False,0.0,1.5,a4a25f1bef3cd80ee3bde162ca3c33b92ed338623c272e3a11f0b180a3065170
+push_medium_+1,push,1.5,N s,5013,ppo,10.0,True,False,True,,False,0.01778835046075996,1.5,3cc8bfe8da3790adf2658a4ede45993b6a304dfb967f286f0141d393a070204e
+push_medium_+1,push,1.5,N s,5013,zero,10.0,True,False,True,0.6,True,0.0,1.5,3cc8bfe8da3790adf2658a4ede45993b6a304dfb967f286f0141d393a070204e
+push_medium_+1,push,1.5,N s,5014,ppo,10.0,True,False,True,,False,0.01783585102759399,1.5,9c87a89dbb8f329eae04bdb6aa82c8858454fbe8069027b80b6f114c29029f2c
+push_medium_+1,push,1.5,N s,5014,zero,10.0,True,False,True,,False,0.0,1.5,9c87a89dbb8f329eae04bdb6aa82c8858454fbe8069027b80b6f114c29029f2c
+push_medium_+1,push,1.5,N s,5015,ppo,10.0,True,False,True,,False,0.017644582738285067,1.5,fe9b2f394e832f16343682c6c7c732099f6c45918510a36b6bb434893fa0fcc8
+push_medium_+1,push,1.5,N s,5015,zero,10.0,True,False,True,,False,0.0,1.5,fe9b2f394e832f16343682c6c7c732099f6c45918510a36b6bb434893fa0fcc8
+push_medium_+1,push,1.5,N s,5016,ppo,10.0,True,False,True,,False,0.0179233684800782,1.5,13d704c7d0f5adc9b1b2bba2d106b6b17b1fe3699d2034e7b5ef3dbe87b1fcc2
+push_medium_+1,push,1.5,N s,5016,zero,2.74,False,True,False,,False,0.0,1.5,13d704c7d0f5adc9b1b2bba2d106b6b17b1fe3699d2034e7b5ef3dbe87b1fcc2
+push_medium_+1,push,1.5,N s,5017,ppo,10.0,True,False,True,,False,0.01815665288668232,1.5,6b841c4990f6d65d38b5ab8517d74ac1591a8edc97c23f770823f3f994f6d597
+push_medium_+1,push,1.5,N s,5017,zero,10.0,True,False,True,,False,0.0,1.5,6b841c4990f6d65d38b5ab8517d74ac1591a8edc97c23f770823f3f994f6d597
+push_medium_+1,push,1.5,N s,5018,ppo,10.0,True,False,True,,False,0.017735410624154728,1.5,29447a163737fd52def7b4ea67f5db0ed91c9cca4947975b4af33054bed32852
+push_medium_+1,push,1.5,N s,5018,zero,10.0,True,False,True,,False,0.0,1.5,29447a163737fd52def7b4ea67f5db0ed91c9cca4947975b4af33054bed32852
+push_medium_+1,push,1.5,N s,5019,ppo,10.0,True,False,True,,False,0.017528578116180183,1.5,144abf13986f50ae3ab53ce570fa094a938b90ffc15a30ef47bbb6fb692ac29d
+push_medium_+1,push,1.5,N s,5019,zero,10.0,True,False,True,0.64,True,0.0,1.5,144abf13986f50ae3ab53ce570fa094a938b90ffc15a30ef47bbb6fb692ac29d

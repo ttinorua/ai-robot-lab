@@ -1,0 +1,22 @@
+{
+  "history": [
+    {
+      "steps": 8192,
+      "score": [
+        true,
+        10,
+        10,
+        10.0
+      ],
+      "selected_steps": 8192,
+      "checkpoint_sha256": "5ed3bc419f8bc03fa86896ce2decb47cd0da92881899f94cc57e34e54288f7d1"
+    }
+  ],
+  "selected_steps": 8192,
+  "reconstructed_from_saved_first_checkpoint": true,
+  "unreached_checkpoint_steps": [
+    16384,
+    24576,
+    32768
+  ]
+}
