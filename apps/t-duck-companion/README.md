@@ -1,6 +1,16 @@
-# T-Duck Companion v0.1
+# T-Duck Companion v0.2
 
 Native Kotlin/Compose Android demo (Android 8.0/API 26 or newer). No account, paid AI, cloud service or hardware required. Install the debug APK from this PR's companion workflow artifact and open **T-Duck Companion**. Demo mode starts automatically.
+
+## Connect to actual MuJoCo state (TC-02)
+
+The v0.2 app adds an authenticated local HTTPS bridge to the actual pinned 14-joint T-Duck MuJoCo/ONNX/BAM controller. The default in-app demo remains available. To use measured simulation state on your phone, run the bridge on your own computer/LAN and configure its HTTPS address and owner token in Settings. The APK does not host MuJoCo or provide an always-on cloud endpoint.
+
+Follow the [TC-02 protocol, setup and robotics handover](../../docs/protocol/TC02_MUJOCO.md). Live MuJoCo mode shows source-labelled measured position, simulation time, orientation, collision contacts, contact forces and named joint states. Unmodelled battery/environment/distance/camera readings are unavailable. Rest pauses simulation; Stop clears requested movement and balances; recovery is unsupported. A future renderer can consume the immutable measured pose without redesigning the communication layer.
+
+CI checks the complete Android UI → TLS → MuJoCo → visible UI path and correlates app-side measurements with bridge audit data; see the milestone progress document for the latest verified outcome. Only the synthetic demo requires no external process.
+
+The debug key may differ from v0.1. If Android refuses an in-place test update, uninstall the previous test app and install v0.2; this clears demo preferences.
 
 ## Try it
 
@@ -35,4 +45,4 @@ A bridge can run on the same Wi-Fi LAN with a certificate matching its DNS name/
 
 ## Integration boundaries
 
-This branch is based on main and changes only companion, protocol, mock-server and companion workflow files. It does not import or modify PR #2 robotics assets or control code. No actual MuJoCo connection, real BLE pairing, physical motor safety, physical OTA, production app signing, Play publication or continuous background agent execution is validated. GitHub stores the handover; another Work session must read the protocol and implement a matching robot-side bridge.
+This branch is based on main and changes only companion, protocol, mock-server and companion workflow files. It does not import or modify PR #2 robotics assets or control code. MuJoCo integration verification is recorded separately for TC-02. Real BLE pairing, physical motor safety, physical OTA, production app signing, Play publication and continuous background agent execution remain unvalidated. GitHub stores the handover; another Work session must read the protocol and implement a matching robot-side bridge.

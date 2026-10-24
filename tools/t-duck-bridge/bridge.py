@@ -191,7 +191,8 @@ class Simulation:
                     "sample_monotonic_ns": time.monotonic_ns(), "worker_age_s": heartbeat_age,
                     "unavailable_fields": ["battery_percent", "battery_voltage", "distance_cm", "touch", "camera_available", "temperature_c", "motor_temperature_c"],
                     "synthetic_fields": [],
-                    "provenance": {**LOCK, "mujoco_version": self.mj.__version__, "model_actuators": self.model.nu,
+                    "provenance": {**LOCK, "mujoco_version": self.mj.__version__, "onnxruntime_version": self.foundation.ort.__version__,
+                                   "numpy_version": self.np.__version__, "model_actuators": self.model.nu,
                                    "controller": "PR2_CPU_BAM_ONNX", "source": "MuJoCo ground truth, not hardware sensors"}}
 
 

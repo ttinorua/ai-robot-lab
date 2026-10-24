@@ -70,7 +70,8 @@ class CompanionModel(application: Application) : AndroidViewModel(application) {
  fun chat(text: String) {
   if (text.isBlank()) return
   val response = if (!state.value.batteryAvailable && "battery" in text.lowercase())
-   "The MuJoCo model has no battery sensor. A battery reading is unavailable."
+   if(state.value.source == "mujoco") "The MuJoCo model has no battery sensor. A battery reading is unavailable."
+   else "No battery reading is available while disconnected."
    else assistant.reply(text.take(500), state.value.battery).text
   mutable.update { it.copy(messages = (it.messages + listOf("You: ${text.take(500)}", "T-Duck: $response")).takeLast(100)) }
  }
