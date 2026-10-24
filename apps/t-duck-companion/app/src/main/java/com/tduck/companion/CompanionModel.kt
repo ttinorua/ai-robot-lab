@@ -109,7 +109,7 @@ class CompanionModel(application: Application) : AndroidViewModel(application) {
    lastTelemetryCommandId = t.optString("last_command_id", ""),
    battery = battery, voltage = t.optDouble("battery_voltage", 0.0), activity = t.getString("activity"), mode = t.getString("movement_mode"), status = t.getString("status"), version = t.getString("software_version"),
    roll = t.optDouble("roll_deg", 0.0), pitch = t.optDouble("pitch_deg", 0.0), yaw = t.optDouble("yaw_deg", 0.0), leftContact = t.optBoolean("left_contact"), rightContact = t.optBoolean("right_contact"), distance = t.optDouble("distance_cm", 0.0), temperature = t.optDouble("temperature_c", 0.0), motorTemp = t.optDouble("motor_temperature_c", 0.0), camera = t.optBoolean("camera_available"), availableSensors = sensors,
-   warnings = t.getJSONArray("warnings").let { a -> (0 until a.length()).map(a::getString) }, notice = if(source == "mujoco") "Live MuJoCo state · authenticated local TLS" else "Authenticated HTTPS · synthetic reference mock") }
+   warnings = t.getJSONArray("warnings").let { a -> (0 until a.length()).map(a::getString) }, notice = if(source == "mujoco") "Live MuJoCo state · authenticated HTTPS" else "Authenticated HTTPS · synthetic reference mock") }
  }
  fun connectLocal(url: String, token: String) {
   if(updating) return
@@ -118,9 +118,9 @@ class CompanionModel(application: Application) : AndroidViewModel(application) {
    var client: HttpsRobotTransport? = null
    var retries = 0
    while (isActive && retries < 4) {
-    mutable.update { it.copy(connected = false, capabilities = emptySet(), availableSensors = emptySet(), pose = null, batteryAvailable = false, connection = if(retries == 0) "Connecting…" else "Reconnecting ($retries/3)…") }
+    mutable.update { it.copy(connected = false, capabilities = emptySet(), availableSensors = emptySet(), pose = null, batteryAvailable = false, connection = if(retries == 0) "Starting secure bridge… (up to 90 seconds)" else "Reconnecting ($retries/3)…") }
     try {
-     val activeClient = HttpsRobotTransport(url, token); client = activeClient
+     val activeClient = HttpsRobotTransport(url, token, wakeSleepingHost = retries == 0); client = activeClient
      val capabilities = activeClient.capabilities()
      val first = activeClient.telemetry()
      // Identity/protocol validation occurs in transport. Never enable commands before telemetry arrives.

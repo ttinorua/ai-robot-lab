@@ -3,6 +3,8 @@ package com.tduck.companion
 import kotlinx.coroutines.*
 import org.json.JSONObject
 import java.net.URL
+import java.net.SocketTimeoutException
+import java.net.ConnectException
 import java.util.UUID
 import java.util.Timer
 import java.util.TimerTask
@@ -66,7 +68,20 @@ internal class RobotProtocolSession {
         return json
     }
 }
-class HttpsRobotTransport(private val endpoint: String, private val token: String) : RobotTransport {
+internal class SleepingBridge(val status: Int) : java.io.IOException("Bridge starting ($status)")
+/** Only read-only discovery may wait for a sleeping host. Commands are never retried. */
+internal suspend fun <T> awaitBridgeWake(attempts: Int = 36, request: suspend () -> T): T {
+    repeat(attempts) { index ->
+        try { return request() }
+        catch (e: Exception) {
+            if (e !is SleepingBridge && e !is SocketTimeoutException && e !is ConnectException) throw e
+            if (index == attempts - 1) throw e
+            delay(1500)
+        }
+    }
+    error("No discovery attempts")
+}
+class HttpsRobotTransport(private val endpoint: String, private val token: String, private val wakeSleepingHost: Boolean = false) : RobotTransport {
     private val protocol = RobotProtocolSession()
     private var sessionId: String? = null
     private val sequence = AtomicLong(0)
@@ -87,7 +102,9 @@ class HttpsRobotTransport(private val endpoint: String, private val token: Strin
             connection.instanceFollowRedirects = false
             connection.setRequestProperty("Authorization", "Bearer $token")
             if (body != null) { connection.requestMethod = "POST"; connection.doOutput = true; connection.setRequestProperty("Content-Type", "application/json"); connection.outputStream.use { it.write(body.toString().toByteArray()) } }
-            check(connection.responseCode == 200) { "Bridge rejected request (${connection.responseCode})" }
+            val status = connection.responseCode
+            if (status in setOf(502, 503, 504)) throw SleepingBridge(status)
+            check(status == 200) { "Bridge rejected request ($status)" }
             val data = connection.inputStream.use { stream ->
                 val output = java.io.ByteArrayOutputStream(); val buffer = ByteArray(4096)
                 while (output.size() <= 65536) { val n = stream.read(buffer); if (n < 0) break; output.write(buffer, 0, n) }; output.toByteArray()
@@ -97,7 +114,7 @@ class HttpsRobotTransport(private val endpoint: String, private val token: Strin
         } finally { deadline.cancel(); deadlines.purge(); connection.disconnect() }
     }
     override suspend fun capabilities(): Set<String> {
-        val json = request("capabilities")
+        val json = if (wakeSleepingHost) awaitBridgeWake { request("capabilities") } else request("capabilities")
         val supported = protocol.capabilities(json)
         if (json.optBoolean("ordered_commands")) {
             val session = request("session", JSONObject().put("purpose", "companion_control"))

@@ -67,6 +67,8 @@ class Simulation:
         self.thread = None
         self.worker_heartbeat = self.clock()
         self.failure = None
+        self.idle_timeout_s = 60.
+        self.last_intent = self.clock()
 
     def _watchdog(self):
         if self.mode in MOVING and self.clock() >= self.deadline:
@@ -82,6 +84,7 @@ class Simulation:
                 return False, "unsafe_state"
             self._watchdog()
             self.mode = command
+            self.last_intent = self.clock()
             self.paused = command == "rest" or self.status != "ready" or (command == "stop" and self.paused)
             self.deadline = self.clock() + ttl_ms / 1000.
             self.last_command_id = command_id
@@ -94,6 +97,10 @@ class Simulation:
         with self.lock:
             self.worker_heartbeat = self.clock()
             self._watchdog()
+            if not self.paused and self.clock() - self.last_intent >= self.idle_timeout_s:
+                self.mode, self.paused = "rest", True
+                self.policy.set_vel_cmd(0., 0., 0.)
+                self.warnings = ["Owner idle for 60 seconds; simulation paused. Send a deliberate command to resume."]
             if self.paused or self.status != "ready":
                 return
             obs = self.policy.get_observations()
@@ -265,9 +272,39 @@ class CommandGate:
         return snapshot
 
 
-def make_server(host, port, token, gate, cert, key):
+class BoundedHTTPServer(ThreadingHTTPServer):
+    """Bound public request concurrency; slow/unauthenticated clients cannot spawn unlimited threads."""
+    daemon_threads = True
+    def __init__(self, *args, **kwargs):
+        self.slots = threading.BoundedSemaphore(8)
+        super().__init__(*args, **kwargs)
+    def get_request(self):
+        connection, address = super().get_request()
+        connection.settimeout(1.)
+        if getattr(self, "tls_context", None) is not None:
+            connection = self.tls_context.wrap_socket(connection, server_side=True, do_handshake_on_connect=False)
+        return connection, address
+    def process_request(self, request, address):
+        if not self.slots.acquire(blocking=False):
+            self.shutdown_request(request)
+            return
+        try:
+            super().process_request(request, address)
+        except BaseException:
+            self.slots.release()
+            raise
+    def process_request_thread(self, request, address):
+        try:
+            super().process_request_thread(request, address)
+        finally:
+            self.slots.release()
+
+
+def make_server(host, port, token, gate, cert=None, key=None, *, edge_https=False):
     if len(token) < 24:
         raise ValueError("Provide a random owner token with at least 24 characters")
+    if edge_https and os.environ.get("T_DUCK_EDGE_HTTPS") != "trusted-provider-edge-only":
+        raise ValueError("Edge HTTP requires an explicit trusted TLS-terminating provider boundary")
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *_):
             pass
@@ -280,6 +317,11 @@ def make_server(host, port, token, gate, cert, key):
             self.end_headers()
             self.wfile.write(body)
         def authorized(self):
+            # In edge mode this header is trusted ONLY because the selected provider must
+            # overwrite it and make this listener unreachable except through its TLS edge.
+            if edge_https and self.headers.get("X-Forwarded-Proto") != "https":
+                self.reply(403, {"error": "https_required"})
+                return False
             try:
                 valid = hmac.compare_digest(self.headers.get("Authorization", "").encode(), ("Bearer " + token).encode())
             except (TypeError, ValueError):
@@ -294,6 +336,12 @@ def make_server(host, port, token, gate, cert, key):
             self.connection.settimeout(0.8)
             return json.loads(self.rfile.read(n))
         def do_GET(self):
+            if self.path == "/healthz":
+                # Liveness only: no telemetry, session, motion, tokens or idle renewal.
+                worker = getattr(gate.sim, "thread", None)
+                healthy = worker is None or (worker.is_alive() and gate.sim.clock() - gate.sim.worker_heartbeat < .5)
+                self.reply(200 if healthy else 503, {"ready": healthy})
+                return
             if not self.authorized():
                 return
             if self.path == "/v1/capabilities":
@@ -322,12 +370,12 @@ def make_server(host, port, token, gate, cert, key):
                 self.reply(400, {"error": "invalid_request"})
             except (BrokenPipeError, ConnectionError, TimeoutError):
                 pass
-    server = ThreadingHTTPServer((host, port), Handler)
-    server.daemon_threads = True
-    context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-    context.minimum_version = ssl.TLSVersion.TLSv1_2
-    context.load_cert_chain(cert, key)
-    server.socket = context.wrap_socket(server.socket, server_side=True)
+    server = BoundedHTTPServer((host, port), Handler)
+    if not edge_https:
+        context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+        context.minimum_version = ssl.TLSVersion.TLSv1_2
+        context.load_cert_chain(cert, key)
+        server.tls_context = context
     return server
 
 
@@ -338,15 +386,21 @@ def main():
     parser.add_argument("--runtime-source", type=Path, required=True)
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8443)
-    parser.add_argument("--cert", required=True)
-    parser.add_argument("--key", required=True)
+    parser.add_argument("--cert")
+    parser.add_argument("--key")
+    parser.add_argument("--edge-https", action="store_true", help="Only behind a trusted managed HTTPS edge; never a direct public HTTP server")
     parser.add_argument("--audit", type=Path)
     args = parser.parse_args()
     simulation = Simulation(args.foundation_source, args.rl_source, args.runtime_source)
     gate = CommandGate(simulation, args.audit)
-    server = make_server(args.host, args.port, os.environ.get("T_DUCK_TOKEN", ""), gate, args.cert, args.key)
+    server = make_server(args.host, args.port, os.environ.get("T_DUCK_TOKEN", ""), gate, args.cert, args.key, edge_https=args.edge_https)
     simulation.start()
-    print("T-Duck MuJoCo bridge ready (HTTPS; actual simulation state; no hardware)", flush=True)
+    import signal
+    def shutdown(*_):
+        simulation.apply("rest", 100, "shutdown-rest")
+        threading.Thread(target=server.shutdown, daemon=True).start()
+    signal.signal(signal.SIGTERM, shutdown)
+    print("T-Duck MuJoCo bridge ready (TLS boundary configured; actual simulation state; no hardware)", flush=True)
     try:
         server.serve_forever(poll_interval=0.1)
     except KeyboardInterrupt:

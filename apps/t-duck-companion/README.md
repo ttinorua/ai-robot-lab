@@ -1,3 +1,5 @@
+> TC-03 development candidate: cloud staging package is prepared but **no public endpoint or physical-phone cloud round trip is verified**. Existing v0.2 remains the delivered APK. See [cloud setup/review](../../docs/protocol/TC03_CLOUD.md) and [signing/upgrade migration](../../docs/protocol/APK_SIGNING.md). CI-only debug builds are not a stable update channel.
+
 # T-Duck Companion v0.2
 
 Native Kotlin/Compose Android demo (Android 8.0/API 26 or newer). No account, paid AI, cloud service or hardware required. Install the debug APK from this PR's companion workflow artifact and open **T-Duck Companion**. Demo mode starts automatically.

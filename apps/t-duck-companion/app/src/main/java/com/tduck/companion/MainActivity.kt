@@ -273,11 +273,11 @@ private fun Settings(s: RobotUi, model: CompanionModel) {
         if (s.onboardingStep > 0) Text("Setup stage ${s.onboardingStep}/4", color = Teal)
         Text("Use example credentials. Real secure provisioning awaits hardware validation.", color = Muted, fontSize = 12.sp)
     }
-    Section("Local simulation bridge") {
-        Text("Connect to a protocol v1 bridge using HTTPS and a trusted certificate. Internet is not required. Credentials stay in this session.", color = Muted)
+    Section("Online or local simulation") {
+        Text("Live MuJoCo needs a running simulation service; the APK does not host it. Enter its HTTPS address and owner token. A free host may take up to 90 seconds to wake. Credentials stay in this session.", color = Muted)
         OutlinedTextField(url, { url = it }, label = { Text("HTTPS bridge address") }, singleLine = true, modifier = Modifier.fillMaxWidth().testTag("bridge-url"))
         OutlinedTextField(token, { token = it }, label = { Text("Owner access token") }, visualTransformation = PasswordVisualTransformation(), modifier = Modifier.fillMaxWidth().testTag("bridge-token"))
-        Button(onClick = { model.connectLocal(url.trim(), token) }, enabled = url.isNotBlank() && token.isNotBlank(), modifier = Modifier.testTag("bridge-connect")) { Text("Connect locally") }
+        Button(onClick = { model.connectLocal(url.trim(), token) }, enabled = url.isNotBlank() && token.isNotBlank(), modifier = Modifier.testTag("bridge-connect")) { Text("Connect to simulation") }
     }
     Section("Assistant preferences") {
         Row(verticalAlignment = Alignment.CenterVertically) {
