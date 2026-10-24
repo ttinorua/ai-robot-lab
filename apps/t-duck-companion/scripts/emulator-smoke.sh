@@ -5,9 +5,12 @@ if gradle -p apps/t-duck-companion --no-daemon connectedDebugAndroidTest; then
 else
   test_result=$?
 fi
-if adb shell pm path com.tduck.companion | grep -q '^package:'; then
+# Android's test runner uninstalls both APKs after testing. Reinstall the same build for visual QA.
+if [ "$test_result" -eq 0 ]; then
+  set -e
+  adb install -r apps/t-duck-companion/app/build/outputs/apk/debug/app-debug.apk
   adb shell am force-stop com.tduck.companion
-  adb shell am start -n com.tduck.companion/.MainActivity
+  adb shell am start -W -n com.tduck.companion/.MainActivity
   sleep 2
   adb shell screencap -p /sdcard/companion-home.png
   adb pull /sdcard/companion-home.png apps/t-duck-companion/app/build/companion-home.png
