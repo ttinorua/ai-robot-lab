@@ -4,6 +4,43 @@ Development branch: `feature/t-duck-companion` · Draft [PR #3](https://github.c
 
 Companion work is isolated from [robotics PR #2](https://github.com/ttinorua/ai-robot-lab/pull/2). Main and the robotics development branch have not been modified. No merge, paid resources, production service, real hardware flashing or Play publication was performed.
 
+## Current milestone: TC-02 verified (2026-10-24)
+
+**Actual Android UI → authenticated HTTPS → pinned MuJoCo/ONNX/BAM → measured telemetry visible in Android passed.** This is Android-emulator simulation integration, not physical phone/LAN or robot validation.
+
+App source: [`7c6fe32`](https://github.com/ttinorua/ai-robot-lab/commit/7c6fe3284a1020ee18bb5cf146a945918c6dbb76). [Successful CI run 40128844686](https://github.com/ttinorua/ai-robot-lab/actions/runs/40128844686): both Android build and integration jobs passed. [Permanent evidence](../reports/t-duck-companion/tc02-001/) includes the app-side report, server audit, independently correlated verification summary and inspected live UI screenshot.
+
+| Verification | Result |
+| --- | --- |
+| Kotlin/JVM | 46 passed, zero failures/skips |
+| Synthetic reference protocol | 9 passed |
+| Bridge/security/actual MuJoCo/TLS | 12 passed |
+| Android 10/API29 x86_64 instrumentation | 7 passed, zero failures/errors/skips; six existing demo tests plus actual MuJoCo round trip |
+| Android lint/build/metadata/APK v2 signature | Passed |
+| Visible telemetry / independent audit / screenshot | Verified |
+
+The app-issued Forward request `01fa3653-eee5-4d72-ba97-7d37368c1f90`, sequence 2, was accepted at physics frame 112. App-measured x changed from 0.0008839840 m to 0.0701667356 m: **0.0692827516 m (6.93 cm)** actual forward displacement. The independent robot-side watchdog expired the movement lease before the test sent Stop. Stand, explicit Stop, Left, Right and Rest were also driven through Control and acknowledged. Left changed measured yaw by 16.20°; the test separately asserted a decrease after Right. All observed commands were accepted in sequence; a final cleanup Stop also appears in the audit.
+
+After both turns and Rest, the sensor UI visibly displayed x=0.146 m and simulation time=3.78 s. The underlying unrounded app frame 756 (x=0.1463096363 m, time=3.7799999999999416 s) exactly matched the server's recorded MuJoCo snapshot. Fourteen measured joint states, orientation and actual collision contacts were received. Battery availability was false, with no invented substitute. The screenshot was reconstructed from instrumentation output and visually inspected.
+
+Delivered **T-Duck-Companion-v0.2.0.apk**, package `com.tduck.companion`, versionCode 2, minSdk 26, targetSdk 35, 8,824,601 bytes. SHA256 `88fc7d47f9578c38ec6e6dc645ed20b86529f8a5e44a52d238f300628a657267`; downloaded bytes matched CI before delivery. [APK artifact](https://github.com/ttinorua/ai-robot-lab/actions/runs/40128844686/artifacts/12574776477), [unit/lint reports](https://github.com/ttinorua/ai-robot-lab/actions/runs/40128844686/artifacts/12573917124), [integration reports/audit/screenshot](https://github.com/ttinorua/ai-robot-lab/actions/runs/40128844686/artifacts/12574501805). Actions artifacts have short retention; permanent source/evidence above remain in GitHub.
+
+A running local bridge on the owner's computer/LAN is required for live mode; no always-on cloud endpoint was created. [Installation and local setup](protocol/TC02_MUJOCO.md) and [app guide](../apps/t-duck-companion/README.md) describe TLS/owner-token configuration. Demo mode remains available offline. A fresh debug signing key may require uninstalling the previous v0.1 test APK; no production signing or owner account credential was changed.
+
+First TC-02 run [40128231691](https://github.com/ttinorua/ai-robot-lab/actions/runs/40128231691) passed build/46 JVM/12 bridge/six existing UI tests, but the real test failed before network connection because the exported test PEM began with PKCS12 bag metadata. `openssl x509` now emits a clean certificate for Android instrumentation; no certificate/hostname checks were bypassed. The complete integration then passed. A separate local mixed-motion sequence also remained upright with forward, stop, left, right and rest; no controller tuning or training was performed.
+
+### Current boundaries and robotics handover
+
+The robotics branch was read but never changed or merged. The bridge wraps a separate checkout at foundation `629abcd15862822c796cca6a91170fca6ba1d492`; all three source revisions and policy digest are enforced by the integration lock and foundation loader. No model/weight assets are committed or bundled. Future foundation changes require a deliberate lock update and repeated end-to-end validation.
+
+Protocol 1.1 retains v1 endpoints and adds negotiated, ordered owner sessions; late movement cannot override a newer Stop. A new connection stops/pauses old intent, retires its session and never resumes motion. Actual state is source-labelled and parsed into immutable root/joint/link poses for a future 3D renderer. No cosmetic redesign or mesh redistribution was attempted. [Detailed versioned handover](protocol/TC02_MUJOCO.md).
+
+Limits: Rest is a simulation pause, not a sitting policy; recovery is unsupported; falls latch and require explicit episode restart. CPU-vs-training/firmware fidelity and feet-only collision limits remain those of PR #2. Real BLE, hardware OTA, physical motor safety, phone speech services and physical-phone-to-LAN operation are unverified. The unrelated inherited main-branch gravity CI failure remains unchanged; its separate robotics fix is in PR #2. No merge, production deployment, spending or firmware flashing.
+
+## Earlier v0.1 milestone ledger (historical)
+
+The following sections preserve the earlier prototype delivery and its then-current limitations; the TC-02 status above supersedes their MuJoCo-pending statements.
+
 ## Milestones
 
 | Milestone | Implemented | Remaining validation or integration |

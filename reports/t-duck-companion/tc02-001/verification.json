@@ -1,0 +1,43 @@
+{
+  "milestone": "TC-02",
+  "result": "verified_android_to_mujoco_roundtrip",
+  "app_source_commit": "7c6fe3284a1020ee18bb5cf146a945918c6dbb76",
+  "ci_run": 40128844686,
+  "ci_url": "https://github.com/ttinorua/ai-robot-lab/actions/runs/40128844686",
+  "draft_pr": "https://github.com/ttinorua/ai-robot-lab/pull/3",
+  "source_lock": {
+    "foundation_revision": "629abcd15862822c796cca6a91170fca6ba1d492",
+    "rl_revision": "725ed0c75a73988adc4f9ede280d2d340664e997",
+    "runtime_revision": "8837d5a3bc7cf3746f6da2b55c7b9191026b9838",
+    "policy_sha256": "57cdebf36e7fa23116270dec96f013a6a64511f37311d322443f5297bdc3d6db"
+  },
+  "tests": {
+    "jvm": 46,
+    "reference_protocol": 9,
+    "bridge": 12,
+    "android_instrumented": 7,
+    "failed": 0,
+    "skipped": 0
+  },
+  "apk": {
+    "version": "0.2.0",
+    "version_code": 2,
+    "package": "com.tduck.companion",
+    "bytes": 8824601,
+    "sha256": "88fc7d47f9578c38ec6e6dc645ed20b86529f8a5e44a52d238f300628a657267",
+    "artifact_id": 12574776477,
+    "signature_scheme_v2_verified": true
+  },
+  "device": "Android 10/API29 x86_64 emulator",
+  "physical_phone_lan_verified": false,
+  "bridge_audit_independently_correlated": true,
+  "live_ui_screenshot_inspected": true,
+  "test_ca_scope": "Instrumentation process only; normal TLS hostname and chain validation retained",
+  "limits": [
+    "Rest pauses physics; no validated sitting/get-up",
+    "No physical robot, BLE or hardware OTA validation",
+    "External model/policy assets are not redistributed",
+    "No always-on hosted bridge",
+    "CPU BAM and feet-only collision limits inherited from robotics foundation"
+  ]
+}
