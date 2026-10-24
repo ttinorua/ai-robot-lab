@@ -1,7 +1,7 @@
 name: T-Duck Companion APK
 on:
   pull_request:
-    paths: ['apps/t-duck-companion/**', 'docs/protocol/**', 'tools/t-duck-mock/**', '.github/workflows/t-duck-companion.yml']
+    paths: ['apps/t-duck-companion/**', 'docs/protocol/**', 'tools/t-duck-mock/**', 'tools/t-duck-bridge/**', '.github/workflows/t-duck-companion.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -37,7 +37,7 @@ jobs:
           sha256sum apps/t-duck-companion/app/build/outputs/apk/debug/app-debug.apk
       - uses: actions/upload-artifact@v4
         with:
-          name: T-Duck-Companion-v0.1-debug
+          name: T-Duck-Companion-v0.2-debug
           path: apps/t-duck-companion/app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
       - uses: actions/upload-artifact@v4
@@ -52,6 +52,25 @@ jobs:
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: '629abcd15862822c796cca6a91170fca6ba1d492'
+          path: .tc02/foundation
+      - uses: actions/checkout@v4
+        with:
+          repository: LuwuDynamics/xgoduck_rl
+          ref: '725ed0c75a73988adc4f9ede280d2d340664e997'
+          path: .tc02/rl
+      - uses: actions/checkout@v4
+        with:
+          repository: LuwuDynamics/xgoduck_runtime_arduino
+          ref: '8837d5a3bc7cf3746f6da2b55c7b9191026b9838'
+          path: .tc02/runtime
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned CPU simulation dependencies
+        run: python -m pip install -r .tc02/foundation/requirements-t-duck.txt
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -70,12 +89,14 @@ jobs:
           arch: x86_64
           target: default
           disable-animations: true
-          script: bash apps/t-duck-companion/scripts/emulator-smoke.sh
+          script: bash apps/t-duck-companion/scripts/tc02-emulator.sh
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: companion-emulator-evidence
+          include-hidden-files: true
           path: |
             apps/t-duck-companion/app/build/reports/androidTests
             apps/t-duck-companion/app/build/outputs/androidTest-results
             apps/t-duck-companion/app/build/companion-home.png
+            .tc02/evidence

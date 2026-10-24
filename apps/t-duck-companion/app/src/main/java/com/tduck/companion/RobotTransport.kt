@@ -6,6 +6,7 @@ import java.net.URL
 import java.util.UUID
 import java.util.Timer
 import java.util.TimerTask
+import java.util.concurrent.atomic.AtomicLong
 import javax.net.ssl.HttpsURLConnection
 
 data class Ack(val id: String, val accepted: Boolean, val command: String)
@@ -31,26 +32,44 @@ class SimulatedProvisioner : BleProvisioner, DeviceDiscovery {
 /** Every response remains bound to the authenticated capability identity for this connection. */
 internal class RobotProtocolSession {
     private var deviceId: String? = null
+    private var bootId: String? = null
+    private var source: String? = null
+    private var lastFrame = -1L
+    private var lastTime = -1.0
     private fun validateEnvelope(json: JSONObject): String {
         check(json.getString("protocol_version").matches(Regex("1\\.[0-9]+"))) { "Unsupported protocol" }
-        check(json.getBoolean("simulated")) { "v0.1 only accepts simulation bridges; hardware validation pending" }
+        check(json.getBoolean("simulated")) { "Companion accepts simulation bridges only; hardware validation pending" }
         return json.getString("device_id").also { check(it.isNotBlank()) { "Missing device identity" } }
     }
     fun capabilities(json: JSONObject): Set<String> {
         val identity = validateEnvelope(json)
         val list = json.getJSONArray("commands")
         val commands = (0 until list.length()).map { list.getString(it) }.toSet()
+        check("stop" in commands) { "Bridge must support local stop" }
         deviceId = identity
+        bootId = json.optString("boot_id").takeIf { it.isNotBlank() }
+        source = json.optString("telemetry_source").takeIf { it.isNotBlank() }
+        if (source == "mujoco") check(bootId != null && json.optBoolean("ordered_commands")) { "MuJoCo requires an ordered control session" }
+        lastFrame = -1; lastTime = -1.0
         return commands.intersect(CommandPolicy.commands)
     }
     fun telemetry(json: JSONObject): JSONObject {
         check(deviceId != null) { "Capabilities must be authenticated first" }
         check(validateEnvelope(json) == deviceId) { "Bridge identity changed; reconnect required" }
+        if (bootId != null) check(json.getString("boot_id") == bootId) { "Bridge restarted; reconnect required" }
+        if (source != null) check(json.getString("telemetry_source") == source) { "Telemetry source changed" }
+        if (source == "mujoco") {
+            val pose = SimulationPose.parse(json.getJSONObject("pose"))
+            check(pose.frameId >= lastFrame && pose.simulationTimeS >= lastTime) { "Stale simulation pose" }
+            lastFrame = pose.frameId; lastTime = pose.simulationTimeS
+        }
         return json
     }
 }
 class HttpsRobotTransport(private val endpoint: String, private val token: String) : RobotTransport {
     private val protocol = RobotProtocolSession()
+    private var sessionId: String? = null
+    private val sequence = AtomicLong(0)
     companion object { private val deadlines = Timer("tduck-network-deadlines", true) }
     init {
         val url = URL(endpoint)
@@ -77,15 +96,30 @@ class HttpsRobotTransport(private val endpoint: String, private val token: Strin
             JSONObject(String(data, Charsets.UTF_8))
         } finally { deadline.cancel(); deadlines.purge(); connection.disconnect() }
     }
-    override suspend fun capabilities(): Set<String> = protocol.capabilities(request("capabilities"))
+    override suspend fun capabilities(): Set<String> {
+        val json = request("capabilities")
+        val supported = protocol.capabilities(json)
+        if (json.optBoolean("ordered_commands")) {
+            val session = request("session", JSONObject().put("purpose", "companion_control"))
+            check(session.getString("boot_id") == json.getString("boot_id")) { "Bridge restarted during connection" }
+            sessionId = session.getString("session_id").also { check(it.isNotBlank()) }
+            sequence.set(0)
+        }
+        return supported
+    }
     override suspend fun telemetry() = protocol.telemetry(request("telemetry"))
     override suspend fun send(command: String, ttlMs: Int): Ack {
         require(command in CommandPolicy.commands) { "Unsupported command" }
         require(ttlMs in 100..1000) { "Movement lease must be 100..1000 ms" }
         val id = UUID.randomUUID().toString()
-        val response = request("commands", JSONObject().put("id", id).put("command", command).put("ttl_ms", ttlMs))
+        val body = JSONObject().put("id", id).put("command", command).put("ttl_ms", ttlMs)
+        val number = sequence.incrementAndGet()
+        sessionId?.let { body.put("session_id", it).put("sequence", number) }
+        val response = request("commands", body)
         check(response.getString("id") == id && response.getString("command") == command) { "Acknowledgement mismatch" }
-        return Ack(id, response.getBoolean("accepted"), command)
+        val accepted = response.getBoolean("accepted")
+        if (sessionId != null && accepted) check(response.getLong("sequence") == number) { "Acknowledgement sequence mismatch" }
+        return Ack(id, accepted, command)
     }
 }
 object CommandPolicy {

@@ -1,6 +1,6 @@
 # T-Duck Companion protocol 1.0 (proposal)
 
-This is an integration contract for the companion branch, not an assertion that PR #2 or physical hardware implements it. All bundled simulator readings and acknowledgements are synthetic; no MuJoCo bridge or real BLE pairing has been validated. The robotics session can implement these endpoints without depending on Android internals. Unknown additive JSON fields must be ignored; breaking changes require a new major URL prefix.
+This describes the synthetic protocol-1.0 reference mock. The separate [TC-02 protocol-1.1 MuJoCo adapter](TC02_MUJOCO.md) wraps the pinned robotics controller and returns actual simulation state; its verification evidence is tracked in the companion progress report. Neither protocol implies physical hardware, BLE pairing or hardware OTA validation. The robotics session can implement these endpoints without depending on Android internals. Unknown additive JSON fields must be ignored; breaking changes require a new major URL prefix.
 
 ## Transport, identity and discovery
 

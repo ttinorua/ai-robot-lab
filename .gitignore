@@ -14,3 +14,8 @@ models/
 local.properties
 *.jks
 *.keystore
+
+# Local TC-02 sources, owner tokens, certificates and ephemeral instrumentation fixtures
+.tc02/
+apps/t-duck-companion/app/src/androidTest/assets/tc02-ca.pem
+apps/t-duck-companion/app/src/androidTest/assets/tc02-bridge.json

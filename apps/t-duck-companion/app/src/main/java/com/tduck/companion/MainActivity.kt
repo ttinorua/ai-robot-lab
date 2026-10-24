@@ -84,7 +84,7 @@ private fun CompanionApp(model: CompanionModel) {
             }
             Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(20.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                Text(if (s.simulated) "DEMONSTRATION • SIMULATED DEVICE" else "LOCAL ROBOT CONNECTION",
+                Text(if(s.source == "mujoco") (if(s.connected) "MUJOCO • LIVE SIMULATION" else "MUJOCO • DISCONNECTED") else if (s.simulated) "DEMONSTRATION • SIMULATED DEVICE" else "LOCAL ROBOT CONNECTION",
                     fontSize = 10.sp, letterSpacing = 1.sp, color = Gold)
                 if (s.notice.isNotBlank()) Info(s.notice)
                 when (selected) {
@@ -110,14 +110,15 @@ private fun Home(s: RobotUi, model: CompanionModel, control: () -> Unit, setting
             Text(s.connection, color = Teal, fontSize = 13.sp)
             Spacer(Modifier.height(15.dp))
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
-                SmallStat("Battery", "${s.battery}%")
+                SmallStat("Battery", if(s.batteryAvailable) "${s.battery}%" else "Unavailable")
                 SmallStat("Mode", s.mode)
                 SmallStat("Software", s.version)
             }
         }
     }
     Section("Ready when you are") {
-        Text("${s.status} • ${if (s.simulated) "All readings are simulated" else "Live local telemetry"}", color = Muted)
+        Text("${s.status} • ${if(s.source == "mujoco") "Measured MuJoCo state" else if (s.simulated) "Synthetic demo readings" else "Live local telemetry"}", color = Muted)
+        if(!s.batteryAvailable) Text(if(s.source == "mujoco") "Battery is not modelled by this simulation." else "Battery is unavailable while disconnected.", color = Muted, fontSize = 12.sp)
         s.warnings.forEach { Text("!  $it", color = Gold) }
         Button(onClick = control, modifier = Modifier.fillMaxWidth()) { Text("Open movement controls") }
         OutlinedButton(onClick = settings, modifier = Modifier.fillMaxWidth()) { Text("Set up your T-Duck") }
@@ -146,6 +147,7 @@ private fun DuckPortrait() {
 @Composable
 private fun Controls(s: RobotUi, model: CompanionModel) {
     Title("Let's move.", "Gentle steps, with safety close by.")
+    if(s.source == "mujoco") Info("Live MuJoCo control. Rest pauses the simulation; Stop clears movement and keeps the balance controller active. Recovery is unavailable.")
     Info("Movement runs in short, 800 ms bursts. Leaving the app requests stop. The robot must also enforce its own movement timeout.")
     Section("Movement • ${s.mode}") {
         CommandRow(s, model, listOf("stand" to "Stand", "rest" to "Rest"))
@@ -157,7 +159,7 @@ private fun Controls(s: RobotUi, model: CompanionModel) {
     Section("Robot state") {
         Text(s.activity, fontWeight = FontWeight.Bold)
         s.warnings.forEach { Text(it, color = Gold) }
-        if (s.simulated) OutlinedButton(onClick = model::fall, enabled = s.connected) { Text("Simulate a fall") }
+        if (s.source == "demo") OutlinedButton(onClick = model::fall, enabled = s.connected) { Text("Simulate a fall") }
     }
 }
 
@@ -165,7 +167,7 @@ private fun Controls(s: RobotUi, model: CompanionModel) {
 private fun CommandRow(s: RobotUi, model: CompanionModel, commands: List<Pair<String, String>>) {
     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
         commands.forEach { (command, label) ->
-            Button(onClick = { model.command(command) }, enabled = s.connected && CommandPolicy.allowed(command, s.capabilities, s.status.equals("Fallen", ignoreCase = true)),
+            Button(onClick = { model.command(command) }, enabled = s.connected && CommandPolicy.allowed(command, s.capabilities, !s.status.equals("ready", ignoreCase = true)),
                 modifier = Modifier.weight(1f).heightIn(min = 54.dp).testTag("command-$command"), shape = RoundedCornerShape(14.dp)) { Text(label) }
         }
     }
@@ -203,7 +205,16 @@ private fun Talk(s: RobotUi, model: CompanionModel) {
 
 @Composable
 private fun Sensors(s: RobotUi) {
-    Title("A sense of the world.", if (s.simulated) "Illustrative readings from your demo duck." else "Readings reported by your robot.")
+    Title("A sense of the world.", if(s.source == "mujoco") "Measured directly from the T-Duck MuJoCo simulation." else if (s.simulated) "Illustrative readings from your demo duck." else "Readings reported by your robot.")
+    s.pose?.let { pose ->
+        Section("Live movement") {
+            Reading("Motion state", s.motionState)
+            Reading("Position X", "%.3f m".format(pose.positionM[0]), "sensor-position-x")
+            Reading("Position Y", "%.3f m".format(pose.positionM[1]))
+            Reading("Height", "%.3f m".format(pose.positionM[2]))
+            Reading("Simulation time", "%.2f s".format(pose.simulationTimeS), "sensor-simulation-time")
+        }
+    }
     if ("imu" in s.availableSensors || "feet" in s.availableSensors) Section("Balance & orientation") {
         if ("imu" in s.availableSensors) {
             Reading("Roll", "%.1f°".format(s.roll)); Reading("Pitch", "%.1f°".format(s.pitch)); Reading("Yaw", "%.1f°".format(s.yaw))
@@ -211,6 +222,8 @@ private fun Sensors(s: RobotUi) {
         if ("feet" in s.availableSensors) {
             Reading("Left foot", if (s.leftContact) "In contact" else "Raised")
             Reading("Right foot", if (s.rightContact) "In contact" else "Raised")
+        s.leftForceN?.let { Reading("Left contact force", "%.2f N".format(it)) }
+        s.rightForceN?.let { Reading("Right contact force", "%.2f N".format(it)) }
         }
     }
     if (s.availableSensors.any { it in setOf("distance", "temperature", "camera") }) Section("Nearby & environment") {
@@ -224,7 +237,16 @@ private fun Sensors(s: RobotUi) {
         }
         if ("motors" in s.availableSensors) Reading("Motor temperature", "%.1f °C".format(s.motorTemp))
     }
-    Info("Only readings supplied by the connected device are shown. Pressure, touch and motor-position streams are not available in this build.")
+    Info(if(s.source == "mujoco") "MuJoCo ground truth. Battery, distance, camera, touch and temperature sensors are not modelled." else "Only readings supplied by the connected device are shown. Pressure, touch and motor-position streams are not available in demo mode.")
+    s.pose?.let { pose ->
+        var expanded by remember { mutableStateOf(false) }
+        Section("Joint motion") {
+            Text("${pose.joints.size} measured joint readings", color = Muted)
+            TextButton(onClick = { expanded = !expanded }) { Text(if(expanded) "Hide joints" else "Show joints") }
+            if(expanded) pose.joints.forEach { Reading(it.name.replace('_', ' '), "%.2f rad".format(it.positionRad)) }
+        }
+    }
+
 }
 
 @Composable
@@ -253,9 +275,9 @@ private fun Settings(s: RobotUi, model: CompanionModel) {
     }
     Section("Local simulation bridge") {
         Text("Connect to a protocol v1 bridge using HTTPS and a trusted certificate. Internet is not required. Credentials stay in this session.", color = Muted)
-        OutlinedTextField(url, { url = it }, label = { Text("HTTPS bridge address") }, singleLine = true, modifier = Modifier.fillMaxWidth())
-        OutlinedTextField(token, { token = it }, label = { Text("Owner access token") }, visualTransformation = PasswordVisualTransformation(), modifier = Modifier.fillMaxWidth())
-        Button(onClick = { model.connectLocal(url.trim(), token) }, enabled = url.isNotBlank() && token.isNotBlank()) { Text("Connect locally") }
+        OutlinedTextField(url, { url = it }, label = { Text("HTTPS bridge address") }, singleLine = true, modifier = Modifier.fillMaxWidth().testTag("bridge-url"))
+        OutlinedTextField(token, { token = it }, label = { Text("Owner access token") }, visualTransformation = PasswordVisualTransformation(), modifier = Modifier.fillMaxWidth().testTag("bridge-token"))
+        Button(onClick = { model.connectLocal(url.trim(), token) }, enabled = url.isNotBlank() && token.isNotBlank(), modifier = Modifier.testTag("bridge-connect")) { Text("Connect locally") }
     }
     Section("Assistant preferences") {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -302,9 +324,9 @@ private fun Settings(s: RobotUi, model: CompanionModel) {
     Text(text, color = Muted, fontSize = 12.sp, lineHeight = 18.sp,
         modifier = Modifier.fillMaxWidth().background(Color(0xFF17283C), RoundedCornerShape(12.dp)).padding(12.dp))
 }
-@Composable private fun Reading(name: String, value: String) {
+@Composable private fun Reading(name: String, value: String, tag: String = "") {
     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-        Text(name, color = Muted); Text(value, color = Teal, fontWeight = FontWeight.Medium)
+        Text(name, color = Muted); Text(value, color = Teal, fontWeight = FontWeight.Medium, modifier = if(tag.isBlank()) Modifier else Modifier.testTag(tag))
     }
 }
 @Composable private fun SmallStat(label: String, value: String) {

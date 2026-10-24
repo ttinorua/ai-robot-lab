@@ -9,6 +9,10 @@ import kotlinx.coroutines.flow.*
 import kotlin.math.sin
 
 data class RobotUi(
+ val source: String = "demo", val batteryAvailable: Boolean = true,
+ val pose: SimulationPose? = null, val motionState: String = "rest",
+ val leftForceN: Double? = null, val rightForceN: Double? = null,
+ val lastAckId: String = "", val lastAckCommand: String = "", val lastTelemetryCommandId: String = "",
  val connected: Boolean = true, val connection: String = "Demo connected", val simulated: Boolean = true,
  val battery: Int = 87, val voltage: Double = 7.8, val activity: String = "Resting", val mode: String = "rest",
  val status: String = "Ready", val warnings: List<String> = emptyList(), val version: String = "0.1.0-demo",
@@ -36,13 +40,13 @@ class CompanionModel(application: Application) : AndroidViewModel(application) {
  }
  private fun stopPreviousBridge() { val old = transport; if (old != null) viewModelScope.launch { runCatching { old.send("stop") } } }
  fun connectDemo() { if(updating) return; stopPreviousBridge(); poll?.cancel(); motion?.cancel(); transport = null; mutable.value = RobotUi(voiceEnabled = state.value.voiceEnabled) }
- fun disconnect() { stopPreviousBridge(); motion?.cancel(); poll?.cancel(); transport = null; mutable.update { it.copy(connected = false, connection = "Disconnected", capabilities = emptySet(), mode = "rest", activity = "Offline", notice = "Disconnected. Bridge watchdog must stop motion locally.") } }
+ fun disconnect() { stopPreviousBridge(); motion?.cancel(); poll?.cancel(); transport = null; mutable.update { it.copy(connected = false, connection = "Disconnected", capabilities = emptySet(), availableSensors = emptySet(), pose = null, batteryAvailable = false, mode = "rest", activity = "Offline", notice = "Disconnected. Bridge watchdog must stop motion locally.") } }
  fun stop() { command("stop") }
  fun command(command: String) {
   val snapshot = state.value
   if (!snapshot.connected) return
   if (updating && command != "stop") { mutable.update { it.copy(notice = "Movement locked during simulated installation") }; return }
-  if (!CommandPolicy.allowed(command, snapshot.capabilities, snapshot.status.equals("fallen", true))) { mutable.update { it.copy(notice = "Command unavailable in this state") }; return }
+  if (!CommandPolicy.allowed(command, snapshot.capabilities, !snapshot.status.equals("ready", true))) { mutable.update { it.copy(notice = "Command unavailable in this state") }; return }
   motion?.cancel()
   val target = transport
   if (target == null) {
@@ -50,7 +54,7 @@ class CompanionModel(application: Application) : AndroidViewModel(application) {
    if (command in setOf("forward", "left", "right")) motion = viewModelScope.launch { delay(800); applyCommand("stop") }
   } else {
    motion = viewModelScope.launch {
-    try { val ack = withTimeout(1000) { target.send(command) }; check(ack.accepted) { "Command rejected" }; mutable.update { it.copy(notice = "Acknowledged: $command") } }
+    try { val ack = withTimeout(1000) { target.send(command) }; check(ack.accepted) { "Command rejected" }; mutable.update { it.copy(notice = "Acknowledged: $command", lastAckId = ack.id, lastAckCommand = command) } }
     catch (e: Exception) { if (e is CancellationException) throw e; mutable.update { it.copy(notice = "No acknowledgement. Safety stop requested; bridge watchdog required.", connected = false, connection = "Connection lost", mode = "rest") }; runCatching { withTimeout(1800) { target.send("stop") } } }
    }
   }
@@ -62,10 +66,12 @@ class CompanionModel(application: Application) : AndroidViewModel(application) {
    activity = when(command) { "stand" -> "Standing"; "rest" -> "Resting"; "forward" -> "Walking forward"; "left" -> "Turning left"; "right" -> "Turning right"; "recover" -> "Recovered to rest"; else -> "Stopped" },
    status = if (fallen) "Fallen" else "Ready", warnings = if (fallen) it.warnings else emptyList(), notice = "Demo acknowledgement · $command") }
  }
- fun fall() { if (transport == null) { motion?.cancel(); mutable.update { it.copy(status = "Fallen", mode = "rest", activity = "Waiting for recovery", warnings = listOf("Simulated fall detected. Movement locked.")) } } }
+ fun fall() { if (state.value.source == "demo" && transport == null) { motion?.cancel(); mutable.update { it.copy(status = "Fallen", mode = "rest", activity = "Waiting for recovery", warnings = listOf("Simulated fall detected. Movement locked.")) } } }
  fun chat(text: String) {
   if (text.isBlank()) return
-  val response = assistant.reply(text.take(500), state.value.battery).text
+  val response = if (!state.value.batteryAvailable && "battery" in text.lowercase())
+   "The MuJoCo model has no battery sensor. A battery reading is unavailable."
+   else assistant.reply(text.take(500), state.value.battery).text
   mutable.update { it.copy(messages = (it.messages + listOf("You: ${text.take(500)}", "T-Duck: $response")).takeLast(100)) }
  }
  fun setVoiceEnabled(value: Boolean) { prefs.edit().putBoolean("voice", value).apply(); mutable.update { it.copy(voiceEnabled = value) } }
@@ -91,10 +97,18 @@ class CompanionModel(application: Application) : AndroidViewModel(application) {
    if (!t.isNull("battery_voltage")) add("battery")
    if (!t.isNull("camera_available")) add("camera")
   }
-  mutable.update { it.copy(connected = true, connection = "Simulation bridge connected", capabilities = capabilities, simulated = true,
-   battery = t.getInt("battery_percent"), voltage = t.optDouble("battery_voltage", 0.0), activity = t.getString("activity"), mode = t.getString("movement_mode"), status = t.getString("status"), version = t.getString("software_version"),
+  val source = t.optString("telemetry_source", "reference_mock")
+  val batteryAvailable = !t.isNull("battery_percent")
+  val battery = if (batteryAvailable) t.getInt("battery_percent").also { require(it in 0..100) } else 0
+  val pose = if (source == "mujoco") SimulationPose.parse(t.getJSONObject("pose")) else null
+  mutable.update { it.copy(connected = true, connection = if (source == "mujoco") "MuJoCo connected" else "Simulation bridge connected", capabilities = capabilities, simulated = true,
+   source = source, batteryAvailable = batteryAvailable, pose = pose, motionState = t.optString("motion_state", t.getString("movement_mode")),
+   leftForceN = if(t.isNull("left_contact_force_n")) null else t.getDouble("left_contact_force_n"),
+   rightForceN = if(t.isNull("right_contact_force_n")) null else t.getDouble("right_contact_force_n"),
+   lastTelemetryCommandId = t.optString("last_command_id", ""),
+   battery = battery, voltage = t.optDouble("battery_voltage", 0.0), activity = t.getString("activity"), mode = t.getString("movement_mode"), status = t.getString("status"), version = t.getString("software_version"),
    roll = t.optDouble("roll_deg", 0.0), pitch = t.optDouble("pitch_deg", 0.0), yaw = t.optDouble("yaw_deg", 0.0), leftContact = t.optBoolean("left_contact"), rightContact = t.optBoolean("right_contact"), distance = t.optDouble("distance_cm", 0.0), temperature = t.optDouble("temperature_c", 0.0), motorTemp = t.optDouble("motor_temperature_c", 0.0), camera = t.optBoolean("camera_available"), availableSensors = sensors,
-   warnings = t.getJSONArray("warnings").let { a -> (0 until a.length()).map(a::getString) }, notice = "Authenticated HTTPS · simulated bridge") }
+   warnings = t.getJSONArray("warnings").let { a -> (0 until a.length()).map(a::getString) }, notice = if(source == "mujoco") "Live MuJoCo state · authenticated local TLS" else "Authenticated HTTPS · synthetic reference mock") }
  }
  fun connectLocal(url: String, token: String) {
   if(updating) return
@@ -103,7 +117,7 @@ class CompanionModel(application: Application) : AndroidViewModel(application) {
    var client: HttpsRobotTransport? = null
    var retries = 0
    while (isActive && retries < 4) {
-    mutable.update { it.copy(connected = false, capabilities = emptySet(), connection = if(retries == 0) "Connecting…" else "Reconnecting ($retries/3)…") }
+    mutable.update { it.copy(connected = false, capabilities = emptySet(), availableSensors = emptySet(), pose = null, batteryAvailable = false, connection = if(retries == 0) "Connecting…" else "Reconnecting ($retries/3)…") }
     try {
      val activeClient = HttpsRobotTransport(url, token); client = activeClient
      val capabilities = activeClient.capabilities()
@@ -112,11 +126,11 @@ class CompanionModel(application: Application) : AndroidViewModel(application) {
      transport = activeClient
      applyTelemetry(first, capabilities)
      retries = 0
-     while (isActive) { delay(500); applyTelemetry(activeClient.telemetry(), capabilities) }
+     while (isActive) { delay(200); applyTelemetry(activeClient.telemetry(), capabilities) }
     } catch(e: Exception) {
      if(e is CancellationException) throw e
      transport = null; motion?.cancel()
-     mutable.update { it.copy(connected = false, capabilities = emptySet(), connection = "Bridge unavailable", notice = "Link lost. Movement lease expires on bridge; retrying without resuming motion.", mode = "rest") }
+     mutable.update { it.copy(connected = false, capabilities = emptySet(), availableSensors = emptySet(), pose = null, batteryAvailable = false, connection = "Bridge unavailable", notice = "Link lost. Movement lease expires on bridge; retrying without resuming motion.", mode = "rest") }
      val failedClient = client
      if (failedClient != null) runCatching { failedClient.send("stop") }
      retries++
