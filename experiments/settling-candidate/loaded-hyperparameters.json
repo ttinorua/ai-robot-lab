@@ -1,0 +1,25 @@
+{
+  "n_steps": 1024,
+  "batch_size": 128,
+  "n_epochs": 10,
+  "gamma": 0.99,
+  "gae_lambda": 0.95,
+  "ent_coef": 0.0,
+  "vf_coef": 0.5,
+  "max_grad_norm": 0.5,
+  "target_kl": null,
+  "use_sde": false,
+  "normalize_advantage": true,
+  "learning_rate": 0.0001,
+  "clip_range": 0.2,
+  "original_action_std": [
+    0.9892435073852539,
+    0.9969677925109863
+  ],
+  "selected_action_std": [
+    0.9880433678627014,
+    0.9969418048858643
+  ],
+  "selected_step": 5120,
+  "policy_parameter_delta_l2": 1.8178536151253377
+}

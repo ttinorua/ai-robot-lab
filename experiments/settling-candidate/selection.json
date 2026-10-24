@@ -1,0 +1,45 @@
+{
+  "history": [
+    {
+      "steps": 5120,
+      "score": [
+        true,
+        0,
+        33,
+        9.74529411764706
+      ],
+      "selected_steps": 5120
+    },
+    {
+      "steps": 10240,
+      "score": [
+        true,
+        0,
+        33,
+        9.74529411764706
+      ],
+      "selected_steps": 5120
+    },
+    {
+      "steps": 15360,
+      "score": [
+        true,
+        0,
+        33,
+        9.74529411764706
+      ],
+      "selected_steps": 5120
+    },
+    {
+      "steps": 20480,
+      "score": [
+        false,
+        0,
+        32,
+        9.501176470588236
+      ],
+      "selected_steps": 5120
+    }
+  ],
+  "selected_steps": 5120
+}

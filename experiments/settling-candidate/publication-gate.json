@@ -1,0 +1,22 @@
+{
+  "repository": "ttinorua/ai-robot-lab",
+  "visibility": "public",
+  "branch": "improve/verified-balance",
+  "expected_parent": "460b57f9120369d96d262c80e2f89deb449d3e66",
+  "runner": "ubuntu-latest",
+  "standard_public_repo_ci_free": true,
+  "physics_triggers": [
+    "push main only",
+    "pull_request",
+    "workflow_dispatch"
+  ],
+  "training_push_main_only": true,
+  "pages_push_main_only": true,
+  "manual_dispatches": 0,
+  "paid_resources": 0,
+  "workflow_sha256": {
+    "physics-validation.yml": "5c628018a0ec0b72da07b386ecbcfd580923936aead22dd1b1c2c710890c12fb",
+    "publish-viewer.yml": "f02925a2896ef4ed32ebbd48a03481b1d376d20b174260bbbe639510460b6612",
+    "train-balance.yml": "75c1393040610d56c53eda16185004efe65f8eb2d9e4eabeacc72d551b62360f"
+  }
+}

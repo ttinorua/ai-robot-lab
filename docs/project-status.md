@@ -25,3 +25,23 @@ training/Pages auto triggers require main. Existing PR branch only.
 Next task: independent Work review. If approved, design one development-only
 experiment for low-angular-speed settling and backward-velocity recovery. Do not
 train until that review; allocate a fresh holdout for any future controller.
+
+
+## Reviewed baseline and single settling attempt
+
+Work accepted baseline 460b57f (PR review 5635858739; prior PR CI 40045624924
+succeeded). One approved fine-tuning run completed at 20480 new steps; selected
+step 5120, SHA bb5cda047e39940ecb3a5e28c31f47bd4a4ac32e2047e87decad9b9b955adab1.
+Traces diagnose sustained ~0.803 rad lean, not persistent oscillation, on sampled
+original nominal behavior; candidate retains it. Development candidate/original/
+zero survival 164/168/75 of 170; recoveries 0/0/20. Candidate nominal 10/10.
+Recovery-gain gate failed; no final holdout and no more training. Seeds 6000–6019
+remain unused. See experiments/settling-candidate for frozen choices, raw evidence,
+checkpoints and budget (5.69 training CPU s; ~72.40 total CPU s incl reserve;
+810 counted evaluations, <=910 conservative total; ~7.6 min execution wall).
+
+Blocker: active settled recovery has not improved; candidate is not promoted.
+Next task is Work review of this negative experiment. Proposed next experiment
+only if separately approved: lower initial action standard deviation to 0.1 with
+this objective/curriculum otherwise fixed. CI is PR/manual plus main-only pushes
+and CPU PyTorch. No training dispatch, merge/deployment or paid resources.
