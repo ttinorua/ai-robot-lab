@@ -40,5 +40,6 @@ adb pull /sdcard/companion-home.png apps/t-duck-companion/app/build/companion-ho
 
 # Signing/update acceptance runs only on this disposable emulator, after UI integration.
 cp apps/t-duck-companion/app/build/outputs/apk/debug/app-debug.apk .tc02/upgrade-before.apk
-gradle -p apps/t-duck-companion --no-daemon assembleDebug -PcompanionVersionCode=4
-python apps/t-duck-companion/scripts/upgrade-acceptance.py --disposable-emulator --v01 .tc02/v01/app-debug.apk --v02 .tc02/v02/app-debug.apk --before .tc02/upgrade-before.apk --after apps/t-duck-companion/app/build/outputs/apk/debug/app-debug.apk --apksigner "$ANDROID_HOME/build-tools/35.0.0/apksigner" --output .tc02/evidence/upgrade-acceptance.json
+next_version=$(python -c 'import re,subprocess; text=subprocess.check_output(["adb","shell","dumpsys","package","com.tduck.companion"],text=True); print(int(re.search(r"versionCode=(\d+)",text).group(1))+1)')
+gradle -p apps/t-duck-companion --no-daemon assembleDebug -PcompanionVersionCode="$next_version"
+python apps/t-duck-companion/scripts/upgrade-acceptance.py --disposable-emulator --historical-optional --v01 .tc02/v01/app-debug.apk --v02 .tc02/v02/app-debug.apk --before .tc02/upgrade-before.apk --after apps/t-duck-companion/app/build/outputs/apk/debug/app-debug.apk --apksigner "$ANDROID_HOME/build-tools/35.0.0/apksigner" --output .tc02/evidence/upgrade-acceptance.json

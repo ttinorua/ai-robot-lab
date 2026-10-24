@@ -4,7 +4,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends git libgl1 libg
 WORKDIR /opt/tduck
 COPY tools/t-duck-cloud/requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
-COPY tools/t-duck-bridge bridge
+COPY tools/t-duck-bridge/bridge.py tools/t-duck-bridge/integration-lock.json bridge/
 COPY tools/t-duck-cloud/start.py start.py
 RUN useradd --create-home --uid 10001 duck && mkdir /sources && chown duck /sources
 USER duck
