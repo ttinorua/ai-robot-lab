@@ -18,8 +18,8 @@ are **not** included in this repository.
 
 ## Measured evidence
 
-Final development: `reports/t-duck/development-002/`, seeds 10000–10009.
-Final holdout: `reports/t-duck/holdout-001/`, previously unused seeds 20000–20009.
+Final development: `reports/t-duck/development-003/`, seeds 10000–10009.
+Final holdout: `reports/t-duck/holdout-002/`, previously unused seeds 30000–30009.
 Holdout ran only after development passed; no subsequent controller tuning.
 Each case/controller combination has ten independent resets. Policy and fixed-pose
 baseline use identical initial qpos/qvel and latency, recorded and SHA-256 paired.
@@ -29,18 +29,18 @@ Fixed pose means constant home targets through the same BAM dynamics, not disabl
 | --- | --- | --- |
 | Standing, upright trials | 10/10 | 10/10 |
 | Forward command 0.2 m/s, upright trials | 10/10 | 10/10 |
-| Forward travel, mean | 1.206795 m | 0.003154 m |
-| Forward travel, range | 1.159856–1.342521 m | -0.000454–0.006281 m |
+| Forward travel, mean | 1.253574 m | 0.001831 m |
+| Forward travel, range | 1.165055–1.362257 m | -0.002205–0.006230 m |
 | Falls across standing + forward | 0/20 | 0/20 |
 
 All twenty policy holdout trials lasted the full 10 seconds. Forward walking is
 supported by distance **and** alternating left-only/right-only foot contact logs,
 not just survival or drifting. Standing alone does not outperform passive stability.
-The achieved forward speed (~0.121 m/s) is below the requested 0.2 m/s; precise
+The achieved forward speed (~0.125 m/s) is below the requested 0.2 m/s; precise
 velocity tracking is not solved.
 
 Development also measured left and right turns at forward 0.1 m/s and yaw ±0.5 rad/s:
-10/10 upright each; mean unwrapped yaw +3.8433/-3.5626 rad over 10 seconds.
+10/10 upright each; mean unwrapped yaw +3.8276/-3.5758 rad over 10 seconds.
 These are exploratory development results, not separate holdout claims.
 A +x torso push of 0.5 N for exactly twenty 5 ms physics steps at 3 seconds
 delivered **0.05 N s**, verified from applied force × timestep. Both policy and
@@ -51,12 +51,19 @@ versions, evaluator SHA-256, and source revisions. `trials.csv` contains every t
 `trace.csv` samples motion at 5 Hz and includes final/failure states. Per-trial
 survival, minimum upright/height, foot contacts, applied impulse and latency are
 measured at 200 Hz. Full physics states are not logged at every timestep.
-Final development/holdout consumed 70.49/29.46 CPU seconds respectively.
+Final development/holdout consumed 75.71/31.89 CPU seconds respectively.
 
 `development-001` is an archived diagnostic run, not the accepted evidence:
 its floating-time push window delivered 0.0475 N s instead of 0.05 N s, and lacked
 the final evaluator hash. The integer-step force schedule fixed this; the entire
 development batch was rerun as 002 before holdout. Do not silently replace old evidence.
+
+The earlier `development-002` and `holdout-001` are retained as archived evidence
+from the pre-audit evaluator, not the final every-physics-step acceptance evidence.
+Their orientation/site/contact caches could lag integration by one timestep.
+`audit-001.json` records the earlier data-consistency audit; `audit.json` records
+the corrected final batches. No policy, action mapping, threshold or reward was
+tuned in response to a holdout.
 
 ## Exact integration and limits
 
@@ -148,8 +155,13 @@ ONNX metadata, then implemented and executed this harness. Codex independently
 completed a read-only source/fidelity/license review in
 https://chatgpt.com/local/01a16e64-d3a8-7062-bb9d-cf0e461830fa.
 Its findings (home mismatch, physics-vs-policy delay, firmware gain difference,
-CPU-vs-mjlab limitations and rights gaps) are incorporated above. The harness code
-and raw results still need the requested follow-up review at their published SHA.
+CPU-vs-mjlab limitations and rights gaps) are incorporated above. The initial harness audit independently recomputed the 140 rows and 70 paired
+initial-state hashes, but found a medium-severity stale-derived-state defect after
+`mj_step`. The correction calls `mj_forward` immediately after every physics
+integration and adds a real MuJoCo regression crossing the 30° boundary in one
+step, including site-position consistency. Development was rerun and a fresh
+holdout uses seeds 30000–30009; the earlier 20000 range is retired. Corrected code
+and results require a final independent read-only check at their published SHA.
 
 The earlier PR #1 residual experiment was preserved at
 `bfa9a29552042ca9a157701c9c0c4c0012ce281c`; its interrupted 8192-step attempt
@@ -159,11 +171,12 @@ viewer and recoverable history remain untouched by this branch's implementation.
 The old `test_gravity` failure was a contact fixture error: starting on the floor
 does not require decreasing root height. It now uses contact-free, zero-velocity
 free fall and verifies both g*t velocity and approximate gravitational displacement.
-Local physics/readiness/acceptance-gate tests pass (11 tests). Independently
+Local physics/readiness/acceptance-gate tests pass (12 tests). Independently
 recomputed all 140 final CSV rows and all 70 paired initial-state hashes;
 repeated development seed 10000 for standing/forward with exact trial-record matches
 (`reports/t-duck/audit.json`). Standard public
-Ubuntu CI is used; no training or viewer deployment is triggered on this branch.
+Ubuntu CI installs only CPU evaluation and Gymnasium dependencies (no unnecessary
+SB3/PyTorch/CUDA download for these tests). Standard public Ubuntu CI is used; no training or viewer deployment is triggered on this branch.
 
 Existing hourly monitor `6adbf32585c081918df167f4e4a1c0e2` was updated for T-Duck;
 no duplicate schedule was created. It may review meaningful GitHub changes and

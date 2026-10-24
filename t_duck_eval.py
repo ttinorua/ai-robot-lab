@@ -33,11 +33,18 @@ DURATION = 10.0
 MIN_UPRIGHT = math.cos(math.radians(30))
 MIN_HEIGHT = 0.09
 MIN_FORWARD = 0.20
+HOLDOUT_SEED_START = 30000  # 20000–20009 retired after derived-state audit
 ROBOT_DIR = "src/mjlab_microduck/robot/xgoduck"
 
 
 def sha256(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def advance_physics(model, data):
+    """Refresh derived state after integration before sensing/gates/logging."""
+    mujoco.mj_step(model, data)
+    mujoco.mj_forward(model, data)
 
 
 def verify_checkout(path, revision):
@@ -166,7 +173,7 @@ def run_trial(rl, upstream, policy_path, seed, case, mode):
                 data.xfrc_applied[policy.trunk_base_id, 0] = 0.5  # 0.05 N s
                 impulse += 0.5 * DT
             controller.update()
-            mujoco.mj_step(model, data)
+            advance_physics(model, data)
             up = float(data.xmat[policy.trunk_base_id].reshape(3, 3)[2, 2])
             height = float(data.qpos[2])
             min_up, min_height = min(min_up, up), min(min_height, height)
@@ -240,7 +247,7 @@ def main():
             parser.error("Evaluator changed since development; run development first")
     upstream, policy_path = load_upstream(args.rl_source.resolve(), args.runtime_source.resolve())
     cases = ("stand", "forward", "left", "right", "push") if args.stage == "development" else ("stand", "forward")
-    seeds = range(10000, 10010) if args.stage == "development" else range(20000, 20010)
+    seeds = range(10000, 10010) if args.stage == "development" else range(HOLDOUT_SEED_START, HOLDOUT_SEED_START + 10)
     rows, trace, initial_states = [], [], {}
     for case in cases:
         for seed in seeds:
@@ -266,7 +273,7 @@ def main():
                            "min_forward_m": MIN_FORWARD, "roll_pitch_deg": [-2, 2],
                            "joint_offset_rad": [-0.01, 0.01], "initial_velocity_std": 0.015,
                            "bam_kp": 5., "voltage": 7.7, "sag_gain": 0.1, "minimum_voltage": 7.,
-                           "delay_physics_steps": [3, 6], "holdout_seeds": [20000, 20009]},
+                           "delay_physics_steps": [3, 6], "holdout_seeds": [HOLDOUT_SEED_START, HOLDOUT_SEED_START + 9]},
               "limitations": ["CPU BAM MujocoController is not the trained mjlab actuator implementation",
                               "Original Walk model has feet-only ground collision; non-foot collisions not evaluated",
                               "ONNX metadata home angles are rounded to 0.001 rad",

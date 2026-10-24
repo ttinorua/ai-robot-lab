@@ -1,10 +1,10 @@
 {
-  "development-002": {
+  "development-003": {
     "rows": 100,
     "paired_initial_states_verified": 50,
     "acceptance_recomputed": true
   },
-  "holdout-001": {
+  "holdout-002": {
     "rows": 40,
     "paired_initial_states_verified": 20,
     "acceptance_recomputed": true

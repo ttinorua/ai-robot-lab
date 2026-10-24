@@ -15,7 +15,7 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
       - name: Install Python dependencies
-        run: pip install -r requirements.txt -r requirements-t-duck.txt
+        run: pip install -r requirements-t-duck.txt 'gymnasium>=1.0,<2'
       - name: Compile Python sources
         run: python -m compileall -q robot_lab train.py evaluate.py t_duck_eval.py tests
       - name: Run MuJoCo physics smoke tests
