@@ -36,7 +36,9 @@ GitHub APK artifact: [T-Duck-Companion-v0.1-debug](https://github.com/ttinorua/a
 
 Build evidence: [40-test/lint report](https://github.com/ttinorua/ai-robot-lab/actions/runs/40107422979/artifacts/12565676061), [6-test emulator report](https://github.com/ttinorua/ai-robot-lab/actions/runs/40107422979/artifacts/12564813039). Emulator suite covers dashboard/movement timeout/fall/stop/recovery, chat cannot move, approval-gated OTA, invalid and successful simulated pairing/trusted identity storage, sensor navigation, disconnect/reconnect control locking.
 
-The initial screenshot capture was skipped because ripgrep was absent on the runner. Tests still passed; a subsequent script-only fix uses grep and leaves app source unchanged.
+Visual QA completed: [follow-up run 40108225366](https://github.com/ttinorua/ai-robot-lab/actions/runs/40108225366) passed both jobs again. Its emulator reinstall/launch returned Android `Status: ok`; the [Home screenshot and emulator report](https://github.com/ttinorua/ai-robot-lab/actions/runs/40108225366/artifacts/12565885558) were downloaded and the screenshot inspected. Header, connection indicator, persistent Stop, demo labels, duck portrait and five-section navigation render correctly; additional dashboard content is scrollable on the small emulator viewport.
+
+Initial screenshot capture was skipped because ripgrep was absent, then because instrumentation uninstalls test APKs during cleanup. The script now reinstalls the same tested build for capture and fails on capture errors. These script/documentation-only fixes leave packaged app source unchanged from the delivered APK's pinned commit.
 
 - Nine Python protocol tests passed locally: authentication rejection, capability/telemetry/ack roundtrip, request rejection, duplicate request handling and lease expiry without a client.
 - Additional local TLS smoke passed with standard certificate verification: authenticated Python mock, accepted movement acknowledgement and lease expiry over HTTPS.
