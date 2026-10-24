@@ -17,6 +17,6 @@ jobs:
       - name: Install Python dependencies
         run: pip install -r requirements-t-duck.txt 'gymnasium>=1.0,<2'
       - name: Compile Python sources
-        run: python -m compileall -q robot_lab train.py evaluate.py t_duck_eval.py tests
+        run: python -m compileall -q robot_lab train.py evaluate.py t_duck_eval.py t_duck_robustness.py t_duck_robustness_holdout.py tests
       - name: Run MuJoCo physics smoke tests
         run: python -m unittest discover -s tests -v

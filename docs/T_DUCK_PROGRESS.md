@@ -1,7 +1,31 @@
 # T-Duck development handover
 
-Updated 2026-10-24. Project: AI Robot Lab. Robot: T-Duck.
+Updated 2026-10-25. Project: AI Robot Lab. Robot: T-Duck.
 Branch: `feature/t-duck-foundation`; draft PR: https://github.com/ttinorua/ai-robot-lab/pull/2.
+
+## Latest parallel robotics milestone
+
+Continued robotics testing independently of Companion PR #3. New benchmark code
+and evidence are documented in [T_DUCK_ROBUSTNESS.md](T_DUCK_ROBUSTNESS.md).
+Development (180 trials) and a fresh holdout (360 trials) ran without controller
+changes or training. Holdout survival was 180/180 for policy versus 159/180 for
+fixed pose; settled non-forward recovery was 170/170 versus 149/170. An injected
+negative pitch offset of 10° and a negative initial x-velocity offset of 0.25 m/s
+each gave 10/10 policy survival versus 0/10 fixed pose. The stronger negative
+x push of 0.2 N s gave 10/10 versus 9/10. These are sampled-condition results; feet-only
+collisions and inherited sensing/runtime limits remain.
+
+`t_duck_eval.py` remains byte-for-byte unchanged at the verified SHA-256. Companion
+PR #3 and its foundation lock to `629abcd` remain unchanged. No protocol or APK
+change is needed for these separate robotics experiments. Existing nominal models,
+holdouts, checkpoints, viewer and source history are preserved. Robotics and
+Companion development do not need to wait for each other; available included
+usage and explicit independent review still bound each task.
+
+Next robotics priority: source-compatible fuller collisions and sensing/delay
+fidelity before harder falls/get-up or promoting hardware claims. Companion's
+online hosting and phone connection remain its separate TC-03 scope. No
+continuous unattended task launching is claimed by this update.
 
 ## Current milestone
 
