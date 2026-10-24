@@ -30,6 +30,11 @@ jobs:
       - name: Unit tests, lint and debug build
         working-directory: apps/t-duck-companion
         run: gradle --no-daemon testDebugUnitTest lintDebug assembleDebug
+      - name: Verify installable APK metadata and signature
+        run: |
+          "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose --print-certs apps/t-duck-companion/app/build/outputs/apk/debug/app-debug.apk
+          "$ANDROID_HOME/build-tools/35.0.0/aapt" dump badging apps/t-duck-companion/app/build/outputs/apk/debug/app-debug.apk
+          sha256sum apps/t-duck-companion/app/build/outputs/apk/debug/app-debug.apk
       - uses: actions/upload-artifact@v4
         with:
           name: T-Duck-Companion-v0.1-debug
@@ -68,6 +73,7 @@ jobs:
           script: |
             cd apps/t-duck-companion
             gradle --no-daemon connectedDebugAndroidTest
+            adb shell am force-stop com.tduck.companion
             adb shell am start -n com.tduck.companion/.MainActivity
             sleep 2
             adb shell screencap -p /sdcard/companion-home.png

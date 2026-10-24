@@ -9,6 +9,8 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTextInput
+import androidx.compose.ui.test.performTextReplacement
+import androidx.test.espresso.Espresso.closeSoftKeyboard
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
@@ -83,4 +85,62 @@ class CompanionSmokeTest {
             assertTrue(model.state.value.simulated)
         }
     }
+
+    @Test fun simulatedProvisioningRejectsWrongProofAndStoresOnlyTrustedIdentity() {
+        compose.runOnIdle { compose.activity.getSharedPreferences("companion", 0).edit().remove("trusted_demo").commit() }
+        compose.onNodeWithTag("tab-Settings").performClick()
+        compose.onNodeWithText("Physical-access code").performScrollTo().performTextInput("000000")
+        compose.onNodeWithText("Demo Wi-Fi name").performScrollTo().performTextInput("Invented demo network")
+        compose.onNodeWithText("Demo Wi-Fi password").performScrollTo().performTextInput("invented-demo-password")
+        closeSoftKeyboard()
+        compose.onNodeWithText("Run simulated setup").performScrollTo().performClick()
+        compose.waitUntil(5_000) { model.state.value.notice == "Demo physical-access code is 246810" }
+        compose.runOnIdle {
+            assertEquals(0, model.state.value.onboardingStep)
+            assertNull(compose.activity.getSharedPreferences("companion", 0).getString("trusted_demo", null))
+        }
+        compose.onNodeWithText("Physical-access code").performScrollTo().performTextReplacement("246810")
+        // The UI intentionally clears the password after every setup request.
+        compose.onNodeWithText("Demo Wi-Fi password").performScrollTo().performTextInput("invented-demo-password")
+        closeSoftKeyboard()
+        compose.onNodeWithText("Run simulated setup").performScrollTo().performClick()
+        compose.waitUntil(6_000) { model.state.value.onboardingStep == 4 }
+        compose.runOnIdle {
+            val stored = compose.activity.getSharedPreferences("companion", 0)
+            assertEquals("demo-duck-001", stored.getString("trusted_demo", null))
+            assertTrue(model.state.value.connected)
+            assertTrue(model.state.value.simulated)
+            assertFalse(stored.all.values.any { it == "invented-demo-password" || it == "Invented demo network" })
+        }
+    }
+
+    @Test fun sensorsAndSettingsNavigationShowsAvailableReadings() {
+        compose.onNodeWithTag("tab-Sensors").performClick()
+        compose.onNodeWithText("A sense of the world.").performScrollTo().assertIsDisplayed()
+        compose.onNodeWithText("Balance & orientation").performScrollTo().assertIsDisplayed()
+        compose.onNodeWithText("Roll").performScrollTo().assertIsDisplayed()
+        compose.onNodeWithText("Obstacle distance").performScrollTo().assertIsDisplayed()
+        compose.onNodeWithText("Power & motors").performScrollTo().assertIsDisplayed()
+        compose.onNodeWithText("Battery voltage").performScrollTo().assertIsDisplayed()
+        compose.onNodeWithTag("tab-Settings").performClick()
+        compose.onNodeWithText("Make it yours.").performScrollTo().assertIsDisplayed()
+        compose.onNodeWithText("Assistant preferences").performScrollTo().assertIsDisplayed()
+        compose.onNodeWithText("Software care • simulated OTA").performScrollTo().assertIsDisplayed()
+    }
+
+    @Test fun disconnectLocksControlsAndDemoReconnectRestoresThem() {
+        compose.onNodeWithTag("tab-Settings").performClick()
+        compose.onNodeWithText("Disconnect").performScrollTo().performClick()
+        compose.runOnIdle { assertFalse(model.state.value.connected) }
+        compose.onNodeWithTag("tab-Control").performClick()
+        compose.onNodeWithTag("command-forward").performScrollTo().assertIsNotEnabled()
+        compose.onNodeWithTag("command-stand").performScrollTo().assertIsNotEnabled()
+        compose.onNodeWithTag("tab-Settings").performClick()
+        compose.onNodeWithText("Demo mode").performScrollTo().performClick()
+        compose.runOnIdle { assertTrue(model.state.value.connected) }
+        compose.onNodeWithTag("tab-Control").performClick()
+        compose.onNodeWithTag("command-forward").performScrollTo().assertIsEnabled()
+        compose.onNodeWithTag("command-stand").performScrollTo().assertIsEnabled()
+    }
+
 }
