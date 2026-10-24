@@ -1,0 +1,24 @@
+{
+  "load_wall_s": 4.401179041999995,
+  "peak_rss_mib": 186.234375,
+  "tick_wall_mean_s": 0.007092091990000143,
+  "tick_wall_p95_s": 0.09120274500000392,
+  "realtime_cpu_fraction": 0.039662746,
+  "telemetry_bytes": 6513,
+  "telemetry_mib_per_hour_at_5hz": 111.80305480957031,
+  "status": "ready",
+  "hardware": "x86_64",
+  "provenance": {
+    "foundation_revision": "629abcd15862822c796cca6a91170fca6ba1d492",
+    "rl_revision": "725ed0c75a73988adc4f9ede280d2d340664e997",
+    "runtime_revision": "8837d5a3bc7cf3746f6da2b55c7b9191026b9838",
+    "policy_sha256": "57cdebf36e7fa23116270dec96f013a6a64511f37311d322443f5297bdc3d6db",
+    "mujoco_version": "3.3.7",
+    "onnxruntime_version": "1.22.1",
+    "numpy_version": "2.2.6",
+    "model_actuators": 14,
+    "controller": "PR2_CPU_BAM_ONNX",
+    "source": "MuJoCo ground truth, not hardware sensors"
+  },
+  "scope": "This host only; not public-endpoint, provider-quota, or phone connectivity evidence"
+}

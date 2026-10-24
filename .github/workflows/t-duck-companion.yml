@@ -1,0 +1,158 @@
+name: T-Duck Companion APK
+on:
+  pull_request:
+    paths: ['apps/t-duck-companion/**', 'docs/protocol/**', 'tools/t-duck-mock/**', 'tools/t-duck-bridge/**', 'tools/t-duck-cloud/**', '.github/workflows/t-duck-companion.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: companion-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  debug-apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: 'platform-tools platforms;android-35 build-tools;35.0.0'
+          log-accepted-android-sdk-licenses: false
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+      - name: Protocol tests
+        run: python -m unittest discover -s tools/t-duck-mock -p 'test_*.py' -v
+      - name: Unit tests, lint and debug build
+        working-directory: apps/t-duck-companion
+        run: gradle --no-daemon testDebugUnitTest lintDebug assembleDebug assembleRelease
+      - name: Verify installable APK metadata and signature
+        run: |
+          "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose --print-certs apps/t-duck-companion/app/build/outputs/apk/debug/app-debug.apk
+          "$ANDROID_HOME/build-tools/35.0.0/aapt" dump badging apps/t-duck-companion/app/build/outputs/apk/debug/app-debug.apk
+          sha256sum apps/t-duck-companion/app/build/outputs/apk/debug/app-debug.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: T-Duck-Companion-v0.2.1-dev-CI-only
+          path: apps/t-duck-companion/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: companion-test-evidence
+          path: |
+            apps/t-duck-companion/app/build/reports/tests
+            apps/t-duck-companion/app/build/reports/lint-results-debug.html
+  emulator-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: '629abcd15862822c796cca6a91170fca6ba1d492'
+          path: .tc02/foundation
+      - uses: actions/checkout@v4
+        with:
+          repository: LuwuDynamics/xgoduck_rl
+          ref: '725ed0c75a73988adc4f9ede280d2d340664e997'
+          path: .tc02/rl
+      - uses: actions/checkout@v4
+        with:
+          repository: LuwuDynamics/xgoduck_runtime_arduino
+          ref: '8837d5a3bc7cf3746f6da2b55c7b9191026b9838'
+          path: .tc02/runtime
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned CPU simulation dependencies
+        run: python -m pip install -r tools/t-duck-cloud/requirements.txt
+      - uses: actions/download-artifact@v4
+        continue-on-error: true # Historical fixtures expire; acceptance report must explicitly mark missing cases blocked.
+        with:
+          github-token: ${{ github.token }}
+          run-id: 40107422979
+          name: T-Duck-Companion-v0.1-debug
+          path: .tc02/v01
+      - uses: actions/download-artifact@v4
+        continue-on-error: true # Historical fixtures expire; acceptance report must explicitly mark missing cases blocked.
+        with:
+          github-token: ${{ github.token }}
+          run-id: 40128844686
+          name: T-Duck-Companion-v0.2-debug
+          path: .tc02/v02
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: 'platform-tools platforms;android-35 build-tools;35.0.0'
+          log-accepted-android-sdk-licenses: false
+      - name: Enable KVM for Android emulator
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          arch: x86_64
+          target: default
+          disable-animations: true
+          script: bash apps/t-duck-companion/scripts/tc02-emulator.sh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: companion-emulator-evidence
+          include-hidden-files: true
+          path: |
+            apps/t-duck-companion/app/build/reports/androidTests
+            apps/t-duck-companion/app/build/outputs/androidTest-results
+            apps/t-duck-companion/app/build/companion-home.png
+            .tc02/evidence
+
+  cloud-package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build candidate without robot assets or deployment
+        run: docker build -f tools/t-duck-cloud/Dockerfile -t tduck-staging-candidate .
+      - name: Verify image is unprivileged and fails closed before asset fetch
+        run: |
+          test "$(docker inspect --format '{{.Config.User}}' tduck-staging-candidate)" = duck
+          docker run --rm --entrypoint python tduck-staging-candidate -c "import start; assert not list(start.Path('/sources').iterdir()); exec('try: start.validate_environment({})\nexcept ValueError: pass\nelse: raise AssertionError(\"missing approval accepted\")')"
+      - uses: actions/checkout@v4
+        with:
+          ref: '629abcd15862822c796cca6a91170fca6ba1d492'
+          path: .tc02/foundation
+      - uses: actions/checkout@v4
+        with:
+          repository: LuwuDynamics/xgoduck_rl
+          ref: '725ed0c75a73988adc4f9ede280d2d340664e997'
+          path: .tc02/rl
+      - uses: actions/checkout@v4
+        with:
+          repository: LuwuDynamics/xgoduck_runtime_arduino
+          ref: '8837d5a3bc7cf3746f6da2b55c7b9191026b9838'
+          path: .tc02/runtime
+      - name: Private CI benchmark at candidate 0.1 CPU and 512 MiB limit
+        run: |
+          mkdir -p .tc02/cloud-evidence
+          docker run --rm --network none --cpus=0.1 --memory=512m --memory-swap=512m --user "$(id -u):$(id -g)" -v "$PWD/.tc02/foundation:/sources/foundation:ro" -v "$PWD/.tc02/rl:/sources/rl:ro" -v "$PWD/.tc02/runtime:/sources/runtime:ro" -v "$PWD/tools/t-duck-cloud/benchmark.py:/opt/tduck/tools/t-duck-cloud/benchmark.py:ro" -v "$PWD/tools/t-duck-bridge:/opt/tduck/tools/t-duck-bridge:ro" --entrypoint python tduck-staging-candidate /opt/tduck/tools/t-duck-cloud/benchmark.py --foundation /sources/foundation --rl /sources/rl --runtime /sources/runtime > .tc02/cloud-evidence/container-resource-benchmark.json
+          python -c "import json; r=json.load(open('.tc02/cloud-evidence/container-resource-benchmark.json')); assert r['status']=='ready' and r['peak_rss_mib']<512 and r['tick_wall_mean_s']*100<2; print(r)"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: companion-cloud-resource-evidence
+          include-hidden-files: true
+          path: .tc02/cloud-evidence
+          if-no-files-found: error

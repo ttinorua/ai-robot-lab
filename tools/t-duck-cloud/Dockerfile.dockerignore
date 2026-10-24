@@ -1,0 +1,11 @@
+# Whitelist the staging build context; exclude local tokens, keys, APKs and robot assets.
+**
+!tools/
+!tools/t-duck-bridge/
+!tools/t-duck-bridge/bridge.py
+!tools/t-duck-bridge/integration-lock.json
+!tools/t-duck-cloud/
+!tools/t-duck-cloud/requirements.txt
+!tools/t-duck-cloud/start.py
+!tools/t-duck-cloud/Dockerfile
+!tools/t-duck-cloud/Dockerfile.dockerignore
