@@ -29,3 +29,10 @@ Separate high-level assistant (speech-to-text, dialogue, text-to-speech, vision,
 - Preserve baseline and prior viewer until replacement passes tests.
 - Use a draft PR for integration; no merge without owner approval.
 - GPU-intensive mjlab training requires a suitable CUDA machine; do not assume free GitHub runners provide one.
+
+## Current execution evidence
+
+See [T_DUCK_PROGRESS.md](T_DUCK_PROGRESS.md) for the implemented CPU MuJoCo/ONNX/BAM
+runner, final development and holdout measurements, exact compatibility limits,
+licensing blockers and continuation instructions. Simulation movement acceptance
+has measured evidence; full v0.1/viewer integration is not complete.

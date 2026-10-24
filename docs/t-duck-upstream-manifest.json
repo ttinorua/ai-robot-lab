@@ -1,0 +1,276 @@
+{
+  "rl_revision": "725ed0c75a73988adc4f9ede280d2d340664e997",
+  "runtime_revision": "8837d5a3bc7cf3746f6da2b55c7b9191026b9838",
+  "hardware_revision": "b5e9ff16a98f7bbe5c146aad29ad38f0dde30a89",
+  "policy": {
+    "path": "python/xgoduck_walk.onnx",
+    "sha256": "57cdebf36e7fa23116270dec96f013a6a64511f37311d322443f5297bdc3d6db",
+    "redistribution": "unresolved"
+  },
+  "rl_files": [
+    {
+      "path": "LICENSE",
+      "sha256": "2d3fd9ffffa70a4307498ec630b14a6b4731e010f8ddda92686eaf65733c2dfe"
+    },
+    {
+      "path": "scripts/infer_policy.py",
+      "sha256": "69db723bb2fc237824190ba4039e31c2ac9cabf347b2b493d66d0c9df5c3ddc2"
+    },
+    {
+      "path": "src/mjlab_microduck/robot/xgoduck/assets/head_pitch.stl",
+      "sha256": "aef526ce7a58f65e4efca3f6c4a0abcd6b4a2e54a51b3949502d325472fdfcb1"
+    },
+    {
+      "path": "src/mjlab_microduck/robot/xgoduck/assets/head_roll.stl",
+      "sha256": "dcbe8ae093a842399e94eecc6f41a533575df9e8367f26690d737a9d38f8b327"
+    },
+    {
+      "path": "src/mjlab_microduck/robot/xgoduck/assets/head_yaw.stl",
+      "sha256": "a509eadd3172b79826b635bdb1b239b567b71f1fcf6c665eb9d2d3fc455cebe1"
+    },
+    {
+      "path": "src/mjlab_microduck/robot/xgoduck/assets/left_ankle.stl",
+      "sha256": "305c7e2900136c4d3e525ebdde4dd8b64c254ab3e92a4eb6c296ec1d84af0566"
+    },
+    {
+      "path": "src/mjlab_microduck/robot/xgoduck/assets/left_hip_pitch.stl",
+      "sha256": "5948191de26a4f209b7dcc7d18e9b1928920c01b687368cf77769d14553fa356"
+    },
+    {
+      "path": "src/mjlab_microduck/robot/xgoduck/assets/left_hip_roll.stl",
+      "sha256": "4745eb3c27645971c1a92a067cffafb024934660f0bd887415e73462f65440d4"
+    },
+    {
+      "path": "src/mjlab_microduck/robot/xgoduck/assets/left_hip_yaw.stl",
+      "sha256": "34bcf92d98d9ca2fef20ee5ef70d05ca71e05079e88a08d30d7a791e208be508"
+    },
+    {
+      "path": "src/mjlab_microduck/robot/xgoduck/assets/left_knee.stl",
+      "sha256": "0a879a561f2d46b8f91f201e4530cfa1b8de6fc6263f3dcf041b3479f14de832"
+    },
+    {
+      "path": "src/mjlab_microduck/robot/xgoduck/assets/neck_pitch.stl",
+      "sha256": "48fd73c630b929a68dd7a192bee3920f5eed478d48948067f49223abb9297984"
+    },
+    {
+      "path": "src/mjlab_microduck/robot/xgoduck/assets/right_ankle.stl",
+      "sha256": "1f2a6b317277be4b6f22802e6fa74b8f0ffab502cb8bd36dacb9e13ab0896a2f"
+    },
+    {
+      "path": "src/mjlab_microduck/robot/xgoduck/assets/right_hip_pitch.stl",
+      "sha256": "e580ffa06a66c0143a0eebdb9f346304bde98c754dec1af2e9ad2318038f71a7"
+    },
+    {
+      "path": "src/mjlab_microduck/robot/xgoduck/assets/right_hip_roll.stl",
+      "sha256": "6f709cd1e2caf44c9c6dde112a8e8d8ac0bf1ef97b3542801b9c9deed08cd09c"
+    },
+    {
+      "path": "src/mjlab_microduck/robot/xgoduck/assets/right_hip_yaw.stl",
+      "sha256": "a27fa340a4f7ae5a6fbb0224feb2203cb1c62827a20db786da022cb9c9abd12d"
+    },
+    {
+      "path": "src/mjlab_microduck/robot/xgoduck/assets/right_knee.stl",
+      "sha256": "644e3fcc3b9b4815f8a5185aa2c4597cc54afcfdc876e42d5f9f04c0838c830d"
+    },
+    {
+      "path": "src/mjlab_microduck/robot/xgoduck/assets/trunk_base.stl",
+      "sha256": "7df63591596f4cf627c80e78ac5e37dff889c67f63c9f2a726e61899d3c358c3"
+    },
+    {
+      "path": "src/mjlab_microduck/robot/xgoduck/convert_from_urdf.py",
+      "sha256": "bd66afff2f7aa161b6da2c47ea520e9843a768ba77e57659c64a7f3bf10aedae"
+    },
+    {
+      "path": "src/mjlab_microduck/robot/xgoduck/params/1910_m6.json",
+      "sha256": "ef2d51adfb1cc0831b9b02ca19aa9176fceecdf725148d084378d7d9a64afceb"
+    },
+    {
+      "path": "src/mjlab_microduck/robot/xgoduck/robot_allcollisions.xml",
+      "sha256": "906960f98a7f2ae24314b5ce1032c46ac6ff619d27c3bae502eb81c8f1b80fea"
+    },
+    {
+      "path": "src/mjlab_microduck/robot/xgoduck/robot_walk.xml",
+      "sha256": "73dcd2fe63c3662288c74cfa92408dcad972fe736db39a0bae82379516066670"
+    },
+    {
+      "path": "src/mjlab_microduck/robot/xgoduck/scene.xml",
+      "sha256": "6384fe9a60e87a1c470bd383117220939a63a372097dfec59898b39ec3c987ba"
+    },
+    {
+      "path": "src/mjlab_microduck/robot/xgoduck/scene_walk.xml",
+      "sha256": "deb9519100b524b8c7a06741c78662f6cfefad91eb284d123143e583e653d0da"
+    },
+    {
+      "path": "src/mjlab_microduck/robot/xgoduck/urdf/XGODUCK.csv",
+      "sha256": "05f75e8c766cd006918ad2837504ec199b96a6ef13760374ca368acffc3f7b7f"
+    },
+    {
+      "path": "src/mjlab_microduck/robot/xgoduck/urdf/XGODUCK.urdf",
+      "sha256": "ddae6b289c683a8265ac8648c9bb5889e8ebf9bae587d500cf3e396cb11c7abb"
+    },
+    {
+      "path": "src/mjlab_microduck/robot/xgoduck/view.py",
+      "sha256": "48c48e2a298d1110d9136e3bf58ab7061a4d60f039f5fd18b226e406587521d9"
+    },
+    {
+      "path": "src/mjlab_microduck/robot/xgoduck/view_collisions.py",
+      "sha256": "9f9d601c9baded0ed008f601080925122937c48769b08da4f65f82e1d7be0947"
+    },
+    {
+      "path": "src/mjlab_microduck/robot/xgoduck_constants.py",
+      "sha256": "be1564ff807558a2e7540e3bd78846a5c482de63cdae885041bbaa9da69a7ba5"
+    },
+    {
+      "path": "vendor/bam/LICENSE",
+      "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd"
+    },
+    {
+      "path": "vendor/bam/bam/__init__.py",
+      "sha256": "def3c0cf098a3aa9003a8c746efc7ad0305525df42ba6f380589f64ae415ac09"
+    },
+    {
+      "path": "vendor/bam/bam/actuator.py",
+      "sha256": "6927d7b2341cbaca0e5d872fae4ddce6200056885310d9ee5acaba1f34e09c13"
+    },
+    {
+      "path": "vendor/bam/bam/actuators.py",
+      "sha256": "adb8b5c87b880d2c9931a8d70981f20526b1cc0a54d31d074460e29cf27a9db2"
+    },
+    {
+      "path": "vendor/bam/bam/drive_backdrive.py",
+      "sha256": "f66c0e5c70f5015984dcfbd3dea4d06c7ec31230b775cf5eeb2b8cb7c816108d"
+    },
+    {
+      "path": "vendor/bam/bam/dynamixel/__init__.py",
+      "sha256": "def3c0cf098a3aa9003a8c746efc7ad0305525df42ba6f380589f64ae415ac09"
+    },
+    {
+      "path": "vendor/bam/bam/dynamixel/actuator.py",
+      "sha256": "8d3ed39d68758981204901dd18dcce11dcb107b842067e036d2b8ac7b1411cec"
+    },
+    {
+      "path": "vendor/bam/bam/dynamixel/all_record.py",
+      "sha256": "0f0f9a2d2c6631904d9d750c2fa85774ec53e838158b2733b03a61bb12a9c79d"
+    },
+    {
+      "path": "vendor/bam/bam/dynamixel/dynamixel.py",
+      "sha256": "31cf03013d57829d8e6248aabdb1b856ddaac4c1e30b4b08d956a5bbba25cdee"
+    },
+    {
+      "path": "vendor/bam/bam/dynamixel/record.py",
+      "sha256": "ec9a8955202336ef4400f4c3a5b0b9077b0347bf5f7e882ffb45f640558bca01"
+    },
+    {
+      "path": "vendor/bam/bam/erob/__init__.py",
+      "sha256": "def3c0cf098a3aa9003a8c746efc7ad0305525df42ba6f380589f64ae415ac09"
+    },
+    {
+      "path": "vendor/bam/bam/erob/actuator.py",
+      "sha256": "6520cbff0364f14618f7b80f9db30a7c452208eda7734d37f285bd6cec80e8ba"
+    },
+    {
+      "path": "vendor/bam/bam/erob/all_record.py",
+      "sha256": "263a4aa64596e6775b85beb061ca710a7b992e398439f0a64c7091524bc97761"
+    },
+    {
+      "path": "vendor/bam/bam/erob/etherban.py",
+      "sha256": "697e105c1f3d93c75fbe646bff9275cdd04cc6c1d6a2aae0498961f6c915349f"
+    },
+    {
+      "path": "vendor/bam/bam/erob/record.py",
+      "sha256": "17c94567c611256d318a5a0358a29378512c75cc22f79f3bf49422eb72b6ffd5"
+    },
+    {
+      "path": "vendor/bam/bam/erob/static.py",
+      "sha256": "fc15d572ce272ceaf0eb2fbb3bf5195b8145b26a1aef36d11283843a85443c7b"
+    },
+    {
+      "path": "vendor/bam/bam/feetech/__init__.py",
+      "sha256": "def3c0cf098a3aa9003a8c746efc7ad0305525df42ba6f380589f64ae415ac09"
+    },
+    {
+      "path": "vendor/bam/bam/feetech/actuator.py",
+      "sha256": "ae099a23194795baee76842995b39814c950f76a7dbd0cc1f56f0301eb773805"
+    },
+    {
+      "path": "vendor/bam/bam/feetech/all_record.py",
+      "sha256": "5c97584f8913f59f5eb2cffd2365cf10eace392cfe61f547a89ba17ef09a9393"
+    },
+    {
+      "path": "vendor/bam/bam/feetech/record.py",
+      "sha256": "b3b25c1dd7fb3c6f1e903de368e70ccd3c3ff6ce6b1370e389cd1430f362330f"
+    },
+    {
+      "path": "vendor/bam/bam/fit.py",
+      "sha256": "28161006b65e71615a5b5faeb98c866b67c1553fd818425d1378db7d68d554bb"
+    },
+    {
+      "path": "vendor/bam/bam/jitter.py",
+      "sha256": "ff39f8dbc7e1d266084ba80f1964c9e87d06726e9ca38e24a9f3842ae286d2c8"
+    },
+    {
+      "path": "vendor/bam/bam/logs.py",
+      "sha256": "45a46a4f186b41c387690bfb6aa64adaa8dab0af3fc24ea2e9fb46d96d71a54e"
+    },
+    {
+      "path": "vendor/bam/bam/mae.py",
+      "sha256": "bfbccb38756a24cac934b80099aa20047bef5c585cc8d9927097d603600e077e"
+    },
+    {
+      "path": "vendor/bam/bam/message.py",
+      "sha256": "91149c92e0c229de7dc96fc5f6c8b7135934c1e16ea01cc582685db5a83cfd5c"
+    },
+    {
+      "path": "vendor/bam/bam/mjlab.py",
+      "sha256": "af3de252939ca868712423979c2ab52e198d382d7aca613b5b33c77d74baa440"
+    },
+    {
+      "path": "vendor/bam/bam/model.py",
+      "sha256": "fed54ebf5ccdb1e15d1094e1a1b426a93c29a7dad5944e6861ff0cd023d900ed"
+    },
+    {
+      "path": "vendor/bam/bam/mujoco.py",
+      "sha256": "62256992ef0d7a4d07e61aff19ff1b930b7e17deb522519f21687764ca02894d"
+    },
+    {
+      "path": "vendor/bam/bam/parameter.py",
+      "sha256": "6bd9f2c37d4ed82131925bbb1e885948a4dcdfc71542ec35362bc35ccd55bf7f"
+    },
+    {
+      "path": "vendor/bam/bam/plot.py",
+      "sha256": "d877480a60934420594ce5c6fe340f9c263b2b9957c719715461d576622e20ef"
+    },
+    {
+      "path": "vendor/bam/bam/process.py",
+      "sha256": "d4da0ab04627204749fa614357b7dcfc5733d5b9838b09d7c3366ae6b84f7362"
+    },
+    {
+      "path": "vendor/bam/bam/simulate.py",
+      "sha256": "6c252d4cdabb84595f22d36997fefd60b1c18b64813aeb65a62769cc91b9078d"
+    },
+    {
+      "path": "vendor/bam/bam/testbench.py",
+      "sha256": "bd1c211ab4c9e428112d6a0e96664d5a122c90a78f8c00930c0f672a2114928f"
+    },
+    {
+      "path": "vendor/bam/bam/testbench_mujoco.py",
+      "sha256": "68ba1b5ffcd9e5f3c53730dd7333c95c483f14afe62028d9b4a99b1436c7944e"
+    },
+    {
+      "path": "vendor/bam/bam/to_mujoco.py",
+      "sha256": "7a5056d32db04f50816c4a277fe8b00337d59123f7f2ba9393e9b27371c423d5"
+    },
+    {
+      "path": "vendor/bam/bam/trajectory.py",
+      "sha256": "a23bfba8c543f5d1672bbe0106a4bf5aeb71097a5ca88785c4d434bb2a572193"
+    },
+    {
+      "path": "vendor/bam/bam/unitree/__init__.py",
+      "sha256": "def3c0cf098a3aa9003a8c746efc7ad0305525df42ba6f380589f64ae415ac09"
+    },
+    {
+      "path": "vendor/bam/bam/unitree/actuator.py",
+      "sha256": "8986329ca7cf34561235e07a0da83c94c5f903e472407c0c9da9518324124aa2"
+    }
+  ]
+}
