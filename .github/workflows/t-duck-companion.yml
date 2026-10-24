@@ -71,13 +71,12 @@ jobs:
           target: default
           disable-animations: true
           script: |
-            cd apps/t-duck-companion
-            gradle --no-daemon connectedDebugAndroidTest
+            gradle -p apps/t-duck-companion --no-daemon connectedDebugAndroidTest
             adb shell am force-stop com.tduck.companion
             adb shell am start -n com.tduck.companion/.MainActivity
             sleep 2
             adb shell screencap -p /sdcard/companion-home.png
-            adb pull /sdcard/companion-home.png app/build/companion-home.png
+            adb pull /sdcard/companion-home.png apps/t-duck-companion/app/build/companion-home.png
       - uses: actions/upload-artifact@v4
         if: always()
         with:
