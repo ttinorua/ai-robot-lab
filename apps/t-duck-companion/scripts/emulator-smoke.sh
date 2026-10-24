@@ -5,7 +5,7 @@ if gradle -p apps/t-duck-companion --no-daemon connectedDebugAndroidTest; then
 else
   test_result=$?
 fi
-if adb shell pm path com.tduck.companion | rg -q '^package:'; then
+if adb shell pm path com.tduck.companion | grep -q '^package:'; then
   adb shell am force-stop com.tduck.companion
   adb shell am start -n com.tduck.companion/.MainActivity
   sleep 2
