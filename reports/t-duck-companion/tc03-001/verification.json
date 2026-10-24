@@ -64,5 +64,11 @@
     "Runtime asset/weight provenance and source-use review",
     "Approved owner cloud-token custody and stable APK signing identity/backup",
     "Actual public-endpoint Android roundtrip and physical-phone acceptance"
-  ]
+  ],
+  "robotics_readonly_closing_review": {
+    "pinned": "629abcd15862822c796cca6a91170fca6ba1d492",
+    "observed_head": "61eb2418d60c9166cd0deb87bc430285c4413895",
+    "evaluator_blob": "d34bc82bebdce176e5195ce398625db0434ed8b3",
+    "identical": true
+  }
 }

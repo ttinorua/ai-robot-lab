@@ -1,6 +1,6 @@
 # TC-03: on-demand online MuJoCo — staging candidate, not deployed
 
-Tracking: [#5](https://github.com/ttinorua/ai-robot-lab/issues/5), signing [#4](https://github.com/ttinorua/ai-robot-lab/issues/4). This TC-03 is cloud connectivity; the original roadmap's BLE milestone remains simulated/unvalidated. Companion owns this adapter/packaging; robotics branch stays unchanged at `629abcd15862822c796cca6a91170fca6ba1d492`.
+Tracking: [#5](https://github.com/ttinorua/ai-robot-lab/issues/5), signing [#4](https://github.com/ttinorua/ai-robot-lab/issues/4). This TC-03 is cloud connectivity; the original roadmap's BLE milestone remains simulated/unvalidated. Companion owns this adapter/packaging; robotics development is untouched by this work; the adapter stays pinned to `629abcd15862822c796cca6a91170fca6ba1d492`.
 
 **Current status: no cloud endpoint or physical-phone round trip has been verified.** Local MuJoCo tests and Android emulator tests are separate evidence. Do not advertise TC-03 as complete or distribute a cloud-ready APK on that basis. The app cannot create/start a cloud service that has not been provisioned. Once approved and deployed, an HTTPS discovery request can wake a sleeping service; it cannot bypass provider suspension, exhausted quota or a failed build.
 
@@ -57,3 +57,7 @@ Pinned code's Apache-2.0 notice is not treated as proof for every inherited mesh
 6. Save timestamped app/server/UI evidence and measured CPU/RSS/cold-start latency, then offer the approved signed APK. Until these pass, `android_to_public_mujoco_verified=false` and `physical_phone_verified=false`.
 
 If hosting remains blocked, the existing local TLS bridge and offline demo still work. A browser-local physics approach could remove a server dependency but requires a separate MuJoCo-WASM/ONNX/BAM port and asset licensing work; it is not equivalent to the existing static simulation playback viewer and has not been implemented/claimed here.
+
+## Closing read-only robotics coordination check
+
+The robotics branch independently advanced to `61eb2418d60c9166cd0deb87bc430285c4413895` with robustness benchmarks. GitHub readback compared `t_duck_eval.py` at that head and the adapter's pinned `629abcd`: identical content and blob `d34bc82bebdce176e5195ce398625db0434ed8b3`. Its handover explicitly preserves the companion lock and requires no protocol/APK change for that experiment. This is a read-only compatibility check, not an independent rerun of the robotics benchmark. No pin, evaluator or robotics branch was changed by Companion.
