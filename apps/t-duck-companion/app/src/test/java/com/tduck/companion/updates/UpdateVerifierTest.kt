@@ -65,4 +65,20 @@ class UpdateVerifierTest {
         session.advance()
         assertEquals(UpdatePhase.IDLE, session.phase)
     }
+    @Test fun runtimeFallAndDisconnectCannotPassHealthCheck() {
+        assertTrue(UpdateSafety.canContinue(true, true, "rest", "Ready", 0, 82))
+        assertFalse(UpdateSafety.canContinue(true, true, "rest", "Fallen", 1, 82))
+        assertFalse(UpdateSafety.canContinue(false, true, "rest", "Ready", 0, 82))
+        assertFalse(UpdateSafety.canContinue(true, false, "rest", "Ready", 0, 82))
+        assertFalse(UpdateSafety.canContinue(true, true, "forward", "Ready", 0, 82))
+        assertFalse(UpdateSafety.canContinue(true, true, "rest", "Ready", 0, 39))
+    }
+    @Test fun releaseGateBlocksRepeatedVersionAndDowngrade() {
+        assertTrue(UpdateSafety.isUpgrade("0.1.0-demo", "0.1.1-demo"))
+        assertFalse(UpdateSafety.isUpgrade("0.1.1-demo", "0.1.1-demo"))
+        assertFalse(UpdateSafety.isUpgrade("0.2.0-demo", "0.1.1-demo"))
+        assertFalse(UpdateSafety.isUpgrade("unknown", "0.1.1-demo"))
+        assertFalse(UpdateSafety.isUpgrade("0.1.0-demo", "unknown"))
+        assertFalse(UpdateSafety.isUpgrade("0.1.0-demo", "0.1.0-experimental"))
+    }
 }

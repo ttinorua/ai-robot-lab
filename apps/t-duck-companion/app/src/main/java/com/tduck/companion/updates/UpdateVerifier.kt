@@ -40,6 +40,25 @@ data class UpdateManifest(
 
 data class UpdateDecision(val allowed: Boolean, val reason: String)
 
+object UpdateSafety {
+    fun canContinue(connected: Boolean, builtInDemo: Boolean, posture: String, status: String,
+                    warningCount: Int, batteryPercent: Int): Boolean =
+        connected && builtInDemo && posture == "rest" && status.equals("ready", true) &&
+            warningCount == 0 && batteryPercent in 40..100
+
+    /** v0.1 numerical release gate. Same core version and unknown formats fail closed. */
+    fun isUpgrade(current: String, candidate: String): Boolean {
+        fun core(value: String): List<Long>? {
+            val match = Regex("^(\\d+)\\.(\\d+)\\.(\\d+)(?:-[A-Za-z0-9.-]+)?$").matchEntire(value) ?: return null
+            return match.groupValues.drop(1).map { it.toLongOrNull() ?: return null }
+        }
+        val old = core(current) ?: return false
+        val next = core(candidate) ?: return false
+        for (i in old.indices) if (next[i] != old[i]) return next[i] > old[i]
+        return false
+    }
+}
+
 object UpdateVerifier {
     fun sha256(bytes: ByteArray): String = MessageDigest.getInstance("SHA-256")
         .digest(bytes).joinToString("") { "%02x".format(it) }

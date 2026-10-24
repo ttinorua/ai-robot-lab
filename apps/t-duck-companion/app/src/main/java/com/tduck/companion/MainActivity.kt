@@ -19,6 +19,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
@@ -60,7 +61,7 @@ private fun CompanionApp(model: CompanionModel) {
     Scaffold(containerColor = Navy, bottomBar = {
         NavigationBar(containerColor = Surface) {
             sections.forEachIndexed { i, label ->
-                NavigationBarItem(selected = selected == i, onClick = { selected = i },
+                NavigationBarItem(selected = selected == i, onClick = { selected = i }, modifier = Modifier.testTag("tab-$label"),
                     icon = { Text(listOf("⌂", "↔", "···", "◉", "⚙")[i], fontSize = 23.sp) },
                     label = { Text(label, fontSize = 11.sp) })
             }
@@ -104,7 +105,7 @@ private fun Home(s: RobotUi, model: CompanionModel, control: () -> Unit, setting
     Title("Hello, friend.", "A small duck. A world to explore.")
     Card(colors = CardDefaults.cardColors(containerColor = Surface), shape = RoundedCornerShape(24.dp)) {
         Column(Modifier.fillMaxWidth().padding(20.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-            DuckPortrait(s.activity)
+            DuckPortrait()
             Text(s.activity.replaceFirstChar { it.uppercase() }, fontSize = 25.sp, fontWeight = FontWeight.Bold)
             Text(s.connection, color = Teal, fontSize = 13.sp)
             Spacer(Modifier.height(15.dp))
@@ -125,7 +126,7 @@ private fun Home(s: RobotUi, model: CompanionModel, control: () -> Unit, setting
 }
 
 @Composable
-private fun DuckPortrait(activity: String) {
+private fun DuckPortrait() {
     Canvas(Modifier.size(210.dp, 160.dp)) {
         val w = size.width; val h = size.height
         drawOval(Color(0xFF0F1D2E), Offset(w * .13f, h * .87f), Size(w * .74f, h * .1f))
@@ -164,8 +165,8 @@ private fun Controls(s: RobotUi, model: CompanionModel) {
 private fun CommandRow(s: RobotUi, model: CompanionModel, commands: List<Pair<String, String>>) {
     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
         commands.forEach { (command, label) ->
-            Button(onClick = { model.command(command) }, enabled = s.connected && command in s.capabilities,
-                modifier = Modifier.weight(1f).heightIn(min = 54.dp), shape = RoundedCornerShape(14.dp)) { Text(label) }
+            Button(onClick = { model.command(command) }, enabled = s.connected && CommandPolicy.allowed(command, s.capabilities, s.status.equals("Fallen", ignoreCase = true)),
+                modifier = Modifier.weight(1f).heightIn(min = 54.dp).testTag("command-$command"), shape = RoundedCornerShape(14.dp)) { Text(label) }
         }
     }
 }
@@ -184,9 +185,9 @@ private fun Talk(s: RobotUi, model: CompanionModel) {
             modifier = Modifier.fillMaxWidth()) { Text(message, Modifier.padding(16.dp), lineHeight = 23.sp) }
     }
     Section("Talk to T-Duck") {
-        OutlinedTextField(value = text, onValueChange = { text = it }, label = { Text("Your message") }, modifier = Modifier.fillMaxWidth())
+        OutlinedTextField(value = text, onValueChange = { text = it }, label = { Text("Your message") }, modifier = Modifier.fillMaxWidth().testTag("chat-input"))
         Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-            Button(onClick = { model.chat(text); text = "" }, enabled = text.isNotBlank()) { Text("Send") }
+            Button(onClick = { model.chat(text); text = "" }, enabled = text.isNotBlank(), modifier = Modifier.testTag("chat-send")) { Text("Send") }
             OutlinedButton(onClick = {
                 try {
                     voice.launch(Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
@@ -203,21 +204,27 @@ private fun Talk(s: RobotUi, model: CompanionModel) {
 @Composable
 private fun Sensors(s: RobotUi) {
     Title("A sense of the world.", if (s.simulated) "Illustrative readings from your demo duck." else "Readings reported by your robot.")
-    Section("Balance & orientation") {
-        Reading("Roll", "%.1f°".format(s.roll)); Reading("Pitch", "%.1f°".format(s.pitch)); Reading("Yaw", "%.1f°".format(s.yaw))
-        Reading("Left foot", if (s.leftContact) "In contact" else "Raised")
-        Reading("Right foot", if (s.rightContact) "In contact" else "Raised")
+    if ("imu" in s.availableSensors || "feet" in s.availableSensors) Section("Balance & orientation") {
+        if ("imu" in s.availableSensors) {
+            Reading("Roll", "%.1f°".format(s.roll)); Reading("Pitch", "%.1f°".format(s.pitch)); Reading("Yaw", "%.1f°".format(s.yaw))
+        }
+        if ("feet" in s.availableSensors) {
+            Reading("Left foot", if (s.leftContact) "In contact" else "Raised")
+            Reading("Right foot", if (s.rightContact) "In contact" else "Raised")
+        }
     }
-    Section("Nearby & environment") {
-        Reading("Obstacle distance", "%.0f cm".format(s.distance))
-        Reading("Temperature", "%.1f °C".format(s.temperature))
-        Reading("Camera", if (s.camera) "Available" else "Not available")
-        Text("Pressure, touch and motor-position streams are not available in this build.", color = Muted, fontSize = 12.sp)
+    if (s.availableSensors.any { it in setOf("distance", "temperature", "camera") }) Section("Nearby & environment") {
+        if ("distance" in s.availableSensors) Reading("Obstacle distance", "%.0f cm".format(s.distance))
+        if ("temperature" in s.availableSensors) Reading("Temperature", "%.1f °C".format(s.temperature))
+        if ("camera" in s.availableSensors) Reading("Camera", if (s.camera) "Available" else "Not available")
     }
-    Section("Power & motors") {
-        Reading("Charge", "${s.battery}%"); Reading("Battery voltage", "%.2f V".format(s.voltage))
-        Reading("Motor temperature", "%.1f °C".format(s.motorTemp))
+    if ("battery" in s.availableSensors || "motors" in s.availableSensors) Section("Power & motors") {
+        if ("battery" in s.availableSensors) {
+            Reading("Charge", "${s.battery}%"); Reading("Battery voltage", "%.2f V".format(s.voltage))
+        }
+        if ("motors" in s.availableSensors) Reading("Motor temperature", "%.1f °C".format(s.motorTemp))
     }
+    Info("Only readings supplied by the connected device are shown. Pressure, touch and motor-position streams are not available in this build.")
 }
 
 @Composable
@@ -267,10 +274,10 @@ private fun Settings(s: RobotUi, model: CompanionModel) {
         if (channel == "experimental") Text("Experimental channel: explicitly selected; may be unstable.", color = Gold)
         Text("Installation requires a verified signature, compatible device, sufficient charge, safe posture and owner approval.", fontSize = 12.sp, color = Muted)
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Checkbox(checked = approved, onCheckedChange = { approved = it })
+            Checkbox(checked = approved, onCheckedChange = { approved = it }, modifier = Modifier.testTag("ota-approval"))
             Text("I approve this simulated installation", fontSize = 13.sp)
         }
-        Button(onClick = { model.installUpdate(approved, channel); approved = false }, enabled = approved && s.connected && s.simulated && s.updateProgress !in 1..99) { Text("Verify & simulate update") }
+        Button(onClick = { model.installUpdate(approved, channel); approved = false }, enabled = approved && s.connected && s.simulated && s.updateProgress !in 1..99, modifier = Modifier.testTag("ota-install")) { Text("Verify & simulate update") }
         if (s.updateProgress in 1..99) LinearProgressIndicator(progress = { s.updateProgress / 100f }, modifier = Modifier.fillMaxWidth())
         if (s.updateStatus.isNotBlank()) Text(s.updateStatus, color = Teal)
         Text("App updates use standard Android installation. Hardware OTA and rollback are not yet validated.", color = Muted, fontSize = 12.sp)

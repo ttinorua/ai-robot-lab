@@ -15,6 +15,7 @@ data class RobotUi(
  val roll: Double = 0.0, val pitch: Double = 0.0, val yaw: Double = 0.0, val leftContact: Boolean = true,
  val rightContact: Boolean = true, val distance: Double = 120.0, val temperature: Double = 22.0,
  val motorTemp: Double = 31.0, val camera: Boolean = false, val capabilities: Set<String> = CommandPolicy.commands,
+ val availableSensors: Set<String> = setOf("imu", "feet", "distance", "temperature", "motors", "battery", "camera"),
  val messages: List<String> = listOf("T-Duck: Hello! I'm your simulated companion. Let's explore safely."),
  val notice: String = "Demo mode · no physical robot connected", val updateProgress: Int = 0,
  val updateStatus: String = "Stable demo update 0.1.1 available", val onboardingStep: Int = 0, val voiceEnabled: Boolean = true
@@ -27,19 +28,21 @@ class CompanionModel(application: Application) : AndroidViewModel(application) {
  private var motion: Job? = null
  private var updating = false
  private val provisioner = SimulatedProvisioner()
+ private val assistant: AssistantProvider = LocalDemoAssistant()
  private val prefs = application.getSharedPreferences("companion", 0)
  init {
   mutable.update { it.copy(voiceEnabled = prefs.getBoolean("voice", true), notice = if (prefs.contains("trusted_demo")) "Trusted demo remembered · simulated connection" else it.notice) }
   viewModelScope.launch { var tick = 0; while (true) { delay(500); tick++; if (transport == null && state.value.connected) mutable.update { it.copy(roll = sin(tick / 3.0) * 1.2, pitch = sin(tick / 4.0) * 0.8) } } }
  }
- fun connectDemo() { poll?.cancel(); motion?.cancel(); transport = null; mutable.value = RobotUi(voiceEnabled = state.value.voiceEnabled) }
- fun disconnect() { stop(); poll?.cancel(); transport = null; mutable.update { it.copy(connected = false, connection = "Disconnected", capabilities = emptySet(), mode = "rest", activity = "Offline", notice = "Disconnected. Bridge watchdog must stop motion locally.") } }
+ private fun stopPreviousBridge() { val old = transport; if (old != null) viewModelScope.launch { runCatching { old.send("stop") } } }
+ fun connectDemo() { if(updating) return; stopPreviousBridge(); poll?.cancel(); motion?.cancel(); transport = null; mutable.value = RobotUi(voiceEnabled = state.value.voiceEnabled) }
+ fun disconnect() { stopPreviousBridge(); motion?.cancel(); poll?.cancel(); transport = null; mutable.update { it.copy(connected = false, connection = "Disconnected", capabilities = emptySet(), mode = "rest", activity = "Offline", notice = "Disconnected. Bridge watchdog must stop motion locally.") } }
  fun stop() { command("stop") }
  fun command(command: String) {
   val snapshot = state.value
   if (!snapshot.connected) return
   if (updating && command != "stop") { mutable.update { it.copy(notice = "Movement locked during simulated installation") }; return }
-  if (!CommandPolicy.allowed(command, snapshot.capabilities, snapshot.status == "Fallen")) { mutable.update { it.copy(notice = "Command unavailable in this state") }; return }
+  if (!CommandPolicy.allowed(command, snapshot.capabilities, snapshot.status.equals("fallen", true))) { mutable.update { it.copy(notice = "Command unavailable in this state") }; return }
   motion?.cancel()
   val target = transport
   if (target == null) {
@@ -47,27 +50,27 @@ class CompanionModel(application: Application) : AndroidViewModel(application) {
    if (command in setOf("forward", "left", "right")) motion = viewModelScope.launch { delay(800); applyCommand("stop") }
   } else {
    motion = viewModelScope.launch {
-    try { val ack = withTimeout(2000) { target.send(command) }; check(ack.accepted) { "Command rejected" }; mutable.update { it.copy(notice = "Acknowledged: $command") } }
+    try { val ack = withTimeout(1000) { target.send(command) }; check(ack.accepted) { "Command rejected" }; mutable.update { it.copy(notice = "Acknowledged: $command") } }
     catch (e: Exception) { if (e is CancellationException) throw e; mutable.update { it.copy(notice = "No acknowledgement. Safety stop requested; bridge watchdog required.", connected = false, connection = "Connection lost", mode = "rest") }; runCatching { withTimeout(1800) { target.send("stop") } } }
    }
   }
  }
  private fun applyCommand(command: String) {
-  mutable.update { it.copy(mode = if (command == "stop" || command == "recover") "rest" else command,
+  mutable.update {
+   val fallen = it.status.equals("fallen", true) && command != "recover"
+   it.copy(mode = if (command == "stop" || command == "recover") "rest" else command,
    activity = when(command) { "stand" -> "Standing"; "rest" -> "Resting"; "forward" -> "Walking forward"; "left" -> "Turning left"; "right" -> "Turning right"; "recover" -> "Recovered to rest"; else -> "Stopped" },
-   status = "Ready", warnings = emptyList(), notice = "Demo acknowledgement · $command") }
+   status = if (fallen) "Fallen" else "Ready", warnings = if (fallen) it.warnings else emptyList(), notice = "Demo acknowledgement · $command") }
  }
  fun fall() { if (transport == null) { motion?.cancel(); mutable.update { it.copy(status = "Fallen", mode = "rest", activity = "Waiting for recovery", warnings = listOf("Simulated fall detected. Movement locked.")) } } }
  fun chat(text: String) {
   if (text.isBlank()) return
-  val proposed = CommandPolicy.interpret(text)
-  val response = when { proposed != null -> "I understood '$proposed'. Use the matching Control button to confirm. I never move from chat alone."
-   "battery" in text.lowercase() -> "My ${if(state.value.simulated) "simulated " else ""}battery is ${state.value.battery}%."
-   else -> "Quack! I'm a local simulated assistant. Try asking about my battery or saying 'walk forward'." }
+  val response = assistant.reply(text.take(500), state.value.battery).text
   mutable.update { it.copy(messages = (it.messages + listOf("You: ${text.take(500)}", "T-Duck: $response")).takeLast(100)) }
  }
  fun setVoiceEnabled(value: Boolean) { prefs.edit().putBoolean("voice", value).apply(); mutable.update { it.copy(voiceEnabled = value) } }
  fun provision(code: String, ssid: String, password: String) {
+  if(updating) return
   viewModelScope.launch { try {
    mutable.update { it.copy(onboardingStep = 1, notice = "Discovering simulated BLE device…") }
    provisioner.discover()
@@ -78,39 +81,83 @@ class CompanionModel(application: Application) : AndroidViewModel(application) {
    connectDemo(); mutable.update { it.copy(onboardingStep = 4, notice = "Demo setup complete. Trusted simulated identity saved; no real BLE pairing performed.") }
   } catch(e: Exception) { mutable.update { it.copy(onboardingStep = 0, notice = e.message ?: "Demo setup failed") } } }
  }
+ private fun applyTelemetry(t: org.json.JSONObject, capabilities: Set<String>) {
+  val sensors = buildSet {
+   if (!t.isNull("roll_deg") && !t.isNull("pitch_deg") && !t.isNull("yaw_deg")) add("imu")
+   if (!t.isNull("left_contact") && !t.isNull("right_contact")) add("feet")
+   if (!t.isNull("distance_cm")) add("distance")
+   if (!t.isNull("temperature_c")) add("temperature")
+   if (!t.isNull("motor_temperature_c")) add("motors")
+   if (!t.isNull("battery_voltage")) add("battery")
+   if (!t.isNull("camera_available")) add("camera")
+  }
+  mutable.update { it.copy(connected = true, connection = "Simulation bridge connected", capabilities = capabilities, simulated = true,
+   battery = t.getInt("battery_percent"), voltage = t.optDouble("battery_voltage", 0.0), activity = t.getString("activity"), mode = t.getString("movement_mode"), status = t.getString("status"), version = t.getString("software_version"),
+   roll = t.optDouble("roll_deg", 0.0), pitch = t.optDouble("pitch_deg", 0.0), yaw = t.optDouble("yaw_deg", 0.0), leftContact = t.optBoolean("left_contact"), rightContact = t.optBoolean("right_contact"), distance = t.optDouble("distance_cm", 0.0), temperature = t.optDouble("temperature_c", 0.0), motorTemp = t.optDouble("motor_temperature_c", 0.0), camera = t.optBoolean("camera_available"), availableSensors = sensors,
+   warnings = t.getJSONArray("warnings").let { a -> (0 until a.length()).map(a::getString) }, notice = "Authenticated HTTPS · simulated bridge") }
+ }
  fun connectLocal(url: String, token: String) {
-  stop(); poll?.cancel()
+  if(updating) return
+  stopPreviousBridge(); motion?.cancel(); poll?.cancel(); transport = null
   poll = viewModelScope.launch {
-   mutable.update { it.copy(connected = false, connection = "Connecting…") }
-   try {
-    val client = HttpsRobotTransport(url, token)
-    val capabilities = client.capabilities()
-    transport = client
-    mutable.update { it.copy(capabilities = capabilities, connected = true, connection = "Simulation bridge connected") }
-    while (isActive) {
-     val t = client.telemetry()
-     check(t.getBoolean("simulated"))
-     mutable.update { it.copy(connected = true, connection = "Simulation bridge connected", simulated = true,
-      battery = t.getInt("battery_percent"), voltage = t.getDouble("battery_voltage"), activity = t.getString("activity"), mode = t.getString("movement_mode"), status = t.getString("status"), version = t.getString("software_version"),
-      roll = t.getDouble("roll_deg"), pitch = t.getDouble("pitch_deg"), yaw = t.getDouble("yaw_deg"), leftContact = t.getBoolean("left_contact"), rightContact = t.getBoolean("right_contact"), distance = t.getDouble("distance_cm"), temperature = t.getDouble("temperature_c"), motorTemp = t.getDouble("motor_temperature_c"), camera = t.getBoolean("camera_available"),
-      warnings = t.getJSONArray("warnings").let { a -> (0 until a.length()).map(a::getString) }, notice = "Authenticated HTTPS · simulated bridge") }
-     delay(500)
+   var client: HttpsRobotTransport? = null
+   var retries = 0
+   while (isActive && retries < 4) {
+    mutable.update { it.copy(connected = false, capabilities = emptySet(), connection = if(retries == 0) "Connecting…" else "Reconnecting ($retries/3)…") }
+    try {
+     val activeClient = HttpsRobotTransport(url, token); client = activeClient
+     val capabilities = activeClient.capabilities()
+     val first = activeClient.telemetry()
+     // Identity/protocol validation occurs in transport. Never enable commands before telemetry arrives.
+     transport = activeClient
+     applyTelemetry(first, capabilities)
+     retries = 0
+     while (isActive) { delay(500); applyTelemetry(activeClient.telemetry(), capabilities) }
+    } catch(e: Exception) {
+     if(e is CancellationException) throw e
+     transport = null; motion?.cancel()
+     mutable.update { it.copy(connected = false, capabilities = emptySet(), connection = "Bridge unavailable", notice = "Link lost. Movement lease expires on bridge; retrying without resuming motion.", mode = "rest") }
+     val failedClient = client
+     if (failedClient != null) runCatching { failedClient.send("stop") }
+     retries++
+     if(retries < 4) delay(1000L * retries)
     }
-   } catch(e: Exception) { if(e is CancellationException) throw e; mutable.update { it.copy(connected = false, connection = "Bridge unavailable", notice = "Connection failed. Check HTTPS certificate, token and bridge. Reconnect in Settings.", mode = "rest") } }
+   }
+   mutable.update { it.copy(notice = "Reconnect paused. Check HTTPS certificate, token and bridge, then connect again.") }
   }
  }
  fun installUpdate(ownerApproved: Boolean, channel: String) {
   if (updating) return
   val s = state.value
-  if (transport != null || !s.connected) { mutable.update { it.copy(updateStatus = "Update demo requires the built-in simulated device") }; return }
+  fun safeToContinue(): Boolean {
+   val current = state.value
+   return UpdateSafety.canContinue(current.connected, transport == null, current.mode,
+    current.status, current.warnings.size, current.battery)
+  }
+  if (!UpdateSafety.isUpgrade(s.version, DemoUpdate.manifest.version)) {
+   mutable.update { it.copy(updateStatus = "No newer compatible demo release available") }; return
+  }
+  if (!safeToContinue()) {
+   mutable.update { it.copy(updateStatus = "Update requires a connected, healthy built-in demo at rest with at least 40% battery") }; return
+  }
   val decision = DemoUpdate.verifyAndApprove(batteryPercent = s.battery, posture = s.mode, selectedChannel = if(channel == "experimental") UpdateChannel.EXPERIMENTAL else UpdateChannel.STABLE, ownerApproved = ownerApproved)
   if (!decision.allowed) { mutable.update { it.copy(updateStatus = decision.reason) }; return }
   updating = true
   viewModelScope.launch {
    try {
-    for (p in 0..100 step 20) { mutable.update { it.copy(updateProgress = p, updateStatus = "Simulated installation · $p%") }; delay(400) }
+    val session = SimulatedUpdateSession(s.version, DemoUpdate.manifest)
+    check(session.begin(decision))
+    var interrupted = false
+    while (session.phase == UpdatePhase.INSTALLING) {
+     delay(400)
+     if (!safeToContinue()) interrupted = true
+     session.advance()
+     mutable.update { it.copy(updateProgress = session.progress, updateStatus =
+      if (interrupted) "Demo update interrupted · preparing rollback" else "Simulated installation · ${session.progress}%") }
+    }
     mutable.update { it.copy(updateStatus = "Simulated health check…") }; delay(500)
-    mutable.update { it.copy(version = "0.1.1-demo", updateStatus = "Demo update complete · simulated health check passed") }
+    session.advance(healthCheckPasses = !interrupted && safeToContinue())
+    mutable.update { it.copy(version = session.installedVersion, updateStatus = if(session.phase == UpdatePhase.COMPLETE) "Demo update complete · simulated health check passed" else "Demo health check failed or connection interrupted · rolled back") }
    } finally { updating = false }
   }
  }

@@ -4,6 +4,8 @@ import kotlinx.coroutines.*
 import org.json.JSONObject
 import java.net.URL
 import java.util.UUID
+import java.util.Timer
+import java.util.TimerTask
 import javax.net.ssl.HttpsURLConnection
 
 data class Ack(val id: String, val accepted: Boolean, val command: String)
@@ -26,12 +28,43 @@ class SimulatedProvisioner : BleProvisioner, DeviceDiscovery {
         return discover().first() // Credentials are neither persisted nor transmitted.
     }
 }
+/** Every response remains bound to the authenticated capability identity for this connection. */
+internal class RobotProtocolSession {
+    private var deviceId: String? = null
+    private fun validateEnvelope(json: JSONObject): String {
+        check(json.getString("protocol_version").matches(Regex("1\\.[0-9]+"))) { "Unsupported protocol" }
+        check(json.getBoolean("simulated")) { "v0.1 only accepts simulation bridges; hardware validation pending" }
+        return json.getString("device_id").also { check(it.isNotBlank()) { "Missing device identity" } }
+    }
+    fun capabilities(json: JSONObject): Set<String> {
+        val identity = validateEnvelope(json)
+        val list = json.getJSONArray("commands")
+        val commands = (0 until list.length()).map { list.getString(it) }.toSet()
+        deviceId = identity
+        return commands.intersect(CommandPolicy.commands)
+    }
+    fun telemetry(json: JSONObject): JSONObject {
+        check(deviceId != null) { "Capabilities must be authenticated first" }
+        check(validateEnvelope(json) == deviceId) { "Bridge identity changed; reconnect required" }
+        return json
+    }
+}
 class HttpsRobotTransport(private val endpoint: String, private val token: String) : RobotTransport {
-    init { require(URL(endpoint).protocol == "https") { "An HTTPS bridge is required" }; require(token.isNotBlank()) { "A bridge token is required" } }
+    private val protocol = RobotProtocolSession()
+    companion object { private val deadlines = Timer("tduck-network-deadlines", true) }
+    init {
+        val url = URL(endpoint)
+        require(url.protocol == "https" && url.host.isNotBlank() && url.userInfo == null && url.query == null && url.ref == null) { "An HTTPS bridge endpoint without embedded credentials is required" }
+        require(token.isNotBlank()) { "A bridge token is required" }
+    }
     private suspend fun request(path: String, body: JSONObject? = null): JSONObject = withContext(Dispatchers.IO) {
         val connection = URL(endpoint.trimEnd('/') + "/v1/" + path).openConnection() as HttpsURLConnection
+        // A socket read timeout alone can be extended indefinitely by trickled data.
+        // Disconnect imposes an overall deadline including connection and response body.
+        val deadline = object : TimerTask() { override fun run() { connection.disconnect() } }
+        deadlines.schedule(deadline, 950)
         try {
-            connection.connectTimeout = 1500; connection.readTimeout = 1500
+            connection.connectTimeout = 800; connection.readTimeout = 800
             connection.instanceFollowRedirects = false
             connection.setRequestProperty("Authorization", "Bearer $token")
             if (body != null) { connection.requestMethod = "POST"; connection.doOutput = true; connection.setRequestProperty("Content-Type", "application/json"); connection.outputStream.use { it.write(body.toString().toByteArray()) } }
@@ -42,17 +75,13 @@ class HttpsRobotTransport(private val endpoint: String, private val token: Strin
             }
             check(data.size <= 65536) { "Bridge response too large" }
             JSONObject(String(data, Charsets.UTF_8))
-        } finally { connection.disconnect() }
+        } finally { deadline.cancel(); deadlines.purge(); connection.disconnect() }
     }
-    override suspend fun capabilities(): Set<String> {
-        val json = request("capabilities")
-        check(json.getString("protocol_version").substringBefore('.') == "1") { "Unsupported protocol" }
-        check(json.getBoolean("simulated")) { "v0.1 only accepts simulation bridges; hardware validation pending" }
-        val list = json.getJSONArray("commands")
-        return (0 until list.length()).map { list.getString(it) }.toSet()
-    }
-    override suspend fun telemetry() = request("telemetry")
+    override suspend fun capabilities(): Set<String> = protocol.capabilities(request("capabilities"))
+    override suspend fun telemetry() = protocol.telemetry(request("telemetry"))
     override suspend fun send(command: String, ttlMs: Int): Ack {
+        require(command in CommandPolicy.commands) { "Unsupported command" }
+        require(ttlMs in 100..1000) { "Movement lease must be 100..1000 ms" }
         val id = UUID.randomUUID().toString()
         val response = request("commands", JSONObject().put("id", id).put("command", command).put("ttl_ms", ttlMs))
         check(response.getString("id") == id && response.getString("command") == command) { "Acknowledgement mismatch" }
