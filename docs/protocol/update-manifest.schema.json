@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "T-Duck signed simulator release canonical payload v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "hardware", "protocol_major", "channel", "sha256", "release_notes", "rollback_supported", "component"],
+  "properties": {
+    "version": {"type": "string", "minLength": 1},
+    "hardware": {"type": "string", "minLength": 1},
+    "protocol_major": {"const": 1},
+    "channel": {"enum": ["stable", "experimental"]},
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "release_notes": {"type": "string", "minLength": 1},
+    "rollback_supported": {"type": "boolean"},
+    "component": {"enum": ["firmware", "policy", "skill", "configuration"]}
+  }
+}
