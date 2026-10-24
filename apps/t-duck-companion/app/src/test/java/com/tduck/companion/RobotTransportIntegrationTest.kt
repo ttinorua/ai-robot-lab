@@ -1,8 +1,5 @@
 package com.tduck.companion
 
-import com.sun.net.httpserver.HttpsConfigurator
-import com.sun.net.httpserver.HttpsServer
-import com.sun.net.httpserver.HttpExchange
 import kotlinx.coroutines.runBlocking
 import org.json.JSONArray
 import org.json.JSONObject
@@ -10,7 +7,10 @@ import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
-import java.net.InetSocketAddress
+import java.net.InetAddress
+import java.net.SocketException
+import javax.net.ssl.SSLServerSocket
+import javax.net.ssl.SSLSocket
 import java.security.KeyStore
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -22,7 +22,7 @@ import javax.net.ssl.TrustManagerFactory
 
 /** Real HTTPS sockets; fixture trust applies to this test class only, never production code. */
 class RobotTransportIntegrationTest {
-    private lateinit var server: HttpsServer
+    private lateinit var server: SSLServerSocket
     private lateinit var executor: ExecutorService
     private lateinit var originalFactory: SSLSocketFactory
     private lateinit var endpoint: String
@@ -52,37 +52,74 @@ class RobotTransportIntegrationTest {
         val testClientContext = SSLContext.getInstance("TLS")
         testClientContext.init(null, trust.trustManagers, null)
         HttpsURLConnection.setDefaultSSLSocketFactory(testClientContext.socketFactory)
-        server = HttpsServer.create(InetSocketAddress("127.0.0.1", 0), 0)
-        server.httpsConfigurator = HttpsConfigurator(serverContext)
+        server = serverContext.serverSocketFactory.createServerSocket(
+            0, 50, InetAddress.getByName("127.0.0.1")) as SSLServerSocket
         executor = Executors.newCachedThreadPool { runnable -> Thread(runnable, "tduck-test-https").apply { isDaemon = true } }
-        server.executor = executor
-        server.createContext("/v1/") { exchange ->
-            try { handle(exchange) }
-            catch (_: java.io.IOException) { exchange.close() }
-            catch (_: InterruptedException) { Thread.currentThread().interrupt(); exchange.close() }
+        executor.submit {
+            while (!server.isClosed) {
+                val socket = try { server.accept() as SSLSocket } catch (_: SocketException) { break }
+                executor.submit {
+                    socket.use {
+                        try { socket.soTimeout = 3000; handle(readRequest(socket)) }
+                        catch (_: java.io.IOException) { /* Negative TLS and deadline tests close early. */ }
+                        catch (_: InterruptedException) { Thread.currentThread().interrupt() }
+                    }
+                }
+            }
         }
-        server.start()
-        endpoint = "https://localhost:${server.address.port}"
+        endpoint = "https://localhost:${server.localPort}"
     }
 
     @After fun stopServer() {
         HttpsURLConnection.setDefaultSSLSocketFactory(originalFactory)
-        if (::server.isInitialized) server.stop(0)
+        if (::server.isInitialized) server.close()
         if (::executor.isInitialized) executor.shutdownNow()
     }
 
     private fun envelope(identity: String = "tls-simulator-001", version: String = "1.0") =
         JSONObject().put("device_id", identity).put("protocol_version", version).put("simulated", true)
 
-    private fun handle(exchange: HttpExchange) {
-        if (exchange.requestHeaders.getFirst("Authorization") != "Bearer $token") {
+    private data class Exchange(val socket: SSLSocket, val path: String,
+                                val headers: Map<String, String>, val body: ByteArray)
+
+    /** Tiny bounded HTTP/1.1 fixture using only java.base; no Android-unavailable HTTP modules. */
+    private fun readRequest(socket: SSLSocket): Exchange {
+        val input = socket.inputStream.buffered()
+        val header = java.io.ByteArrayOutputStream()
+        var suffix = 0
+        while (suffix != 0x0d0a0d0a) {
+            val byte = input.read()
+            if (byte < 0) throw java.io.EOFException("Request ended before headers")
+            header.write(byte)
+            if (header.size() > 16384) throw java.io.IOException("Oversized test request headers")
+            suffix = (suffix shl 8) or byte
+        }
+        val lines = header.toString("US-ASCII").split("\r\n")
+        val path = lines.first().split(' ')[1]
+        val headers = lines.drop(1).filter { ':' in it }.associate {
+            it.substringBefore(':').trim().lowercase() to it.substringAfter(':').trim()
+        }
+        val size = headers["content-length"]?.toInt() ?: 0
+        require(size in 0..4096)
+        val body = ByteArray(size)
+        var offset = 0
+        while (offset < size) {
+            val count = input.read(body, offset, size - offset)
+            if (count < 0) throw java.io.EOFException("Incomplete request body")
+            offset += count
+        }
+        return Exchange(socket, path, headers, body)
+    }
+
+    private fun handle(exchange: Exchange) {
+        if (exchange.headers["authorization"] != "Bearer $token") {
             reply(exchange, 401, JSONObject().put("error", "unauthorized")); return
         }
-        when (exchange.requestURI.path) {
+        when (exchange.path) {
             "/v1/capabilities" -> reply(exchange, 200, envelope().put("commands", JSONArray(listOf("stand", "forward", "stop"))))
             "/v1/telemetry" -> reply(exchange, 200, envelope(telemetryIdentity, telemetryProtocol).put("activity", "Resting"))
             "/v1/commands" -> {
-                val request = JSONObject(exchange.requestBody.bufferedReader().use { it.readText() })
+                val request = JSONObject(String(exchange.body, Charsets.UTF_8))
                 lastCommand = request
                 if (delayCommand) Thread.sleep(2000)
                 val ack = JSONObject().put("id", if (ackMode == "wrong-id") "stale-id" else request.getString("id"))
@@ -94,12 +131,11 @@ class RobotTransportIntegrationTest {
         }
     }
 
-    private fun reply(exchange: HttpExchange, status: Int, body: JSONObject) {
+    private fun reply(exchange: Exchange, status: Int, body: JSONObject) {
         val bytes = body.toString().toByteArray(Charsets.UTF_8)
-        exchange.responseHeaders.add("Content-Type", "application/json")
-        exchange.sendResponseHeaders(status, bytes.size.toLong())
-        exchange.responseBody.use { it.write(bytes) }
-        exchange.close()
+        val reason = when (status) { 200 -> "OK"; 401 -> "Unauthorized"; else -> "Not Found" }
+        val headers = "HTTP/1.1 $status $reason\r\nContent-Type: application/json\r\nContent-Length: ${bytes.size}\r\nConnection: close\r\n\r\n"
+        exchange.socket.outputStream.apply { write(headers.toByteArray(Charsets.US_ASCII)); write(bytes); flush() }
     }
 
     private suspend fun mustFail(block: suspend () -> Unit) {
@@ -171,7 +207,7 @@ class RobotTransportIntegrationTest {
 
     @Test fun hostnameValidationRemainsEnabled() = runBlocking {
         // Fixture cert contains only DNS localhost, never the IP address.
-        mustFail { HttpsRobotTransport("https://127.0.0.1:${server.address.port}", token).capabilities() }
+        mustFail { HttpsRobotTransport("https://127.0.0.1:${server.localPort}", token).capabilities() }
     }
 
     @Test fun platformTrustDoesNotTrustTestCertificate() = runBlocking {

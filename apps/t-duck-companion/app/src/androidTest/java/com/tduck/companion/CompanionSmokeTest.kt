@@ -45,7 +45,7 @@ class CompanionSmokeTest {
     @Test fun dashboardMovementTimeoutFallAndRecovery() {
         compose.onNodeWithText("Hello, friend.").assertIsDisplayed()
         compose.onNodeWithText("DEMONSTRATION • SIMULATED DEVICE").assertIsDisplayed()
-        compose.onNodeWithText("87%").assertIsDisplayed()
+        compose.onNodeWithText("87%").performScrollTo().assertIsDisplayed()
         compose.onNodeWithTag("tab-Control").performClick()
         compose.onNodeWithTag("command-forward").performScrollTo().assertIsEnabled().performClick()
         compose.waitUntil(4_000) { observed.any { it.notice == "Demo acknowledgement · forward" && it.mode == "forward" } }
