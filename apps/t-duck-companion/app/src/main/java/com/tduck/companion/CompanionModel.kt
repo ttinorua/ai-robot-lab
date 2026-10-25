@@ -34,8 +34,16 @@ class CompanionModel(application: Application) : AndroidViewModel(application) {
  private val provisioner = SimulatedProvisioner()
  private val assistant: AssistantProvider = LocalDemoAssistant()
  private val prefs = application.getSharedPreferences("companion", 0)
+ private val credentials = BridgeCredentials(application)
+ fun savedBridge(): Pair<String, String>? = credentials.load()
+ fun forgetBridge() { disconnect(); credentials.clear(); mutable.update { it.copy(notice = "Saved bridge connection forgotten") } }
+ fun connectRemembered(url: String, token: String) {
+  try { credentials.save(url.trim(), token); connectLocal(url.trim(), token) }
+  catch (_: Exception) { mutable.update { it.copy(notice = "Could not securely save connection; nothing was connected") } }
+ }
  init {
   mutable.update { it.copy(voiceEnabled = prefs.getBoolean("voice", true), notice = if (prefs.contains("trusted_demo")) "Trusted demo remembered · simulated connection" else it.notice) }
+  credentials.load()?.let { (url, token) -> connectLocal(url, token) }
   viewModelScope.launch { var tick = 0; while (true) { delay(500); tick++; if (transport == null && state.value.connected) mutable.update { it.copy(roll = sin(tick / 3.0) * 1.2, pitch = sin(tick / 4.0) * 0.8) } } }
  }
  private fun stopPreviousBridge() { val old = transport; if (old != null) viewModelScope.launch { runCatching { old.send("stop") } } }
