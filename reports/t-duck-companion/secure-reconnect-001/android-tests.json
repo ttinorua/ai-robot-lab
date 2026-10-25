@@ -1,0 +1,39 @@
+{
+  "suite": {
+    "name": "com.tduck.companion.BridgeCredentialsTest",
+    "tests": "25",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "27.11",
+    "timestamp": "2026-10-25T22:27:53",
+    "hostname": "localhost"
+  },
+  "tests": [
+    "com.tduck.companion.BridgeCredentialsTest.newStoreRestoresEndpointAndTokenWithoutPlaintextPreferences",
+    "com.tduck.companion.BridgeCredentialsTest.forgetDeletesRecordAndKeystoreAlias",
+    "com.tduck.companion.BridgeCredentialsTest.missingKeyFailsClosedWithoutRegeneratingKey",
+    "com.tduck.companion.BridgeCredentialsTest.repeatedSaveUsesFreshGcmNonce",
+    "com.tduck.companion.BridgeCredentialsTest.invalidReplacementDoesNotEraseExistingRecord",
+    "com.tduck.companion.BridgeCredentialsTest.alteredEndpointCannotRedirectSavedToken",
+    "com.tduck.companion.BridgeCredentialsTest.corruptCiphertextAndIncompleteRecordFailClosed",
+    "com.tduck.companion.BridgeCredentialsTest.originalPr7FormatMigratesWithoutLosingToken",
+    "com.tduck.companion.CompanionSmokeTest.simulatedProvisioningRejectsWrongProofAndStoresOnlyTrustedIdentity",
+    "com.tduck.companion.CompanionSmokeTest.simulatedUpdateRequiresOwnerApproval",
+    "com.tduck.companion.CompanionSmokeTest.chatCannotMoveRobot",
+    "com.tduck.companion.CompanionSmokeTest.disconnectLocksControlsAndDemoReconnectRestoresThem",
+    "com.tduck.companion.CompanionSmokeTest.sensorsAndSettingsNavigationShowsAvailableReadings",
+    "com.tduck.companion.CompanionSmokeTest.dashboardMovementTimeoutFallAndRecovery",
+    "com.tduck.companion.ConnectionRecoveryTest.disconnectDuringRequestCannotPublishLateAckOrReconnect",
+    "com.tduck.companion.ConnectionRecoveryTest.temporaryFailureRecoversWithoutErasingCredentialsOrResumingMotion",
+    "com.tduck.companion.ConnectionRecoveryTest.backgroundStopsPollingAndForegroundReconnectsWithoutMovement",
+    "com.tduck.companion.ConnectionRecoveryTest.authenticationRejectionStopsRetriesAndKeepsCredentials",
+    "com.tduck.companion.ConnectionRecoveryTest.lostMovementAckLocksControlsAndReconnectsWithoutRepeatingMovement",
+    "com.tduck.companion.ConnectionRecoveryTest.exhaustedRetryBudgetRequiresExplicitRetry",
+    "com.tduck.companion.ConnectionRecoveryTest.forgetPreventsReconnectionAndRemovesRecord",
+    "com.tduck.companion.ConnectionRecoveryTest.freshViewModelAutoConnectsSavedCredentialsWithoutMovement",
+    "com.tduck.companion.MuJoCoRoundTripTest.androidControlChangesActualMuJoCoAndTelemetryIsVisible",
+    "com.tduck.companion.SecureReconnectUiTest.savedRejectedTokenIsRetainedAndDoesNotEnableControls",
+    "com.tduck.companion.SecureReconnectUiTest.settingsAndActivityRecreationKeepEndpointAndForgetRemovesConnection"
+  ]
+}
