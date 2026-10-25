@@ -1,0 +1,115 @@
+{
+  "runtime": {
+    "python": "3.11.17",
+    "mujoco": "3.17.0",
+    "numpy": "2.4.6",
+    "gymnasium": "1.4.0"
+  },
+  "source_commit": "002b8497f19baf18f565f0983ebc9fd643dee3bf",
+  "source_sha256": {
+    "tests/test_physics.py": "5a7843221a0db43294fafe75d756f0d1b55819e1990ba582d7a52247ab339b94",
+    "robot_lab/env.py": "9c4dc6e97ae9793da65a80122982c507174ad05518960a4cb962719da6872f9e",
+    "assets/robot.xml": "5becb4218e15a54e45b048bd9c26117fb2edd532aedad7758b0f9161994695a3"
+  },
+  "dependency_scope": "Exact CI Python and physics dependencies; unused SB3/Torch/CUDA/TensorBoard omitted",
+  "trials": [
+    {
+      "case": "nominal_contact",
+      "gravity_z": -9.81,
+      "initial": {
+        "z": 0.675,
+        "vz": -0.029265527829807545,
+        "az": 7.029625028221575,
+        "contacts": 4,
+        "minimum_contact_distance_m": -0.005855546764318244,
+        "constraint_z": 61.490987969715384
+      },
+      "final": {
+        "z": 0.6760083499334241,
+        "vz": -0.0012203234858370398,
+        "time_s": 0.09999999999999999
+      },
+      "max_abs_actuator_force": 0.0
+    },
+    {
+      "case": "nominal_contact_zero_gravity",
+      "gravity_z": 0.0,
+      "initial": {
+        "z": 0.675,
+        "vz": -0.029265527829807545,
+        "az": 10.548028336099001,
+        "contacts": 4,
+        "minimum_contact_distance_m": -0.005855546764318244,
+        "constraint_z": 38.662407696945046
+      },
+      "final": {
+        "z": 0.6834703647132445,
+        "vz": 0.0858282807679142,
+        "time_s": 0.09999999999999999
+      },
+      "max_abs_actuator_force": 0.0
+    },
+    {
+      "case": "free_fall",
+      "gravity_z": -9.81,
+      "initial": {
+        "z": 1.675,
+        "vz": 0.0,
+        "az": -9.810000000000002,
+        "contacts": 0,
+        "minimum_contact_distance_m": null,
+        "constraint_z": 0.0
+      },
+      "final": {
+        "z": 1.621045,
+        "vz": -0.9810000000000006,
+        "time_s": 0.09999999999999999
+      },
+      "max_abs_actuator_force": 0.0
+    },
+    {
+      "case": "free_fall_half_gravity",
+      "gravity_z": -4.905,
+      "initial": {
+        "z": 1.675,
+        "vz": 0.0,
+        "az": -4.905000000000001,
+        "contacts": 0,
+        "minimum_contact_distance_m": null,
+        "constraint_z": 0.0
+      },
+      "final": {
+        "z": 1.6480225000000002,
+        "vz": -0.4905000000000003,
+        "time_s": 0.09999999999999999
+      },
+      "max_abs_actuator_force": 0.0
+    },
+    {
+      "case": "free_fall_zero_gravity",
+      "gravity_z": 0.0,
+      "initial": {
+        "z": 1.675,
+        "vz": 0.0,
+        "az": 0.0,
+        "contacts": 0,
+        "minimum_contact_distance_m": null,
+        "constraint_z": 0.0
+      },
+      "final": {
+        "z": 1.675,
+        "vz": 0.0,
+        "time_s": 0.09999999999999999
+      },
+      "max_abs_actuator_force": 0.0
+    }
+  ],
+  "physics_suite": {
+    "exit_code": 1,
+    "output": "test_gravity (test_physics.TestPhysics.test_gravity) ... FAIL\ntest_model_loads (test_physics.TestPhysics.test_model_loads) ... ok\ntest_motor_response (test_physics.TestPhysics.test_motor_response) ... ok\ntest_reset_observation (test_physics.TestPhysics.test_reset_observation) ... ok\ntest_step_interface (test_physics.TestPhysics.test_step_interface) ... ok\n\n======================================================================\nFAIL: test_gravity (test_physics.TestPhysics.test_gravity)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/scratch/b3753508b113/physics-failed/tests/test_physics.py\", line 38, in test_gravity\n    self.assertLess(float(self.env.data.qpos[2]), z0)\nAssertionError: 0.6760083499334241 not less than 0.675\n\n----------------------------------------------------------------------\nRan 5 tests in 0.007s\n\nFAILED (failures=1)\n"
+  },
+  "default_gravity_negative_controls": {
+    "0.0": "rejected",
+    "9.81": "rejected"
+  }
+}
