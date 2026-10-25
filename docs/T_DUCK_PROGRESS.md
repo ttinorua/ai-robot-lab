@@ -5,6 +5,21 @@ Branch: `feature/t-duck-foundation`; draft PR: https://github.com/ttinorua/ai-ro
 
 ## Latest parallel robotics milestone
 
+2026-10-25 follow-up: the legacy Companion gravity failure was reproduced exactly
+at merge002b849 on Python3.11.17/MuJoCo3.17.0 and also3.3.7. It is a contact-state
+test assumption, not evidence of broken gravity. Separate draft PR#8 provides the
+one-file test fix commit `1ca9d9c2e653bf1aed3caad628a9239c310d7b51` and full
+reproduction reports; all six fixed physics tests pass on both engine versions,
+and GitHub physics validation40239433684 passed. PR#7's worker received the exact
+reference for approved integration; no Companion branch was written or merged.
+
+Robotics then continued with [eight fuller-collision drop probes](../reports/t-duck/collision-probe-001/README.md).
+Fuller model detected body contacts4/4, feet-only model0/4; both share fourteen
+actuators and total mass. This is collision coverage validation only, not a new
+walking, balance or get-up result. Policies, runtime settings and earlier evidence
+remain unchanged. The next experiment is unchanged-policy inference with the
+fuller collision model in a separate factory.
+
 Continued robotics testing independently of Companion PR #3. New benchmark code
 and evidence are documented in [T_DUCK_ROBUSTNESS.md](T_DUCK_ROBUSTNESS.md).
 Development (180 trials) and a fresh holdout (360 trials) ran without controller
