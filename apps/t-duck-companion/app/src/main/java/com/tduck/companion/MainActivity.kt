@@ -252,7 +252,7 @@ private fun Sensors(s: RobotUi) {
 @Composable
 private fun Settings(s: RobotUi, model: CompanionModel) {
     var code by remember { mutableStateOf("") }; var ssid by remember { mutableStateOf("") }; var password by remember { mutableStateOf("") }
-    var url by remember { mutableStateOf("") }; var token by remember { mutableStateOf("") }
+    var url by remember { mutableStateOf(model.savedBridge()?.first.orEmpty()) }; var token by remember { mutableStateOf(model.savedBridge()?.second.orEmpty()) }
     var channel by rememberSaveable { mutableStateOf("stable") }; var approved by remember { mutableStateOf(false) }
     Title("Make it yours.", "Connection, preferences and a little care.")
     Section("Connection") {
@@ -274,10 +274,11 @@ private fun Settings(s: RobotUi, model: CompanionModel) {
         Text("Use example credentials. Real secure provisioning awaits hardware validation.", color = Muted, fontSize = 12.sp)
     }
     Section("Online or local simulation") {
-        Text("Live MuJoCo needs a running simulation service; the APK does not host it. Enter its HTTPS address and owner token. A free host may take up to 90 seconds to wake. Credentials stay in this session.", color = Muted)
+        Text("Live MuJoCo needs a running simulation service; the APK does not host it. Enter its HTTPS address and owner token. A free host may take up to 90 seconds to wake. The address and encrypted owner token are saved on this device until you forget them. Reconnection is attempted when the app opens.", color = Muted)
         OutlinedTextField(url, { url = it }, label = { Text("HTTPS bridge address") }, singleLine = true, modifier = Modifier.fillMaxWidth().testTag("bridge-url"))
         OutlinedTextField(token, { token = it }, label = { Text("Owner access token") }, visualTransformation = PasswordVisualTransformation(), modifier = Modifier.fillMaxWidth().testTag("bridge-token"))
-        Button(onClick = { model.connectLocal(url.trim(), token) }, enabled = url.isNotBlank() && token.isNotBlank(), modifier = Modifier.testTag("bridge-connect")) { Text("Connect to simulation") }
+        Button(onClick = { model.connectRemembered(url.trim(), token) }, enabled = url.isNotBlank() && token.isNotBlank(), modifier = Modifier.testTag("bridge-connect")) { Text("Connect to simulation") }
+        OutlinedButton(onClick = { model.forgetBridge(); url = ""; token = "" }, modifier = Modifier.testTag("bridge-forget")) { Text("Forget saved connection") }
     }
     Section("Assistant preferences") {
         Row(verticalAlignment = Alignment.CenterVertically) {
