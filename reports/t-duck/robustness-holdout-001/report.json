@@ -1,0 +1,132 @@
+{
+  "status": "completed",
+  "stage": "fresh_holdout_no_controller_tuning",
+  "trials": 360,
+  "seeds": [
+    50000,
+    50001,
+    50002,
+    50003,
+    50004,
+    50005,
+    50006,
+    50007,
+    50008,
+    50009
+  ],
+  "cases": [
+    {
+      "name": "stand"
+    },
+    {
+      "name": "forward",
+      "forward": 0.2
+    },
+    {
+      "name": "roll_-10deg",
+      "tilt_axis": 0,
+      "tilt_deg": -10
+    },
+    {
+      "name": "roll_+10deg",
+      "tilt_axis": 0,
+      "tilt_deg": 10
+    },
+    {
+      "name": "pitch_-10deg",
+      "tilt_axis": 1,
+      "tilt_deg": -10
+    },
+    {
+      "name": "pitch_+10deg",
+      "tilt_axis": 1,
+      "tilt_deg": 10
+    },
+    {
+      "name": "velocity_x_-1",
+      "velocity_x": -0.25
+    },
+    {
+      "name": "angular_pitch_-1",
+      "angular_pitch": -2.0
+    },
+    {
+      "name": "velocity_x_+1",
+      "velocity_x": 0.25
+    },
+    {
+      "name": "angular_pitch_+1",
+      "angular_pitch": 2.0
+    },
+    {
+      "name": "push_0_-1_0.1",
+      "push_axis": 0,
+      "push_impulse": -0.1
+    },
+    {
+      "name": "push_0_+1_0.1",
+      "push_axis": 0,
+      "push_impulse": 0.1
+    },
+    {
+      "name": "push_1_-1_0.1",
+      "push_axis": 1,
+      "push_impulse": -0.1
+    },
+    {
+      "name": "push_1_+1_0.1",
+      "push_axis": 1,
+      "push_impulse": 0.1
+    },
+    {
+      "name": "push_0_-1_0.2",
+      "push_axis": 0,
+      "push_impulse": -0.2
+    },
+    {
+      "name": "push_0_+1_0.2",
+      "push_axis": 0,
+      "push_impulse": 0.2
+    },
+    {
+      "name": "push_1_-1_0.2",
+      "push_axis": 1,
+      "push_impulse": -0.2
+    },
+    {
+      "name": "push_1_+1_0.2",
+      "push_axis": 1,
+      "push_impulse": 0.2
+    }
+  ],
+  "evaluator_sha256": "b09734352cc4c520350b8f8630558a454855c32a0fcd45c5124d3220b58689ed",
+  "foundation_sha256": "be98b4a9bb7788e19edecf477afb3d2e535e3a94e4901a7dc27defc6f2f51457",
+  "policy_sha256": "57cdebf36e7fa23116270dec96f013a6a64511f37311d322443f5297bdc3d6db",
+  "elapsed_cpu_s": 256.223332732,
+  "runtime": {
+    "python": "3.12.14",
+    "mujoco": "3.3.7",
+    "onnxruntime": "1.22.1",
+    "numpy": "2.5.4"
+  },
+  "protocol": {
+    "physics_hz": 200,
+    "policy_hz": 50,
+    "duration_s": 10,
+    "push_ticks": [
+      600,
+      619
+    ],
+    "recovery": "1 continuous second: tilt<=5deg, angular speed<=0.5rad/s, xy speed<=0.05m/s",
+    "fall": "height<0.09m or torso tilt>30deg",
+    "initial_clearance": "lift by initial floor penetration depth +1mm when needed"
+  },
+  "limitations": [
+    "Ten seeds per scenario; sampled conditions only",
+    "Feet-only collision, CPU/runtime/sensing limitations inherited",
+    "Peak tilt samples after physics steps; initial pose separately recorded",
+    "No controller tuning/training or Companion lock change"
+  ],
+  "development_report_sha256": "40f0b5d536c4ebd0b88a3eb5ace10a30719f484b64c74cab5d5a57accc657f55",
+  "holdout_runner_sha256": "11069d4e95dad4a20fe01c4dbebe43833dc74904c76a19115c5cf8389e08e3af"
+}

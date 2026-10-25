@@ -1,0 +1,204 @@
+{
+  "upstream_revision": "725ed0c75a73988adc4f9ede280d2d340664e997",
+  "runtime": {
+    "python": "3.11.17",
+    "mujoco": "3.3.7",
+    "numpy": "2.4.6"
+  },
+  "source_sha256": {
+    "scene_walk.xml": "deb9519100b524b8c7a06741c78662f6cfefad91eb284d123143e583e653d0da",
+    "scene.xml": "6384fe9a60e87a1c470bd383117220939a63a372097dfec59898b39ec3c987ba",
+    "robot_walk.xml": "73dcd2fe63c3662288c74cfa92408dcad972fe736db39a0bae82379516066670",
+    "robot_allcollisions.xml": "906960f98a7f2ae24314b5ce1032c46ac6ff619d27c3bae502eb81c8f1b80fea"
+  },
+  "probe_sha256": "d4de20785575e5872fb22ec737e36fecda8cfe1b40edce8bfce3bfe204e1e05a",
+  "models": {
+    "scene_walk.xml": {
+      "mass_kg": 0.7977886721912344,
+      "actuator_joints": [
+        "left_hip_yaw",
+        "left_hip_roll",
+        "left_hip_pitch",
+        "left_knee",
+        "left_ankle",
+        "neck_pitch",
+        "head_pitch",
+        "head_yaw",
+        "head_roll",
+        "right_hip_yaw",
+        "right_hip_roll",
+        "right_hip_pitch",
+        "right_knee",
+        "right_ankle"
+      ],
+      "named_collision_geoms": [
+        "left_foot_collision",
+        "right_foot_collision"
+      ]
+    },
+    "scene.xml": {
+      "mass_kg": 0.7977886721912344,
+      "actuator_joints": [
+        "left_hip_yaw",
+        "left_hip_roll",
+        "left_hip_pitch",
+        "left_knee",
+        "left_ankle",
+        "neck_pitch",
+        "head_pitch",
+        "head_yaw",
+        "head_roll",
+        "right_hip_yaw",
+        "right_hip_roll",
+        "right_hip_pitch",
+        "right_knee",
+        "right_ankle"
+      ],
+      "named_collision_geoms": [
+        "trunk_collision",
+        "left_hip_yaw_collision",
+        "left_hip_roll_collision",
+        "left_thigh_collision",
+        "left_shin_collision",
+        "left_foot_collision",
+        "neck_collision",
+        "head_pitch_collision",
+        "head_yaw_collision",
+        "head_collision",
+        "right_hip_yaw_collision",
+        "right_hip_roll_collision",
+        "right_thigh_collision",
+        "right_shin_collision",
+        "right_foot_collision"
+      ]
+    }
+  },
+  "trials": [
+    {
+      "scene": "scene_walk.xml",
+      "tilt_axis": "roll",
+      "tilt_deg": -90,
+      "initial_contacts": 0,
+      "floor_contact_geoms": [
+        "left_foot_collision",
+        "right_foot_collision"
+      ],
+      "first_nonfoot_contact_s": null,
+      "final_root_z_m": -0.09416198925200418,
+      "duration_s": 1.0000000000000007,
+      "finite": true
+    },
+    {
+      "scene": "scene_walk.xml",
+      "tilt_axis": "roll",
+      "tilt_deg": 90,
+      "initial_contacts": 0,
+      "floor_contact_geoms": [
+        "left_foot_collision",
+        "right_foot_collision"
+      ],
+      "first_nonfoot_contact_s": null,
+      "final_root_z_m": -0.09306790992517386,
+      "duration_s": 1.0000000000000007,
+      "finite": true
+    },
+    {
+      "scene": "scene_walk.xml",
+      "tilt_axis": "pitch",
+      "tilt_deg": -90,
+      "initial_contacts": 0,
+      "floor_contact_geoms": [
+        "left_foot_collision",
+        "right_foot_collision"
+      ],
+      "first_nonfoot_contact_s": null,
+      "final_root_z_m": -0.043404811015340605,
+      "duration_s": 1.0000000000000007,
+      "finite": true
+    },
+    {
+      "scene": "scene_walk.xml",
+      "tilt_axis": "pitch",
+      "tilt_deg": 90,
+      "initial_contacts": 0,
+      "floor_contact_geoms": [
+        "left_foot_collision",
+        "right_foot_collision"
+      ],
+      "first_nonfoot_contact_s": null,
+      "final_root_z_m": -0.024926723451803825,
+      "duration_s": 1.0000000000000007,
+      "finite": true
+    },
+    {
+      "scene": "scene.xml",
+      "tilt_axis": "roll",
+      "tilt_deg": -90,
+      "initial_contacts": 0,
+      "floor_contact_geoms": [
+        "head_collision",
+        "left_foot_collision",
+        "left_shin_collision",
+        "left_thigh_collision"
+      ],
+      "first_nonfoot_contact_s": 0.24000000000000013,
+      "final_root_z_m": 0.05879781885140528,
+      "duration_s": 1.0000000000000007,
+      "finite": true
+    },
+    {
+      "scene": "scene.xml",
+      "tilt_axis": "roll",
+      "tilt_deg": 90,
+      "initial_contacts": 0,
+      "floor_contact_geoms": [
+        "head_collision",
+        "right_foot_collision",
+        "right_shin_collision",
+        "right_thigh_collision"
+      ],
+      "first_nonfoot_contact_s": 0.24000000000000013,
+      "final_root_z_m": 0.058908495327818916,
+      "duration_s": 1.0000000000000007,
+      "finite": true
+    },
+    {
+      "scene": "scene.xml",
+      "tilt_axis": "pitch",
+      "tilt_deg": -90,
+      "initial_contacts": 0,
+      "floor_contact_geoms": [
+        "head_collision",
+        "right_thigh_collision",
+        "trunk_collision"
+      ],
+      "first_nonfoot_contact_s": 0.2500000000000001,
+      "final_root_z_m": 0.04678730622622047,
+      "duration_s": 1.0000000000000007,
+      "finite": true
+    },
+    {
+      "scene": "scene.xml",
+      "tilt_axis": "pitch",
+      "tilt_deg": 90,
+      "initial_contacts": 0,
+      "floor_contact_geoms": [
+        "head_collision",
+        "left_foot_collision",
+        "left_hip_roll_collision",
+        "right_foot_collision",
+        "right_hip_roll_collision"
+      ],
+      "first_nonfoot_contact_s": 0.23000000000000012,
+      "final_root_z_m": 0.054266632223416114,
+      "duration_s": 1.0000000000000007,
+      "finite": true
+    }
+  ],
+  "protocol": "Four deterministic 1s drops per model, root0.35m,roll/pitch\u00b190deg,200Hz; bare MJCF PD holds STAND",
+  "limitations": [
+    "No PPO/BAM policy execution, get-up, balance or hardware claim",
+    "Upstream geometry/masks unchanged; no asset redistribution",
+    "Compatibility of mass/order alone does not establish walking-policy performance"
+  ]
+}

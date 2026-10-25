@@ -1,0 +1,20 @@
+{
+  "development-003": {
+    "rows": 100,
+    "paired_initial_states_verified": 50,
+    "acceptance_recomputed": true
+  },
+  "holdout-002": {
+    "rows": 40,
+    "paired_initial_states_verified": 20,
+    "acceptance_recomputed": true
+  },
+  "repeatability": {
+    "development_seed": 10000,
+    "cases": [
+      "stand",
+      "forward"
+    ],
+    "exact_trial_record_match": true
+  }
+}
