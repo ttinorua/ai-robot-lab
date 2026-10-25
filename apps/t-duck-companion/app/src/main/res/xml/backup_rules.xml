@@ -1,0 +1,3 @@
+<full-backup-content>
+    <exclude domain="sharedpref" path="tduck_bridge_credentials.xml" />
+</full-backup-content>

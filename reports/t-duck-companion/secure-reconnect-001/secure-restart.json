@@ -1,0 +1,9 @@
+{
+  "different_process": true,
+  "credentials_restored": true,
+  "automatic_connection": true,
+  "actual_mujoco_telemetry": true,
+  "movement_mode": "rest",
+  "joint_count": 14,
+  "token_in_plaintext_preferences": false
+}

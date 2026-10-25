@@ -1,0 +1,18 @@
+test_idle_pause_cannot_be_extended_by_telemetry (test_cloud.ActualIdleTests.test_idle_pause_cannot_be_extended_by_telemetry) ... ok
+test_edge_session_and_ordered_command (test_cloud.EdgeHTTPTests.test_edge_session_and_ordered_command) ... ok
+test_health_does_not_change_session_or_simulation (test_cloud.EdgeHTTPTests.test_health_does_not_change_session_or_simulation) ... ok
+test_no_cleartext_or_unauthenticated_controls (test_cloud.EdgeHTTPTests.test_no_cleartext_or_unauthenticated_controls) ... ok
+test_overload_closes_instead_of_spawning (test_cloud.EdgeHTTPTests.test_overload_closes_instead_of_spawning) ... ok
+test_defaults_cannot_fetch_or_start (test_cloud.PackagingTests.test_defaults_cannot_fetch_or_start) ... ok
+test_edge_transport_requires_explicit_opt_in (test_cloud.PackagingTests.test_edge_transport_requires_explicit_opt_in) ... ok
+test_no_implicit_http_or_owner_token (test_cloud.PackagingTests.test_no_implicit_http_or_owner_token) ... ok
+test_pinned_sources_match_integration_lock (test_cloud.PackagingTests.test_pinned_sources_match_integration_lock) ... ok
+test_valid_explicit_configuration (test_cloud.PackagingTests.test_valid_explicit_configuration) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 2.777s
+
+OK
+Vel cmd: [0.00, 0.00, 0.00] [walking]
+Vel cmd: [0.00, 0.00, 0.00] [walking]
+Vel cmd: [0.00, 0.00, 0.00] [walking]

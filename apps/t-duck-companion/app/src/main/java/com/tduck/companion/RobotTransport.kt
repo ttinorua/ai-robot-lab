@@ -68,6 +68,7 @@ internal class RobotProtocolSession {
         return json
     }
 }
+class BridgeAuthenticationException : java.io.IOException("Owner authentication rejected")
 internal class SleepingBridge(val status: Int) : java.io.IOException("Bridge starting ($status)")
 /** Only read-only discovery may wait for a sleeping host. Commands are never retried. */
 internal suspend fun <T> awaitBridgeWake(attempts: Int = 36, request: suspend () -> T): T {
@@ -81,7 +82,8 @@ internal suspend fun <T> awaitBridgeWake(attempts: Int = 36, request: suspend ()
     }
     error("No discovery attempts")
 }
-class HttpsRobotTransport(private val endpoint: String, private val token: String, private val wakeSleepingHost: Boolean = false) : RobotTransport {
+class HttpsRobotTransport(endpoint: String, private val token: String, private val wakeSleepingHost: Boolean = false) : RobotTransport {
+    private val endpoint = BridgeEndpoint.normalize(endpoint)
     private val protocol = RobotProtocolSession()
     private var sessionId: String? = null
     private val sequence = AtomicLong(0)
@@ -103,6 +105,7 @@ class HttpsRobotTransport(private val endpoint: String, private val token: Strin
             connection.setRequestProperty("Authorization", "Bearer $token")
             if (body != null) { connection.requestMethod = "POST"; connection.doOutput = true; connection.setRequestProperty("Content-Type", "application/json"); connection.outputStream.use { it.write(body.toString().toByteArray()) } }
             val status = connection.responseCode
+            if (status == 401 || status == 403) throw BridgeAuthenticationException()
             if (status in setOf(502, 503, 504)) throw SleepingBridge(status)
             check(status == 200) { "Bridge rejected request ($status)" }
             val data = connection.inputStream.use { stream ->

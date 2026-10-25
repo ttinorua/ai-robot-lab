@@ -25,8 +25,9 @@ for attempt in range(100):
   if attempt==99: raise
   time.sleep(.1)
 PY
+test "$(adb shell getprop ro.kernel.qemu | tr -d '\r')" = 1
 adb reverse tcp:8443 tcp:8443
-if gradle -p apps/t-duck-companion --no-daemon connectedDebugAndroidTest; then
+if gradle -p apps/t-duck-companion --no-daemon connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.notClass=com.tduck.companion.ProcessRestartTest; then
   python tools/t-duck-bridge/collect_android_evidence.py
 else
   exit 1
@@ -38,8 +39,30 @@ sleep 2
 adb shell screencap -p /sdcard/companion-home.png
 adb pull /sdcard/companion-home.png apps/t-duck-companion/app/build/companion-home.png
 
+# Persistence across two actual app processes, using only disposable emulator/CI credentials.
+adb install -r apps/t-duck-companion/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
+adb logcat -c
+adb shell am instrument -w -r -e class com.tduck.companion.ProcessRestartTest -e reconnectPhase seed com.tduck.companion.test/androidx.test.runner.AndroidJUnitRunner > .tc02/evidence/restart-seed.txt
+adb shell am force-stop com.tduck.companion
+adb shell am instrument -w -r -e class com.tduck.companion.ProcessRestartTest -e reconnectPhase restore com.tduck.companion.test/androidx.test.runner.AndroidJUnitRunner > .tc02/evidence/restart-restore.txt
+adb logcat -d -s RECONNECT_PROCESS:I '*:S' > .tc02/evidence/restart-log.txt
+python - <<'PYTEST'
+import json,re
+from pathlib import Path
+root=Path('.tc02/evidence')
+for name in ['restart-seed.txt','restart-restore.txt']:
+ text=(root/name).read_text()
+ assert re.search(r'OK \(1 test\)',text), 'Process restart instrumentation did not pass: '+name
+line=next(x for x in (root/'restart-log.txt').read_text().splitlines() if '"different_process"' in x)
+report=json.loads(line[line.index('{'):])
+assert report['different_process'] and report['automatic_connection'] and report['actual_mujoco_telemetry']
+assert report['movement_mode']=='rest' and not report['token_in_plaintext_preferences']
+(root/'secure-restart.json').write_text(json.dumps(report,indent=2)+'\n')
+print(json.dumps(report,indent=2))
+PYTEST
+
 # Signing/update acceptance runs only on this disposable emulator, after UI integration.
 cp apps/t-duck-companion/app/build/outputs/apk/debug/app-debug.apk .tc02/upgrade-before.apk
 next_version=$(python -c 'import re,subprocess; text=subprocess.check_output(["adb","shell","dumpsys","package","com.tduck.companion"],text=True); print(int(re.search(r"versionCode=(\d+)",text).group(1))+1)')
 gradle -p apps/t-duck-companion --no-daemon assembleDebug -PcompanionVersionCode="$next_version"
-python apps/t-duck-companion/scripts/upgrade-acceptance.py --disposable-emulator --historical-optional --v01 .tc02/v01/app-debug.apk --v02 .tc02/v02/app-debug.apk --before .tc02/upgrade-before.apk --after apps/t-duck-companion/app/build/outputs/apk/debug/app-debug.apk --apksigner "$ANDROID_HOME/build-tools/35.0.0/apksigner" --output .tc02/evidence/upgrade-acceptance.json
+python apps/t-duck-companion/scripts/upgrade-acceptance.py --disposable-emulator --historical-optional --reconnect-instrumentation --current-baseline .tc02/reconnect-baseline/app-debug.apk --v01 .tc02/v01/app-debug.apk --v02 .tc02/v02/app-debug.apk --before .tc02/upgrade-before.apk --after apps/t-duck-companion/app/build/outputs/apk/debug/app-debug.apk --apksigner "$ANDROID_HOME/build-tools/35.0.0/apksigner" --output .tc02/evidence/upgrade-acceptance.json
