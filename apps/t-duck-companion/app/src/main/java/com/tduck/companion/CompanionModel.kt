@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.*
 import kotlin.math.sin
 
 data class RobotUi(
+ val savedEndpoint: String = "", val hasSavedConnection: Boolean = false,
  val source: String = "demo", val batteryAvailable: Boolean = true,
  val pose: SimulationPose? = null, val motionState: String = "rest",
  val leftForceN: Double? = null, val rightForceN: Double? = null,
@@ -24,7 +25,13 @@ data class RobotUi(
  val notice: String = "Demo mode · no physical robot connected", val updateProgress: Int = 0,
  val updateStatus: String = "Stable demo update 0.1.1 available", val onboardingStep: Int = 0, val voiceEnabled: Boolean = true
 )
-class CompanionModel(application: Application) : AndroidViewModel(application) {
+class CompanionModel @JvmOverloads constructor(
+ application: Application,
+ private val credentials: ConnectionCredentialStore = BridgeCredentials(application),
+ private val transportFactory: (String, String) -> RobotTransport = { url, token -> HttpsRobotTransport(url, token) },
+ private val pollingMs: Long = 200,
+ private val retryDelaysMs: List<Long> = listOf(1000, 2000, 4000)
+) : AndroidViewModel(application) {
  private val mutable = MutableStateFlow(RobotUi())
  val state = mutable.asStateFlow()
  private var transport: RobotTransport? = null
@@ -34,21 +41,67 @@ class CompanionModel(application: Application) : AndroidViewModel(application) {
  private val provisioner = SimulatedProvisioner()
  private val assistant: AssistantProvider = LocalDemoAssistant()
  private val prefs = application.getSharedPreferences("companion", 0)
- private val credentials = BridgeCredentials(application)
- fun savedBridge(): Pair<String, String>? = credentials.load()
- fun forgetBridge() { disconnect(); credentials.clear(); mutable.update { it.copy(notice = "Saved bridge connection forgotten") } }
+ private var reconnectAllowed = true
+ private var foreground = true
+ private var connectionEpoch = 0L
+ private var commandLinkFailed = false
+ fun forgetBridge() {
+  disconnect()
+  val removed = credentials.clear()
+  mutable.update { it.copy(savedEndpoint = "", hasSavedConnection = false, notice = if (removed) "Saved bridge connection forgotten" else "Connection disabled. Secure storage removal failed; retry Forget.") }
+ }
  fun connectRemembered(url: String, token: String) {
-  try { credentials.save(url.trim(), token); connectLocal(url.trim(), token) }
-  catch (_: Exception) { mutable.update { it.copy(notice = "Could not securely save connection; nothing was connected") } }
+  if(updating) return
+  try {
+   val endpoint = BridgeEndpoint.normalize(url)
+   val accessToken = token.ifBlank {
+    val saved = credentials.load().connection
+    require(saved != null && saved.endpoint == endpoint) { "Enter an access token for this address" }
+    saved.token
+   }
+   credentials.save(endpoint, accessToken)
+   mutable.update { it.copy(savedEndpoint = endpoint, hasSavedConnection = true) }
+   reconnectAllowed = true
+   connectLocal(endpoint, accessToken)
+  } catch (_: Exception) { mutable.update { it.copy(notice = "Could not securely save connection. Check the HTTPS address/token, or re-enter credentials if the device key changed.") } }
+ }
+ fun reconnectSaved() {
+  if(updating) return
+  val saved = credentials.load()
+  if(saved.connection != null) {
+   reconnectAllowed = true
+   mutable.update { it.copy(savedEndpoint = saved.connection.endpoint, hasSavedConnection = true) }
+   connectLocal(saved.connection.endpoint, saved.connection.token)
+  } else if(saved.unreadable) {
+   disconnect()
+   mutable.update { it.copy(savedEndpoint = "", hasSavedConnection = false, notice = "Saved connection cannot be decrypted. Enter its address and token again.") }
+  }
+ }
+ fun onForeground() {
+  foreground = true
+  if(reconnectAllowed && !state.value.connected && poll?.isActive != true) reconnectSaved()
+ }
+ fun onBackground() {
+  val wasRemote = poll?.isActive == true || transport != null || state.value.source != "demo"
+  foreground = false
+  stopPreviousBridge(); connectionEpoch++; motion?.cancel(); poll?.cancel(); transport = null
+  if(wasRemote) offline("Offline", "App in background. Movement lease remains enforced by the bridge.")
+ }
+ private fun offline(connection: String, notice: String) {
+  mutable.update { it.copy(connected = false, connection = connection, capabilities = emptySet(), availableSensors = emptySet(), pose = null,
+   batteryAvailable = false, mode = "rest", activity = "Offline", notice = notice) }
  }
  init {
   mutable.update { it.copy(voiceEnabled = prefs.getBoolean("voice", true), notice = if (prefs.contains("trusted_demo")) "Trusted demo remembered · simulated connection" else it.notice) }
-  credentials.load()?.let { (url, token) -> connectLocal(url, token) }
-  viewModelScope.launch { var tick = 0; while (true) { delay(500); tick++; if (transport == null && state.value.connected) mutable.update { it.copy(roll = sin(tick / 3.0) * 1.2, pitch = sin(tick / 4.0) * 0.8) } } }
+  reconnectSaved()
+  viewModelScope.launch { var tick = 0; while (true) { delay(500); tick++; if (foreground && transport == null && state.value.connected) mutable.update { it.copy(roll = sin(tick / 3.0) * 1.2, pitch = sin(tick / 4.0) * 0.8) } } }
  }
  private fun stopPreviousBridge() { val old = transport; if (old != null) viewModelScope.launch { runCatching { old.send("stop") } } }
- fun connectDemo() { if(updating) return; stopPreviousBridge(); poll?.cancel(); motion?.cancel(); transport = null; mutable.value = RobotUi(voiceEnabled = state.value.voiceEnabled) }
- fun disconnect() { stopPreviousBridge(); motion?.cancel(); poll?.cancel(); transport = null; mutable.update { it.copy(connected = false, connection = "Disconnected", capabilities = emptySet(), availableSensors = emptySet(), pose = null, batteryAvailable = false, mode = "rest", activity = "Offline", notice = "Disconnected. Bridge watchdog must stop motion locally.") } }
+ fun connectDemo() { if(updating) return; reconnectAllowed = false; connectionEpoch++; stopPreviousBridge(); poll?.cancel(); motion?.cancel(); transport = null; mutable.value = RobotUi(voiceEnabled = state.value.voiceEnabled, savedEndpoint = state.value.savedEndpoint, hasSavedConnection = state.value.hasSavedConnection) }
+ fun disconnect() {
+  reconnectAllowed = false; connectionEpoch++; stopPreviousBridge(); motion?.cancel(); poll?.cancel(); transport = null
+  offline("Offline", "Disconnected. Saved credentials are retained; bridge watchdog stops movement locally.")
+ }
  fun stop() { command("stop") }
  fun command(command: String) {
   val snapshot = state.value
@@ -57,13 +110,20 @@ class CompanionModel(application: Application) : AndroidViewModel(application) {
   if (!CommandPolicy.allowed(command, snapshot.capabilities, !snapshot.status.equals("ready", true))) { mutable.update { it.copy(notice = "Command unavailable in this state") }; return }
   motion?.cancel()
   val target = transport
+  val epoch = connectionEpoch
   if (target == null) {
    applyCommand(command)
    if (command in setOf("forward", "left", "right")) motion = viewModelScope.launch { delay(800); applyCommand("stop") }
   } else {
    motion = viewModelScope.launch {
-    try { val ack = withTimeout(1000) { target.send(command) }; check(ack.accepted) { "Command rejected" }; mutable.update { it.copy(notice = "Acknowledged: $command", lastAckId = ack.id, lastAckCommand = command) } }
-    catch (e: Exception) { if (e is CancellationException) throw e; mutable.update { it.copy(notice = "No acknowledgement. Safety stop requested; bridge watchdog required.", connected = false, connection = "Connection lost", mode = "rest") }; runCatching { withTimeout(1800) { target.send("stop") } } }
+    try { val ack = withTimeout(1000) { target.send(command) }; check(ack.accepted) { "Command rejected" }; if(epoch != connectionEpoch || target !== transport) return@launch; mutable.update { it.copy(notice = "Acknowledged: $command", lastAckId = ack.id, lastAckCommand = command) } }
+    catch (e: Exception) {
+     if (e is CancellationException && e !is TimeoutCancellationException) throw e
+     if(epoch != connectionEpoch || target !== transport) return@launch
+     commandLinkFailed = true
+     offline("Offline", "No acknowledgement. Safety stop requested; bridge watchdog remains authoritative.")
+     runCatching { withTimeout(1800) { target.send("stop") } }
+    }
    }
   }
  }
@@ -121,32 +181,53 @@ class CompanionModel(application: Application) : AndroidViewModel(application) {
  }
  fun connectLocal(url: String, token: String) {
   if(updating) return
-  stopPreviousBridge(); motion?.cancel(); poll?.cancel(); transport = null
+  val endpoint = try { BridgeEndpoint.normalize(url) } catch (_: Exception) {
+   mutable.update { it.copy(notice = "Enter a valid HTTPS bridge address") }; return
+  }
+  stopPreviousBridge(); connectionEpoch++; motion?.cancel(); poll?.cancel(); transport = null
+  val epoch = connectionEpoch
+  commandLinkFailed = false
+  offline("Connecting", "Connecting securely. Movement remains locked until validated telemetry arrives.")
   poll = viewModelScope.launch {
-   var client: HttpsRobotTransport? = null
-   var retries = 0
-   while (isActive && retries < 4) {
-    mutable.update { it.copy(connected = false, capabilities = emptySet(), availableSensors = emptySet(), pose = null, batteryAvailable = false, connection = if(retries == 0) "Starting secure bridge… (up to 90 seconds)" else "Reconnecting ($retries/3)…") }
+   var failures = 0
+   // One bounded foreground retry budget. A momentary success does not reset a flapping link forever.
+   while (isActive && foreground && epoch == connectionEpoch) {
+    var client: RobotTransport? = null
     try {
-     val activeClient = HttpsRobotTransport(url, token, wakeSleepingHost = retries == 0); client = activeClient
-     val capabilities = activeClient.capabilities()
-     val first = activeClient.telemetry()
-     // Identity/protocol validation occurs in transport. Never enable commands before telemetry arrives.
-     transport = activeClient
+     val active = transportFactory(endpoint, token); client = active
+     val capabilities = active.capabilities()
+     val first = active.telemetry()
+     ensureActive()
+     if(epoch != connectionEpoch || !foreground) return@launch
+     transport = active; commandLinkFailed = false
      applyTelemetry(first, capabilities)
-     retries = 0
-     while (isActive) { delay(200); applyTelemetry(activeClient.telemetry(), capabilities) }
+     while (isActive && foreground && epoch == connectionEpoch) {
+      delay(pollingMs)
+      if(commandLinkFailed) throw java.io.IOException("Command link failed")
+      val next = active.telemetry()
+      ensureActive()
+      if(commandLinkFailed) throw java.io.IOException("Command link failed")
+      if(epoch != connectionEpoch || !foreground) return@launch
+      applyTelemetry(next, capabilities)
+     }
     } catch(e: Exception) {
      if(e is CancellationException) throw e
+     if(epoch != connectionEpoch) return@launch
      transport = null; motion?.cancel()
-     mutable.update { it.copy(connected = false, capabilities = emptySet(), availableSensors = emptySet(), pose = null, batteryAvailable = false, connection = "Bridge unavailable", notice = "Link lost. Movement lease expires on bridge; retrying without resuming motion.", mode = "rest") }
-     val failedClient = client
-     if (failedClient != null) runCatching { failedClient.send("stop") }
-     retries++
-     if(retries < 4) delay(1000L * retries)
+     offline("Offline", "Connection unavailable. Saved credentials retained; motion will not resume automatically.")
+     if(client != null) runCatching { withTimeout(1000) { client.send("stop") } }
+     val terminal = e is BridgeAuthenticationException || e is javax.net.ssl.SSLException ||
+      e is IllegalArgumentException || e is IllegalStateException || e is org.json.JSONException
+     if(terminal || failures >= retryDelaysMs.size) {
+      reconnectAllowed = false
+      mutable.update { it.copy(notice = if(e is BridgeAuthenticationException) "Authentication rejected. Saved credentials retained; correct the token and reconnect." else "Reconnect paused. Check Tailscale, VPS, certificate and saved settings, then retry.") }
+      return@launch
+     }
+     val wait = retryDelaysMs[failures++]
+     mutable.update { it.copy(connection = "Connecting", notice = "Retry $failures/${retryDelaysMs.size}. Saved credentials retained; no movement will resume.") }
+     delay(wait)
     }
    }
-   mutable.update { it.copy(notice = "Reconnect paused. Check HTTPS certificate, token and bridge, then connect again.") }
   }
  }
  fun installUpdate(ownerApproved: Boolean, channel: String) {

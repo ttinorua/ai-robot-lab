@@ -49,7 +49,7 @@ class MuJoCoRoundTripTest {
   }
  }
  @After fun cleanup() {
-  if(::model.isInitialized) compose.runOnIdle { model.disconnect() }
+  if(::model.isInitialized) compose.runOnIdle { model.forgetBridge() }
   scope.cancel()
   if(::originalFactory.isInitialized) HttpsURLConnection.setDefaultSSLSocketFactory(originalFactory)
  }

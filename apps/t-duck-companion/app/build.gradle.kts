@@ -2,7 +2,7 @@ plugins { id("com.android.application"); id("org.jetbrains.kotlin.android"); id(
 android {
  namespace = "com.tduck.companion"
  compileSdk = 35
- defaultConfig { applicationId = "com.tduck.companion"; minSdk = 26; targetSdk = 35; versionCode = providers.gradleProperty("companionVersionCode").orElse("3").get().toInt(); versionName = "0.2.1-dev"; testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner" }
+ defaultConfig { applicationId = "com.tduck.companion"; minSdk = 26; targetSdk = 35; versionCode = providers.gradleProperty("companionVersionCode").orElse("4").get().toInt(); versionName = "0.2.2-reconnect"; testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner" }
  // Owner-managed release identity only. Never fall back to a runner-generated key.
  val signingPath = System.getenv("T_DUCK_SIGNING_STORE")
  signingConfigs {

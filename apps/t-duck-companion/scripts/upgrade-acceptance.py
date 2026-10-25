@@ -30,6 +30,7 @@ def cert(apksigner,apk):
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     for name in ['v01','v02','before','after','output','apksigner']:p.add_argument('--'+name,required=True)
+    p.add_argument('--current-baseline')
     p.add_argument('--disposable-emulator',action='store_true')
     p.add_argument('--historical-optional',action='store_true',help='CI only: explicitly report unavailable expired fixtures; stable release acceptance must provide its baseline')
     args=p.parse_args()
@@ -59,6 +60,17 @@ def main():
         candidate_rejection=command('adb','install','-r',args.before,check=False)
         assert 'INSTALL_FAILED_UPDATE_INCOMPATIBLE' in candidate_rejection,candidate_rejection
         command('adb','uninstall',PACKAGE)
+    baseline_verified=False
+    baseline_certificate=None
+    if args.current_baseline and Path(args.current_baseline).is_file():
+        digest=hashlib.sha256(Path(args.current_baseline).read_bytes()).hexdigest()
+        assert digest=='a92d0388f715302d41dc931fd47dd689c8e978e0e09171d4c39a6657032362dc','Current baseline APK hash mismatch'
+        baseline_certificate=cert(args.apksigner,args.current_baseline)
+        command('adb','install',args.current_baseline)
+        response=command('adb','install','-r',args.before,check=False)
+        assert 'INSTALL_FAILED_UPDATE_INCOMPATIBLE' in response,response
+        command('adb','uninstall',PACKAGE)
+        baseline_verified=True
     command('adb','install',args.before)
     command('adb','shell','run-as',PACKAGE,'mkdir','-p','shared_prefs')
     command('adb','shell',"run-as com.tduck.companion sh -c 'cat > shared_prefs/companion.xml'",input=PREFS)
@@ -78,8 +90,10 @@ def main():
         'v01_to_v02_installer_error':'INSTALL_FAILED_UPDATE_INCOMPATIBLE' if historical else None,
         'v02_to_candidate_installer_error':'INSTALL_FAILED_UPDATE_INCOMPATIBLE' if historical else None,
         'same_test_key_upgrade':True,'version_before':before_version,'version_after':after_version,'preferences_preserved':True,'launch_after_upgrade':True,
+        'baseline_40187307822_verified':baseline_verified,'baseline_40187307822_certificate_sha256':baseline_certificate,
+        'baseline_40187307822_installer_error':'INSTALL_FAILED_UPDATE_INCOMPATIBLE' if baseline_verified else None,
         'physical_phone_tested':False,'stable_owner_key_provisioned':False,
-        'debug_release_preflight_rejected':True,'cases_passed':5 if historical else 3,'cases_blocked':0 if historical else 2,'scope':'Disposable Android emulator; exact historical binaries and same-key candidate pair'}
+        'debug_release_preflight_rejected':True,'cases_passed':(5 if historical else 3)+int(baseline_verified),'cases_blocked':(0 if historical else 2)+int(not baseline_verified),'scope':'Disposable Android emulator; exact historical binaries and same-key candidate pair'}
     Path(args.output).write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps(report,indent=2))
     command('adb','uninstall',PACKAGE)

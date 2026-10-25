@@ -1,0 +1,30 @@
+# Secure saved connection and reconnection — PR #7
+
+Branch `feature/tduck-companion-secure-reconnect`, based on Companion PR #3. Robotics/training files and bridge protocol are not changed. Owner reports successful physical Android→private Tailscale HTTPS→Windows VPS MuJoCo connectivity. This worker does not possess/read the owner token, probe the private endpoint, or claim a new physical-phone/VPS test.
+
+## Behavior
+
+- Connect saves the normalized HTTPS endpoint and AES-256-GCM encrypted bearer token in app-private preferences using a nonexportable Android Keystore key. Endpoint is authenticated as GCM additional data. No plaintext token preference/log/Bundle/GitHub field exists. Each encryption has a new random nonce; records from the original PR #7 format migrate on load.
+- Settings shows the saved endpoint and a saved-token indicator. The password field stays blank after saving; a blank token reuses the saved token only for the same normalized endpoint. Changing the address requires a new token. Password drafts are not saved to Android instance-state bundles.
+- Keystore lookup for decryption never creates a replacement key. Missing keys, bad tags, corrupted/incomplete records or unsupported formats clear the unusable record/key and require explicit re-entry. Forget cancels reconnect, locks controls, removes ciphertext/preferences and deletes the key. A failed deletion is reported instead of claimed successful.
+- Startup automatically negotiates capabilities/new ordered owner session and validates telemetry before enabling controls. No stand/forward/turn command is issued by reconnection. The existing MuJoCo bridge's new-session rest/independent movement lease remains authoritative.
+- Four connection attempts maximum per foreground connection run, with 1/2/4-second backoff. A brief successful telemetry sample does not reset a flapping link indefinitely. Authentication or TLS/protocol validation failures stop automatic attempts; saved credentials remain intact for correction or explicit retry. Tap Reconnect saved connection to restart the budget. No work scheduler, background service, wake lock or unattended launcher is added.
+- Backgrounding cancels polling/retries and requests best-effort Stop. Foregrounding reconnects a previously active saved connection. Manual Disconnect or Demo mode suppresses reconnect for that in-memory session; a fresh app process can reconnect saved credentials. Forget removes them permanently. Network loss never implies that a Stop ACK arrived; the independent robot-side watchdog remains required.
+- Lost command ACKs lock controls and trigger bounded safe reconnection without repeating movement. Late ACKs from a retired connection cannot overwrite current state. Transport HTTPS certificate/hostname validation, bounded response size, short request/command deadlines and command sequencing are retained.
+- Backup remains disabled; explicit legacy/cloud/device-transfer exclusion rules also exclude credential preferences on platforms where transfer can operate independently of allowBackup. This is device-bound storage, not a guarantee of hardware-backed Keystore or resistance to a rooted/debuggable device.
+
+## Validation
+
+Baseline run 40187307822 passed the existing three CI jobs at 7ca0d27. It does not verify the new behavior below. New CI validation is pending at this implementation checkpoint.
+
+New tests cover real Android Keystore encryption/nonexportability/nonce variation, durable load/new instance, deletion, missing key, tampering, incomplete records, old-format migration, and invalid replacement. Android model tests inject deterministic network/auth/ACK faults to verify bounded retry, saved-record retention, no automatic movement, background pause, explicit recovery and late-result exclusion. These fault tests are not claimed as actual VPS telemetry.
+
+Real UI/TLS/MuJoCo tests cover Settings navigation/recreation, saved-token rejection and disabled movement. A separate host-controlled two-phase instrumentation test force-stops the disposable emulator app between processes, then verifies credential restoration, automatic actual MuJoCo telemetry and rest posture. Original movement/watchdog/emergency Stop, chat, OTA demo and navigation regressions remain. The Windows VPS and the owner's phone are not touched.
+
+## APK and signing
+
+Candidate package stays `com.tduck.companion`, versionCode 4/versionName 0.2.2-reconnect. Builds use existing debug CI signing only; no signing credential or production identity is created/provisioned by this change. Release configuration still requires an explicitly supplied owner key.
+
+Known baseline 40187307822: versionCode 3, APK SHA256 `a92d0388f715302d41dc931fd47dd689c8e978e0e09171d4c39a6657032362dc`, public signer SHA256 `8ac1c6f98b3c0f81e726399b9fd4de4db46894bccb848c69b21262515b050a2c`. Its ephemeral CI private key was not archived. CI will compare exact baseline/candidate binaries and reproduce installation compatibility on a disposable emulator only, alongside same-key candidate data-preserving upgrade acceptance. The actual installed phone APK's certificate has not been provided, so compatibility cannot be inferred from its display version alone.
+
+Do not uninstall or overwrite the owner's installed app or rotate/provision signing keys without separate approval. If signatures differ, Android refuses an in-place update even with a higher versionCode. Keep the installed working app until an existing compatible signing key or an explicitly approved migration is ready. No new owner token is required by the code; existing valid credentials can be entered locally after an approved installation. Never paste them into GitHub/chat.
