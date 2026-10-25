@@ -78,7 +78,7 @@ private fun CompanionApp(model: CompanionModel) {
                     Text("T-DUCK", fontWeight = FontWeight.ExtraBold, fontSize = 23.sp, letterSpacing = 3.sp)
                     Text("Your little companion", color = Muted, fontSize = 12.sp)
                 }
-                Text(if (s.connected) "● Connected" else "○ Offline", color = if (s.connected) Teal else Gold,
+                Text(if (s.connected) "● Connected" else if(s.connection == "Connecting") "◌ Connecting" else "○ Offline", color = if (s.connected) Teal else Gold,
                     fontSize = 12.sp)
             }
             Button(onClick = { model.stop() }, modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp),
@@ -281,7 +281,7 @@ private fun Settings(s: RobotUi, model: CompanionModel) {
         Text("Live MuJoCo needs a running simulation service; the APK does not host it. Enter its HTTPS address and owner token. For your private VPS, keep Tailscale connected on this phone. Temporary outages use a limited retry budget; tap Reconnect to try again. The address and encrypted owner token are saved on this device until you forget them. Reconnection is attempted when the app opens.", color = Muted)
         OutlinedTextField(url, { url = it }, label = { Text("HTTPS bridge address") }, singleLine = true, modifier = Modifier.fillMaxWidth().testTag("bridge-url"))
         OutlinedTextField(token, { token = it }, label = { Text("Owner access token") }, visualTransformation = PasswordVisualTransformation(), modifier = Modifier.fillMaxWidth().testTag("bridge-token"))
-        Button(onClick = { model.connectRemembered(url.trim(), token); token = "" }, enabled = url.isNotBlank() && (token.isNotBlank() || (s.hasSavedConnection && url.trim().trimEnd('/') == s.savedEndpoint)), modifier = Modifier.testTag("bridge-connect")) { Text("Connect to simulation") }
+        Button(onClick = { if(model.connectRemembered(url.trim(), token)) token = "" }, enabled = url.isNotBlank() && (token.isNotBlank() || (s.hasSavedConnection && url.trim().trimEnd('/') == s.savedEndpoint)), modifier = Modifier.testTag("bridge-connect")) { Text("Connect to simulation") }
         if(s.hasSavedConnection) {
             Text("Access token saved securely on this device. Leave the field empty to reuse it.", color = Muted, fontSize = 12.sp)
             OutlinedButton(onClick = model::reconnectSaved, modifier = Modifier.testTag("bridge-retry")) { Text("Reconnect saved connection") }

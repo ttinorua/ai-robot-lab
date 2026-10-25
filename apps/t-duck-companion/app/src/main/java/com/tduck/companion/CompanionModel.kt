@@ -50,9 +50,9 @@ class CompanionModel @JvmOverloads constructor(
   val removed = credentials.clear()
   mutable.update { it.copy(savedEndpoint = "", hasSavedConnection = false, notice = if (removed) "Saved bridge connection forgotten" else "Connection disabled. Secure storage removal failed; retry Forget.") }
  }
- fun connectRemembered(url: String, token: String) {
-  if(updating) return
-  try {
+ fun connectRemembered(url: String, token: String): Boolean {
+  if(updating) return false
+  return try {
    val endpoint = BridgeEndpoint.normalize(url)
    val accessToken = token.ifBlank {
     val saved = credentials.load().connection
@@ -63,7 +63,8 @@ class CompanionModel @JvmOverloads constructor(
    mutable.update { it.copy(savedEndpoint = endpoint, hasSavedConnection = true) }
    reconnectAllowed = true
    connectLocal(endpoint, accessToken)
-  } catch (_: Exception) { mutable.update { it.copy(notice = "Could not securely save connection. Check the HTTPS address/token, or re-enter credentials if the device key changed.") } }
+   true
+  } catch (_: Exception) { mutable.update { it.copy(notice = "Could not securely save connection. Check the HTTPS address/token, or re-enter credentials if the device key changed.") }; false }
  }
  fun reconnectSaved() {
   if(updating) return
